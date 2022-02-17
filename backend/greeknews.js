@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const PORT = 7000
+const PORT = 8088;
 var cors = require('cors')
 let RSS_URL = 'https://www.protothema.gr/rss'
 // let RSS_URL = 'https://news.google.com/rss?hl=el&gl=GR&ceid=GR:el'
@@ -27,10 +27,10 @@ app.get('/news', async (req, res) => {
     console.log(feed.title);
 
     feed.items.forEach(item => {
-    console.log(item.title + ':' + item.link)
+    console.log("\x1b[33m", item.title, ':', "\x1b[34m",item.link)
   });
 
-    res.send(feed);
+    res.status(200).json(feed);
   
 })
 
