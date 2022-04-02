@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 
 function News() {
     const [news, setNews] = useState([]);
+    const [scores, setScores] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch('http://localhost:7000/news')
+        fetch('http://localhost:8088/news')
         .then(res => res.json())
         .then(data => {
             setNews(data);
@@ -13,7 +14,16 @@ function News() {
         });
     }, [])
 
+    useEffect(() => {
+        fetch('http://localhost:8088/live')
+        .then(res => res.json())
+        .then(data => {
+            setScores(data);
+            setLoading(false);
+        });
+    }, [])
 
+    console.log(scores)
 
     return (
         <>
