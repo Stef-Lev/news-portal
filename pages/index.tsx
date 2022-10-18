@@ -2,12 +2,11 @@ import type { NextPage } from "next";
 import Link from "next/link";
 import { pathTitles } from "../helpers/pathTitles";
 import { getNews } from "../helpers/fetchData";
-import styles from "../styles/Home.module.css";
 
 const Home: NextPage = ({ news }) => {
   console.log("news", news);
   return (
-    <div className={styles.container}>
+    <div>
       <ul>
         {news.map((item: any, index: number) => (
           <Link key={index + 1} href={`/${pathTitles[item[0]]}`}>
