@@ -2,9 +2,10 @@ import type { NextPage } from "next";
 import Link from "next/link";
 import { pathTitles } from "../helpers/pathTitles";
 import { getNews } from "../helpers/fetchData";
+import { getWeather } from "../helpers/fetchData";
 
-const Home: NextPage = ({ news }) => {
-  console.log("news", news);
+const Home: NextPage = ({ news, weather }) => {
+  console.log(news);
   return (
     <div>
       <ul>
@@ -44,7 +45,9 @@ export default Home;
 
 export async function getServerSideProps() {
   const news = await getNews();
+  const weather = await getWeather();
+
   return {
-    props: { news: Object.entries(news) },
+    props: { news: Object.entries(news), weather },
   };
 }
