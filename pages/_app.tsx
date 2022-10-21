@@ -5,13 +5,10 @@ import Layout from "../components/Layout";
 import { getNews } from "../helpers/fetchData";
 import { useEffect } from "react";
 
-function MyApp({ Component, pageProps, headerProps }: AppProps) {
-  useEffect(() => {
-    headerPropsCache = headerProps;
-  }, []);
+function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider>
-      <Layout items={headerProps}>
+      <Layout>
         <Component {...pageProps} />
       </Layout>
     </ChakraProvider>

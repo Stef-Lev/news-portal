@@ -6,6 +6,11 @@ import { getWeather } from "../helpers/fetchData";
 
 const Home: NextPage = ({ news, weather }) => {
   console.log(news);
+
+  const preparePath = (link: string) => {
+    return link.split("/")[6];
+  };
+
   return (
     <div>
       <ul>
@@ -29,6 +34,15 @@ const Home: NextPage = ({ news, weather }) => {
                     <sub>
                       <em>{item.contentSnippet}</em>
                     </sub>
+                    <Link
+                      href={{
+                        pathname: `/news/${preparePath(item.link)}`,
+                        query: { url: item.link },
+                      }}
+                      as={`/news/${preparePath(item.link)}`}
+                    >
+                      <a>Go</a>
+                    </Link>
                     <hr style={{ background: "black" }} />
                   </div>
                 );
