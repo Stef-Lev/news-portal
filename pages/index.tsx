@@ -1,27 +1,17 @@
 import type { NextPage } from "next";
+import { useRouter } from "next/router";
 import Link from "next/link";
-import { pathTitles } from "../helpers/pathTitles";
 import { getNews } from "../helpers/fetchData";
 import { getWeather } from "../helpers/fetchData";
 
 const Home: NextPage = ({ news, weather }) => {
-  console.log(news);
-
+  const router = useRouter();
   const preparePath = (link: string) => {
     return link.split("/")[6];
   };
 
   return (
     <div>
-      <ul>
-        {news.map((item: any, index: number) => (
-          <Link key={index + 1} href={`/${pathTitles[item[0]]}`}>
-            <li>
-              <strong>{item[0]}</strong>
-            </li>
-          </Link>
-        ))}
-      </ul>
       <div>
         {news.map((item: any, index: number) => (
           <section key={index + 1} style={{ background: "lightgray" }}>
@@ -39,7 +29,6 @@ const Home: NextPage = ({ news, weather }) => {
                         pathname: `/news/${preparePath(item.link)}`,
                         query: { url: item.link },
                       }}
-                      as={`/news/${preparePath(item.link)}`}
                     >
                       <a>Go</a>
                     </Link>

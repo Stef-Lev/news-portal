@@ -1,9 +1,9 @@
 import scrapeIt from "scrape-it";
+import { NextPageContext } from "next";
 
 import { cleanContent } from "../../helpers/cleanContent";
 
 const Article = ({ data }) => {
-  // console.log("data", data);
   return (
     <div>
       <h2>{data.title}</h2>
@@ -16,8 +16,8 @@ const Article = ({ data }) => {
 
 export default Article;
 
-export async function getServerSideProps(ctx) {
-  const url = await ctx.query.url;
+export async function getServerSideProps(ctx: NextPageContext) {
+  const { url } = ctx.query;
 
   let finalData;
   const ftc = await scrapeIt(url, {

@@ -13,10 +13,14 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { useRef } from "react";
+import { titleToPath } from "../helpers/pathTitles";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 function DrawerMenu() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef();
+  const router = useRouter();
 
   return (
     <>
@@ -33,13 +37,21 @@ function DrawerMenu() {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader>Create your account</DrawerHeader>
+          <DrawerHeader></DrawerHeader>
 
           <DrawerBody>
             <List spacing={3}>
-              <ListItem>Sports</ListItem>
-              <ListItem>Lorem ipsum dolor</ListItem>
-              <ListItem>Lorem ipsum dolor</ListItem>
+              {Object.entries(titleToPath).map((item) => (
+                <ListItem
+                  key={item[1]}
+                  onClick={() => {
+                    router.push(`/categories/${item[1]}`);
+                    onClose();
+                  }}
+                >
+                  {item[0]}
+                </ListItem>
+              ))}
             </List>
           </DrawerBody>
 
