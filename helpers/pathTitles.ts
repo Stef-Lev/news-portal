@@ -5,6 +5,7 @@ export const titleToPath = {
   Lifestyle: "lifestyle",
   Πολιτική: "politics",
   Υγεία: "health",
+  "Αποτελέσματα αγώνων": "scores",
 };
 
 export const pathToTitle = {
@@ -14,4 +15,5 @@ export const pathToTitle = {
   lifestyle: "Lifestyle",
   politics: "Πολιτική",
   health: "Υγεία",
+  scores: "Αποτελέσματα αγώνων",
 };

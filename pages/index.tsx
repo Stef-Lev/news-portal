@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { getNews } from "../helpers/fetchData";
 import { getWeather } from "../helpers/fetchData";
+import WeatherCarousel from "../components/WeatherCarousel";
 
 const Home: NextPage = ({ news, weather }) => {
   const router = useRouter();
@@ -12,6 +13,7 @@ const Home: NextPage = ({ news, weather }) => {
 
   return (
     <div>
+      <WeatherCarousel items={weather.list} />
       <div>
         {news.map((item: any, index: number) => (
           <section key={index + 1} style={{ background: "lightgray" }}>

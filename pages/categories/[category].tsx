@@ -1,9 +1,15 @@
 import { getNews } from "../../helpers/fetchData";
 import { pathToTitle } from "../../helpers/pathTitles";
+import { useRouter } from "next/router";
 
 const Category = ({ news }) => {
+  const router = useRouter();
   console.log(news);
-  return <div>Enter</div>;
+  return (
+    <div>
+      <h1>{pathToTitle[router.query.category]}</h1>
+    </div>
+  );
 };
 
 export default Category;
