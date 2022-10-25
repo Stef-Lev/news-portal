@@ -1,14 +1,21 @@
-import { Box, HStack, VStack, Image, Heading } from "@chakra-ui/react";
+import { Box, HStack, VStack, Image, Text } from "@chakra-ui/react";
 
 function WeatherCarousel({ items }) {
   console.log(items);
   return (
     <div>
-      <HStack h="80px" bg="grey" padding="8px 12px" overflowX="scroll">
+      <HStack h="140px" bg="lightgray" padding="8px" overflowX="scroll">
         {items.map((item) => (
-          <Box>
-            <VStack>
-              <Heading as="h4">{item.name}</Heading>
+          <Box key={item.name} w="120px">
+            <VStack w="120px" padding="5px 8px">
+              <Text fontSize="md">{item.name}</Text>
+              <Image
+                alt="weather"
+                w="50px"
+                src={`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`}
+                my="0px"
+              />
+              <Text fontSize="sm">{Math.round(item.main.temp)}°C</Text>
             </VStack>
           </Box>
         ))}

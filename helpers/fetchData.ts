@@ -65,7 +65,7 @@ export async function getWeather() {
 
   let ids = cityIds.map((item) => item.id).join(",");
 
-  let finalURL = `${WEATHER_URL}group?id=${ids}&appid=${WEATHER_KEY}`;
+  let finalURL = `${WEATHER_URL}group?id=${ids}&units=metric&appid=${WEATHER_KEY}`;
   let data = await fetch(finalURL);
   let weather = await data.json();
   return weather;
