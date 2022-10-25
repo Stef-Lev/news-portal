@@ -1,5 +1,6 @@
 import { getNews } from "../../helpers/fetchData";
 import { pathToTitle } from "../../helpers/pathTitles";
+import Panel from "../../components/Panel";
 import { useRouter } from "next/router";
 
 const Category = ({ news }) => {
@@ -8,6 +9,9 @@ const Category = ({ news }) => {
   return (
     <div>
       <h1>{pathToTitle[router.query.category]}</h1>
+      {news.map((item) => (
+        <Panel data={item} />
+      ))}
     </div>
   );
 };
