@@ -1,4 +1,4 @@
-import { Box, Image, HStack, VStack, Text } from "@chakra-ui/react";
+import { Box, Image, HStack, VStack, Text, GridItem } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 
 function Panel({ data }) {
@@ -14,19 +14,25 @@ function Panel({ data }) {
   };
 
   return (
-    <Box
+    <GridItem
       borderRadius="8px"
       border="1px solid grey"
-      h="180px"
+      h="140px"
+      w="100%"
       onClick={() => goToPath(data.link)}
     >
       <HStack>
-        <Image src={data.image.$.url} boxSize="180px" objectFit="cover" />
-        <VStack justify="flex-start">
-          <Text>{data.title}</Text>
+        <Image
+          src={data.image.$.url}
+          borderRadius="8px 0px 0px 8px"
+          boxSize="140px"
+          objectFit="cover"
+        />
+        <VStack justify="flex-start" padding="8px">
+          <Text fontSize={{ base: "12px", md: "14px" }}>{data.title}</Text>
         </VStack>
       </HStack>
-    </Box>
+    </GridItem>
   );
 }
 

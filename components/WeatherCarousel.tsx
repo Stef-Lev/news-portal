@@ -1,7 +1,6 @@
 import { Box, HStack, VStack, Image, Text } from "@chakra-ui/react";
 
 function WeatherCarousel({ items }) {
-  console.log(items);
   return (
     <div>
       <HStack h="140px" bg="lightgray" padding="8px" overflowX="scroll">

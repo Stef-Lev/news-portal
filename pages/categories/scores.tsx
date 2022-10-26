@@ -1,7 +1,6 @@
 import { getScores } from "../../helpers/fetchData";
 
 function Scores({ scores }) {
-  console.log(scores);
   return <div>scores</div>;
 }
 

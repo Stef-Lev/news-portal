@@ -56,7 +56,6 @@ export async function getWeather() {
     { id: 261779, name: "Ioánnina" },
     { id: 252661, name: "Trikala" },
     { id: 8133690, name: "Patra" },
-    { id: 2151682, name: "Rhodes" },
     { id: 257056, name: "Mykonos" },
     { id: 8133837, name: "Xanthi" },
     { id: 8133762, name: "Chania" },

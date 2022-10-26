@@ -1,3 +1,4 @@
+import { Container, Heading, Text, Image } from "@chakra-ui/react";
 import scrapeIt from "scrape-it";
 import { NextPageContext } from "next";
 
@@ -5,12 +6,27 @@ import { cleanContent } from "../../helpers/cleanContent";
 
 const Article = ({ data }) => {
   return (
-    <div>
-      <h2>{data.title}</h2>
-      <h3>{data.subtitle}</h3>
-      <img src={data.imageUrl} />
-      <p>{data.content}</p>
-    </div>
+    <Container maxW={["95%", "90%", "70%", "60%"]}>
+      <Heading fontSize={["1.5rem", "1.9rem", "2.1rem", "2.5rem"]}>
+        {data.title}
+      </Heading>
+      <Heading
+        as="h4"
+        fontSize={["1.2rem", "1.5rem", "1.7rem", "2.1rem"]}
+        fontWeight={500}
+      >
+        {data.subtitle}
+      </Heading>
+      <Image
+        src={data.imgUrl}
+        fallbackSrc={data.imgUrl}
+        borderRadius="10px"
+        my="22px"
+        width="100%"
+        alt="article"
+      />
+      <Text>{data.content}</Text>
+    </Container>
   );
 };
 
