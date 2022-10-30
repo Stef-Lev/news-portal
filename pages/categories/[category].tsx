@@ -32,6 +32,12 @@ export async function getServerSideProps(ctx) {
     (item) => item[0] === pathToTitle[category]
   );
 
+  if (!news) {
+    return {
+      props: { news: [] },
+    };
+  }
+
   return {
     props: { news: news[1] },
   };

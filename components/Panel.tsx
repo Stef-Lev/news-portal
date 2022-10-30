@@ -29,7 +29,9 @@ function Panel({ data }) {
           objectFit="cover"
         />
         <VStack justify="flex-start" padding="8px">
-          <Text fontSize={{ base: "12px", md: "14px" }}>{data.title}</Text>
+          <Text fontSize={{ base: "14px", md: "15px", lg: "18px" }}>
+            {data.title}
+          </Text>
         </VStack>
       </HStack>
     </GridItem>

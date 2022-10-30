@@ -1,4 +1,5 @@
 import { Box, HStack, VStack, Image, Text } from "@chakra-ui/react";
+import { weatherCities } from "../helpers/weatherCities";
 
 function WeatherCarousel({ items }) {
   return (
@@ -7,12 +8,12 @@ function WeatherCarousel({ items }) {
         {items.map((item) => (
           <Box key={item.name} w="120px">
             <VStack w="120px" padding="5px 8px">
-              <Text fontSize="md">{item.name}</Text>
+              <Text fontSize="md">{weatherCities[item.name]}</Text>
               <Image
                 alt="weather"
                 w="50px"
                 src={`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`}
-                my="0px"
+                marginTop={0}
               />
               <Text fontSize="sm">{Math.round(item.main.temp)}°C</Text>
             </VStack>
