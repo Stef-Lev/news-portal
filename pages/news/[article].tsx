@@ -2,9 +2,8 @@ import { Container, Heading, Text, Image, Center } from "@chakra-ui/react";
 import scrapeIt from "scrape-it";
 import { NextPageContext } from "next";
 
-import { cleanContent } from "../../helpers/cleanContent";
-
 const Article = ({ data }) => {
+  console.log(data);
   return (
     <Container maxW={["95%", "90%", "70%", "60%"]}>
       <Heading fontSize={["1.6rem", "1.8rem", "2.2rem", "2.2rem"]}>
@@ -48,14 +47,17 @@ export async function getServerSideProps(ctx: NextPageContext) {
 
   let finalData;
   const ftc = await scrapeIt(url, {
-    title: ".title h1",
-    subtitle: ".articleTopInfo h3",
-    imgUrl: { selector: ".imgWrp picture img", attr: "src" },
+    title: "h1",
+    subtitle: "h2",
+    imgUrl: {
+      selector: '.first-img source[media="(min-width: 1024px)"]',
+      attr: "srcset",
+    },
     content: {
-      selector: ".articleContainer__main .cnt",
+      selector: ".entry-content p",
     },
   }).then(({ data, response }) => {
-    return (finalData = cleanContent(data));
+    return (finalData = data);
   });
 
   return {

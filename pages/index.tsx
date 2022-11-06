@@ -11,6 +11,8 @@ const Home: NextPage = ({ news, weather }) => {
     return link.split("/")[6];
   };
 
+  console.log(news);
+
   return (
     <div>
       <WeatherCarousel items={weather.list} />
@@ -32,7 +34,7 @@ const Home: NextPage = ({ news, weather }) => {
                         query: { url: item.link },
                       }}
                     >
-                      <a>Go</a>
+                      Go
                     </Link>
                     <hr style={{ background: "black" }} />
                   </div>
