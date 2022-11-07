@@ -4,7 +4,8 @@ import { useRouter } from "next/router";
 function Panel({ data }) {
   const router = useRouter();
   const preparePath = (link: string) => {
-    return link.split("/")[6];
+    let path = link.split("/");
+    return path[path.length - 2];
   };
   const goToPath = (url) => {
     router.push({

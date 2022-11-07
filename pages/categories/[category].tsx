@@ -28,6 +28,7 @@ export default Category;
 export async function getServerSideProps(ctx) {
   const { category } = ctx.query;
   const allNews = await getNews();
+
   const news = Object.entries(allNews).find(
     (item) => item[0] === pathToTitle[category]
   );

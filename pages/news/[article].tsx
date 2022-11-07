@@ -3,7 +3,7 @@ import scrapeIt from "scrape-it";
 import { NextPageContext } from "next";
 
 const Article = ({ data }) => {
-  console.log(data);
+  // console.log(data);
   return (
     <Container maxW={["95%", "90%", "70%", "60%"]}>
       <Heading fontSize={["1.6rem", "1.8rem", "2.2rem", "2.2rem"]}>

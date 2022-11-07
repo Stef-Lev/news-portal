@@ -1,17 +1,18 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
+import { Button, Center } from "@chakra-ui/react";
 import Link from "next/link";
 import { getNews } from "../helpers/fetchData";
 import { getWeather } from "../helpers/fetchData";
 import WeatherCarousel from "../components/WeatherCarousel";
 
 const Home: NextPage = ({ news, weather }) => {
-  const router = useRouter();
   const preparePath = (link: string) => {
-    return link.split("/")[6];
+    let path = link.split("/");
+    return path[path.length - 2];
   };
 
-  console.log(news);
+  // console.log(news);
 
   return (
     <div>
@@ -28,14 +29,19 @@ const Home: NextPage = ({ news, weather }) => {
                     <sub>
                       <em>{item.contentSnippet}</em>
                     </sub>
-                    <Link
-                      href={{
-                        pathname: `/news/${preparePath(item.link)}`,
-                        query: { url: item.link },
-                      }}
-                    >
-                      Go
-                    </Link>
+                    <Center>
+                      <Button bg="teal.400">
+                        <Link
+                          href={{
+                            pathname: `/news/${preparePath(item.link)}`,
+                            query: { url: item.link },
+                          }}
+                        >
+                          Go
+                        </Link>
+                      </Button>
+                    </Center>
+
                     <hr style={{ background: "black" }} />
                   </div>
                 );
