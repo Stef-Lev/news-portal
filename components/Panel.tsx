@@ -21,7 +21,32 @@ const Panel: React.FC<PanelProps> = ({ data, type }) => {
   };
 
   if (type === "vertical") {
-    return null;
+    return (
+      <GridItem
+        borderRadius="8px"
+        background="blue.800"
+        minH="300px"
+        w="100%"
+        onClick={() => goToPath(data.link)}
+      >
+        <VStack>
+          <Image
+            src={data.image.$.url}
+            w="100%"
+            borderRadius="8px 8px 0px 0px"
+            objectFit="cover"
+          />
+          <Box padding={{ base: "6px 6px 6px 4px", md: "10px", lg: "14px" }}>
+            <Text
+              fontSize={{ base: "14px", md: "15px", lg: "18px" }}
+              fontWeight={500}
+            >
+              {data.title}
+            </Text>
+          </Box>
+        </VStack>
+      </GridItem>
+    );
   } else {
     return (
       <GridItem
@@ -38,7 +63,7 @@ const Panel: React.FC<PanelProps> = ({ data, type }) => {
             boxSize={{ base: "110px", md: "120px", lg: "130px", xl: "140px" }}
             objectFit="cover"
           />
-          <Box padding="6px 6px 6px 4px">
+          <Box padding={{ base: "6px 6px 6px 4px", md: "10px", lg: "14px" }}>
             <Text
               fontSize={{ base: "14px", md: "15px", lg: "18px" }}
               fontWeight={500}

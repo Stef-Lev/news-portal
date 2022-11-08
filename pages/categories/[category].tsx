@@ -18,7 +18,7 @@ const Category = ({ news }) => {
           templateColumns={{ base: "repeat(1, 1fr)", md: "repeat(2, 2fr)" }}
         >
           {news.map((item) => (
-            <Panel key={item.guid} data={item} />
+            <Panel key={item.guid} data={item} type="vertical" />
           ))}
         </Grid>
       </Box>

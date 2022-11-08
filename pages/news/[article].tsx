@@ -6,13 +6,14 @@ const Article = ({ data }) => {
   // console.log(data);
   return (
     <Container maxW={["95%", "90%", "70%", "60%"]}>
-      <Heading fontSize={["1.6rem", "1.8rem", "2.2rem", "2.2rem"]}>
+      <Heading fontSize={["1.4rem", "1.6rem", "1.8rem", "2rem"]}>
         {data.title}
       </Heading>
       <Heading
         as="h4"
-        fontSize={["1.2rem", "1.3rem", "1.5rem", "1.5rem"]}
-        fontWeight={500}
+        fontSize={["0.9rem", "0.9rem", "1rem", "1.1rem"]}
+        fontWeight={400}
+        fontStyle="italic"
       >
         {data.subtitle}
       </Heading>
