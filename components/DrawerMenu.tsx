@@ -9,12 +9,12 @@ import {
   IconButton,
   List,
   ListItem,
+  Box,
   useDisclosure,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { useRef } from "react";
 import { titleToPath } from "../helpers/pathTitles";
-import Link from "next/link";
 import { useRouter } from "next/router";
 
 function DrawerMenu() {
@@ -23,10 +23,12 @@ function DrawerMenu() {
   const router = useRouter();
 
   return (
-    <>
-      <IconButton ref={btnRef} colorScheme="white" onClick={onOpen}>
-        <HamburgerIcon w={30} h={30} color="black" />
-      </IconButton>
+    <Box>
+      <Box>
+        <IconButton ref={btnRef} colorScheme="white" onClick={onOpen}>
+          <HamburgerIcon w={30} h={30} color="text.light" />
+        </IconButton>
+      </Box>
 
       <Drawer
         isOpen={isOpen}
@@ -37,9 +39,9 @@ function DrawerMenu() {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader></DrawerHeader>
+          <DrawerHeader background="blue.800"></DrawerHeader>
 
-          <DrawerBody>
+          <DrawerBody background="blue.800" fontWeight={500}>
             <List spacing={3}>
               {Object.entries(titleToPath).map((item) => (
                 <ListItem
@@ -55,10 +57,10 @@ function DrawerMenu() {
             </List>
           </DrawerBody>
 
-          <DrawerFooter></DrawerFooter>
+          <DrawerFooter background="blue.800"></DrawerFooter>
         </DrawerContent>
       </Drawer>
-    </>
+    </Box>
   );
 }
 

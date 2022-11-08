@@ -12,7 +12,7 @@ const Home: NextPage = ({ news, weather }) => {
     return path[path.length - 2];
   };
 
-  // console.log(news);
+  console.log(news);
 
   return (
     <div>
