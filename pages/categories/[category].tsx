@@ -1,4 +1,4 @@
-import { VStack, Heading, Box, Grid, Container } from "@chakra-ui/react";
+import { Heading, Box, Grid, Container } from "@chakra-ui/react";
 import { getNews } from "../../helpers/fetchData";
 import { pathToTitle } from "../../helpers/pathTitles";
 import Panel from "../../components/Panel";
@@ -16,9 +16,10 @@ const Category = ({ news }) => {
         <Grid
           gap={{ base: "3", md: "4", lg: "5" }}
           templateColumns={{ base: "repeat(1, 1fr)", md: "repeat(2, 2fr)" }}
+          pb="48px"
         >
           {news.map((item) => (
-            <Panel key={item.guid} data={item} type="vertical" />
+            <Panel key={item.guid} data={item} />
           ))}
         </Grid>
       </Box>

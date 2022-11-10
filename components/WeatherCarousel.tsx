@@ -4,7 +4,7 @@ import { weatherCities } from "../helpers/weatherCities";
 function WeatherCarousel({ items }) {
   return (
     <div>
-      <HStack h="140px" bg="lightgray" padding="8px" overflowX="scroll">
+      <HStack h="140px" bg="lightgray" padding="8px" overflowX="auto">
         {items.map((item) => (
           <Box key={item.name} w="120px">
             <VStack w="120px" padding="5px 8px">

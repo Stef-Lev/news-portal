@@ -24,7 +24,7 @@ function DrawerMenu() {
 
   return (
     <Box>
-      <Box>
+      <Box position="fixed" top={0} bg="blue.900" w="100%" zIndex={200}>
         <IconButton ref={btnRef} colorScheme="white" onClick={onOpen}>
           <HamburgerIcon w={30} h={30} color="text.light" />
         </IconButton>
