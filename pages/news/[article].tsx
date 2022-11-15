@@ -6,14 +6,20 @@ import {
   Center,
   IconButton,
   Box,
+  HStack,
 } from "@chakra-ui/react";
-import { ChevronLeftIcon } from "@chakra-ui/icons";
+import { ChevronLeftIcon, CalendarIcon } from "@chakra-ui/icons";
 import scrapeIt from "scrape-it";
 import { NextPageContext } from "next";
 import { useRouter } from "next/router";
+import { titleToPath } from "../../helpers/pathTitles";
+import { categories } from "../../helpers/pathTitles";
+import format from "date-fns/format";
+import { el } from "date-fns/locale";
 
 const Article = ({ data }) => {
   const router = useRouter();
+  console.log(data);
   return (
     <>
       <Box
@@ -31,33 +37,58 @@ const Article = ({ data }) => {
         />
       </Box>
       <Container
-        maxW={["95%", "90%", "70%", "60%"]}
+        maxW={["95%", "90%", "80%", "70%", "60%"]}
         gap="120px"
         pb="30px"
         mt={{ base: "0px", md: "40px" }}
       >
-        <Heading fontSize={["1.4rem", "1.6rem", "1.8rem", "2rem"]} pb="16px">
+        <Heading fontSize={["24px", "24px", "26px", "28px"]} pb="16px">
           {data.title}
         </Heading>
         <Heading
           as="h4"
-          fontSize={["0.9rem", "0.9rem", "1rem", "1.1rem"]}
+          fontSize={["16px", "16px", "18px", "20px"]}
           fontWeight={400}
           fontStyle="italic"
         >
           {data.subtitle}
         </Heading>
+
         <Center>
           <Image
             src={data.imgUrl}
             fallbackSrc={data.imgUrl}
             borderRadius="10px"
             my="22px"
-            width={["100%", "88%"]}
+            width={{ base: "100%", md: "90%", lg: "90%", xl: "70%" }}
             alt="article"
           />
         </Center>
-        <Text>{data.content}</Text>
+        <Box
+          bg="blue.400"
+          borderRadius="5px"
+          p="2px 6px"
+          fontWeight={700}
+          width="max-content"
+          mb="16px"
+          onClick={() =>
+            router.push(`/categories/${titleToPath[categories[data.category]]}`)
+          }
+        >
+          {categories[data.category]}
+        </Box>
+
+        <HStack mb={3}>
+          <CalendarIcon color="text.medium" />
+          <Text
+            fontSize={{ base: "12px", md: "16px" }}
+            fontStyle="italic"
+            color="text.medium"
+          >
+            {format(new Date(data.date), "PPPp", { locale: el })}
+          </Text>
+        </HStack>
+        <Text fontSize={{ base: "16px", md: "18px" }}>{data.content}</Text>
       </Container>
     </>
   );
@@ -81,6 +112,8 @@ export async function getServerSideProps(ctx: NextPageContext) {
   const ftc = await scrapeIt(url, {
     title: "h1",
     subtitle: "h2",
+    category: { selector: ".entry-header a" },
+    date: { selector: ".meta-date-published", attr: "datetime" },
     imgUrl: {
       selector: '.first-img source[media="(min-width: 1024px)"]',
       attr: "srcset",

@@ -18,7 +18,7 @@ const Panel: React.FC<PanelProps> = ({ data }) => {
   const router = useRouter();
   const preparePath = (link: string) => {
     let path = link.split("/");
-    return path[path.length - 2];
+    return path[path.length - 3];
   };
   const goToPath = (url: string) => {
     router.push({

@@ -1,3 +1,4 @@
+import { categories as tabs } from "./pathTitles";
 const NEWS_URL = process.env.NEWS_URL ?? "";
 const WEATHER_URL = process.env.WEATHER_URL;
 const WEATHER_KEY = process.env.WEATHER_KEY;
@@ -23,7 +24,6 @@ export async function getNews() {
     "ΜΟΥΣΙΚΗ",
     "ΚΟΣΜΟΣ",
     "ΠΟΛΗ",
-    "ΣΚΙΤΣΑ",
     "ΕΞΩΤΕΡΙΚΗ ΠΟΛΙΤΙΚΗ",
     "ΓΑΣΤΡΟΝΟΜΟΣ",
     "ΤΗΛΕΟΡΑΣΗ",
@@ -34,26 +34,7 @@ export async function getNews() {
     "ΤΑΞΙΔΙΑ",
     "ΒΙΒΛΙΟ",
   ];
-  const tabs = {
-    "ΔΙΕΘΝΗΣ ΟΙΚΟΝΟΜΙΑ": "ΟΙΚΟΝΟΜΙΑ",
-    ΑΘΛΗΤΙΣΜΟΣ: "ΑΘΛΗΤΙΣΜΟΣ",
-    ΠΟΛΙΤΙΣΜΟΣ: "ΠΟΛΙΤΙΣΜΟΣ",
-    ΚΟΙΝΩΝΙΑ: "ΚΟΙΝΩΝΙΑ",
-    ΚΙΝΗΜΑΤΟΓΡΑΦΟΣ: "ΠΟΛΙΤΙΣΜΟΣ",
-    ΜΟΥΣΙΚΗ: "ΠΟΛΙΤΙΣΜΟΣ",
-    ΚΟΣΜΟΣ: "ΚΟΣΜΟΣ",
-    ΠΟΛΗ: "ΚΟΙΝΩΝΙΑ",
-    ΣΚΙΤΣΑ: "ΠΟΛΙΤΙΚΗ",
-    "ΕΞΩΤΕΡΙΚΗ ΠΟΛΙΤΙΚΗ": "ΠΟΛΙΤΙΚΗ",
-    ΓΑΣΤΡΟΝΟΜΟΣ: "ΚΟΙΝΩΝΙΑ",
-    ΤΗΛΕΟΡΑΣΗ: "ΠΟΛΙΤΙΣΜΟΣ",
-    ΜΟΥΣΕΙΑ: "ΠΟΛΙΤΙΣΜΟΣ",
-    ΑΡΧΙΤΕΚΤΟΝΙΚΗ: "ΠΟΛΙΤΙΣΜΟΣ",
-    ΠΟΛΙΤΙΚΗ: "ΠΟΛΙΤΙΚΗ",
-    "ΕΛΛΗΝΙΚΗ ΟΙΚΟΝΟΜΙΑ": "ΟΙΚΟΝΟΜΙΑ",
-    ΤΑΞΙΔΙΑ: "ΚΟΣΜΟΣ",
-    ΒΙΒΛΙΟ: "ΠΟΛΙΤΙΣΜΟΣ",
-  };
+
   let feed = await parser.parseURL(NEWS_URL);
   feed.items.map((item) => {
     if (categories.includes(item.categories[0])) {
