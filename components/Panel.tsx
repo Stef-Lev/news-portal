@@ -1,6 +1,6 @@
 import {
   Image,
-  HStack,
+  Flex,
   VStack,
   Text,
   GridItem,
@@ -9,6 +9,8 @@ import {
 } from "@chakra-ui/react";
 import { NewsItem } from "../types/types";
 import { useRouter } from "next/router";
+import { el } from "date-fns/locale";
+import { formatDistanceToNowStrict } from "date-fns";
 
 type PanelProps = {
   data: NewsItem;
@@ -26,6 +28,12 @@ const Panel: React.FC<PanelProps> = ({ data }) => {
       query: { url: url },
     });
   };
+
+  const publishedDate = formatDistanceToNowStrict(new Date(data.isoDate), {
+    locale: el,
+    addSuffix: true,
+  });
+
   const type = useBreakpointValue({ base: "vertical", sm: "horizontal" });
 
   if (type === "vertical") {
@@ -39,6 +47,7 @@ const Panel: React.FC<PanelProps> = ({ data }) => {
       >
         <VStack>
           <Image
+            alt={data.title}
             src={data.image.$.url}
             w="100%"
             borderRadius="8px 8px 0px 0px"
@@ -61,22 +70,43 @@ const Panel: React.FC<PanelProps> = ({ data }) => {
         w="100%"
         onClick={() => goToPath(data.link)}
       >
-        <HStack>
+        <Flex>
           <Image
+            alt={data.title}
             src={data.image.$.url}
             borderRadius="8px 0px 0px 8px"
             boxSize={{ base: "110px", md: "120px", lg: "130px", xl: "140px" }}
             objectFit="cover"
           />
-          <Box padding={{ base: "6px 6px 6px 4px", md: "10px", lg: "14px" }}>
+          <Flex
+            flexDirection="column"
+            justifyContent="space-between"
+            padding={{ base: "6px 6px 6px 4px", md: "10px", lg: "14px" }}
+            w="100%"
+          >
             <Text
               fontSize={{ base: "14px", md: "15px", lg: "18px" }}
               fontWeight={500}
             >
               {data.title}
             </Text>
-          </Box>
-        </HStack>
+
+            <Text
+              fontSize={"14px"}
+              fontStyle={"italic"}
+              borderTop="1px solid"
+              borderColor={"text.medium"}
+              color={"text.medium"}
+              pt="4px"
+              css={{
+                "&::-webkit-line-clamp": 3,
+                overflow: "hidden",
+              }}
+            >
+              {publishedDate}
+            </Text>
+          </Flex>
+        </Flex>
       </GridItem>
     );
   }
