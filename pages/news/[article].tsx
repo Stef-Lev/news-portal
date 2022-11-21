@@ -19,7 +19,7 @@ import { el } from "date-fns/locale";
 
 const Article = ({ data }) => {
   const router = useRouter();
-  console.log(data);
+  // console.log(data);
   return (
     <>
       <Box

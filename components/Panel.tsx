@@ -1,7 +1,6 @@
 import {
   Image,
   Flex,
-  VStack,
   Text,
   GridItem,
   Box,
@@ -41,11 +40,10 @@ const Panel: React.FC<PanelProps> = ({ data }) => {
       <GridItem
         borderRadius="8px"
         background="blue.800"
-        minH="340px"
         w="100%"
         onClick={() => goToPath(data.link)}
       >
-        <VStack>
+        <Flex flexDirection="column">
           <Image
             alt={data.title}
             src={data.image.$.url}
@@ -53,12 +51,32 @@ const Panel: React.FC<PanelProps> = ({ data }) => {
             borderRadius="8px 8px 0px 0px"
             objectFit="cover"
           />
-          <Box w="100%" h="100%" padding="8px 16px 12px">
-            <Text fontSize="16px" fontWeight={500}>
-              {data.title}
-            </Text>
-          </Box>
-        </VStack>
+          <Flex
+            flexDirection="column"
+            padding="10px"
+            justifyContent="space-between"
+          >
+            <Box w="100%">
+              <Text fontSize="16px" fontWeight={500}>
+                {data.title}
+              </Text>
+            </Box>
+            <Box>
+              <Text
+                fontSize="14px"
+                fontStyle="italic"
+                color="text.medium"
+                pt="4px"
+                css={{
+                  "&::-webkit-line-clamp": 3,
+                  overflow: "hidden",
+                }}
+              >
+                {publishedDate}
+              </Text>
+            </Box>
+          </Flex>
+        </Flex>
       </GridItem>
     );
   } else {
@@ -66,7 +84,7 @@ const Panel: React.FC<PanelProps> = ({ data }) => {
       <GridItem
         borderRadius="8px"
         background="blue.800"
-        minH={{ base: "110px", md: "120px", lg: "130px", xl: "140px" }}
+        h={{ base: "110px", md: "120px", lg: "130px", xl: "140px" }}
         w="100%"
         onClick={() => goToPath(data.link)}
       >
@@ -81,30 +99,31 @@ const Panel: React.FC<PanelProps> = ({ data }) => {
           <Flex
             flexDirection="column"
             justifyContent="space-between"
-            padding={{ base: "6px 6px 6px 4px", md: "10px", lg: "14px" }}
+            padding={{ base: "10px", md: "10px", lg: "14px" }}
             w="100%"
           >
-            <Text
-              fontSize={{ base: "14px", md: "15px", lg: "18px" }}
-              fontWeight={500}
-            >
-              {data.title}
-            </Text>
-
-            <Text
-              fontSize={"14px"}
-              fontStyle={"italic"}
-              borderTop="1px solid"
-              borderColor={"text.medium"}
-              color={"text.medium"}
-              pt="4px"
-              css={{
-                "&::-webkit-line-clamp": 3,
-                overflow: "hidden",
-              }}
-            >
-              {publishedDate}
-            </Text>
+            <Box>
+              <Text
+                fontSize={{ base: "16px", md: "16px", lg: "18px" }}
+                fontWeight={500}
+              >
+                {data.title}
+              </Text>
+            </Box>
+            <Box>
+              <Text
+                fontSize="14px"
+                fontStyle="italic"
+                color="text.medium"
+                pt="4px"
+                css={{
+                  "&::-webkit-line-clamp": 3,
+                  overflow: "hidden",
+                }}
+              >
+                {publishedDate}
+              </Text>
+            </Box>
           </Flex>
         </Flex>
       </GridItem>

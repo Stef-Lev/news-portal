@@ -6,9 +6,9 @@ import { useRouter } from "next/router";
 
 const Category = ({ news }) => {
   const router = useRouter();
-  console.log(news);
+  // console.log(news);
   return (
-    <Container maxW={{ base: "100%", lg: "90%", xl: "75%" }}>
+    <Container maxW={{ base: "100%", lg: "90%", xl: "75%" }} mt="56px">
       <Box>
         <Heading marginBottom="16px">
           {pathToTitle[router.query.category]}

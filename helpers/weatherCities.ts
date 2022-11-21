@@ -6,8 +6,8 @@ export const weatherCities = {
   Ioannina: "Ιωάννινα",
   Trikala: "Τρίκαλα",
   Patras: "Πάτρα",
-  Mykonos: "Μύκονος",
   Xanthi: "Ξάνθη",
+  Mykonos: "Μύκονος",
   Chania: "Χανιά",
   Heraklion: "Ηράκλειο",
 };
