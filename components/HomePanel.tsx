@@ -42,8 +42,8 @@ const HomePanel: React.FC<HomePanelProps> = ({ newsItem, index }) => {
           height={{
             base: "250px",
             sm: "320px",
-            md: index === 0 ? "400px" : "300px",
-            lg: index === 0 ? "600px" : "380px",
+            md: index === 0 ? "400px" : "220px",
+            lg: index === 0 ? "500px" : "300px",
           }}
           borderRadius="8px 8px 0px 0px"
           objectFit="cover"
@@ -52,10 +52,20 @@ const HomePanel: React.FC<HomePanelProps> = ({ newsItem, index }) => {
           flexDirection="column"
           justifyContent="space-between"
           w="100%"
-          h="100%"
+          minH="120px"
           padding={{ base: "12px", sm: "14px", md: "20px" }}
         >
-          <Heading as="h3" fontSize="22px" fontWeight={500}>
+          <Heading
+            as="h3"
+            fontSize="22px"
+            fontWeight={500}
+            h={{
+              base: index === 0 ? "auto" : "86px",
+              md: index === 0 ? "auto" : "78px",
+            }}
+            textOverflow="ellipsis"
+            overflow="hidden"
+          >
             {newsItem.title}
           </Heading>
           {index === 0 && (
@@ -67,10 +77,6 @@ const HomePanel: React.FC<HomePanelProps> = ({ newsItem, index }) => {
               fontStyle="italic"
               color="text.medium"
               pt="4px"
-              css={{
-                "&::-webkit-line-clamp": 3,
-                overflow: "hidden",
-              }}
             >
               {publishedDate}
             </Text>

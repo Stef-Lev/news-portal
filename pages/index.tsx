@@ -1,15 +1,6 @@
 import type { NextPage } from "next";
 import HomePanel from "../components/HomePanel";
-import {
-  Button,
-  Center,
-  Container,
-  Grid,
-  GridItem,
-  Box,
-  Heading,
-} from "@chakra-ui/react";
-import Link from "next/link";
+import { Container, Grid, Box, Heading } from "@chakra-ui/react";
 import { getNews } from "../helpers/fetchData";
 import { getWeather } from "../helpers/fetchData";
 import WeatherCarousel from "../components/WeatherCarousel";
@@ -22,7 +13,7 @@ const Home: NextPage = ({ news, weather }) => {
         {news.map((item: any, index: number) => (
           <Container
             key={index}
-            maxW={{ base: "100%", lg: "90%", xl: "75%" }}
+            maxW={{ base: "100%", md: "720px", lg: "900px", xl: "1100px" }}
             mb="20px"
           >
             <Heading as="h2" fontSize="50px" mb="20px">
@@ -31,7 +22,7 @@ const Home: NextPage = ({ news, weather }) => {
             <Grid
               templateRows={{ base: "repeat(1fr)", md: "repeat(1fr, 1fr)" }}
               templateColumns="repeat(2, 1fr)"
-              gap={6}
+              gap={4}
             >
               {item[1].map((item, index) => {
                 if (index < 7) {
