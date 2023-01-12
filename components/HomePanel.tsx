@@ -37,6 +37,7 @@ const HomePanel: React.FC<HomePanelProps> = ({ newsItem, index }) => {
     >
       <Flex flexDirection="column">
         <Image
+          alt={newsItem.title}
           src={newsItem.image.$.url}
           w="100%"
           height={{

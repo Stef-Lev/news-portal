@@ -103,23 +103,16 @@ const Panel: React.FC<PanelProps> = ({ data }) => {
             w="100%"
           >
             <Box>
-              <Text
-                fontSize={{ base: "16px", md: "16px", lg: "18px" }}
-                fontWeight={500}
-              >
+              <Text fontSize={{ base: "14px", lg: "18px" }} fontWeight={500}>
                 {data.title}
               </Text>
             </Box>
             <Box>
               <Text
-                fontSize="14px"
+                fontSize="13px"
                 fontStyle="italic"
                 color="text.medium"
                 pt="4px"
-                css={{
-                  "&::-webkit-line-clamp": 3,
-                  overflow: "hidden",
-                }}
               >
                 {publishedDate}
               </Text>
