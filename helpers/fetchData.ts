@@ -70,46 +70,10 @@ export async function getWeather() {
   let weather = await data.json();
   return weather;
 }
-export async function getScores() {
-  let scores = {};
-
-  let dateToday = new Date();
-  let yearToday = dateToday.getFullYear();
-  let monthToday = dateToday.getMonth() + 1;
-  let dayToday = dateToday.getDate();
-  let todayString = `${yearToday}-${
-    String(monthToday).length > 1 ? monthToday : `0${monthToday}`
-  }-${dayToday}`;
-
-  const yesterday = new Date(dateToday);
-  yesterday.setDate(yesterday.getDate() - 1);
-
-  let yearYesterday = yesterday.getFullYear();
-  let monthYesterday = yesterday.getMonth() + 1;
-  let dayYesterday = yesterday.getDate();
-  let yesterdayString = `${yearYesterday}-${
-    String(monthYesterday).length > 1 ? monthYesterday : `0${monthYesterday}`
-  }-${dayYesterday}`;
-
-  let yesterdayData = await fetch(`${SCORES_URL}${yesterdayString}`);
-  let yesterdayScores = await yesterdayData.json();
-  let formattedYGames = yesterdayScores.games.map((item) => ({
-    id: item.id,
-    isFinished: item.isFinished,
-    isLive: item.isLive,
-    league_id: item.league_id,
-    league_name: item.league_name,
-    minute: item.minute,
-    red_cards: item.rcards,
-    timestamp: item.timestamp,
-    time: item.time,
-    score: item.score,
-    teams: { home: item.teams.hometeam.name, away: item.teams.awayteam.name },
-  }));
-  scores[yesterdayScores.day] = formattedYGames;
-  let todayData = await fetch(`${SCORES_URL}${todayString}`);
+export async function getScores(date) {
+  let todayData = await fetch(`${SCORES_URL}${date}`);
   let todayScores = await todayData.json();
-  let formattedTGames = todayScores.games.map((item) => ({
+  let formattedGames = todayScores.games.map((item) => ({
     id: item.id,
     isFinished: item.isFinished,
     isLive: item.isLive,
@@ -122,6 +86,5 @@ export async function getScores() {
     score: item.score,
     teams: item.teams,
   }));
-  scores[todayScores.day] = formattedTGames;
-  return scores;
+  return formattedGames;
 }
