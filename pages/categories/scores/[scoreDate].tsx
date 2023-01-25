@@ -1,8 +1,19 @@
 import useSWR from "swr";
+import Head from "next/head";
+import Link from "next/link";
 import scoreDates from "../../../helpers/scoreDates";
 import { useRouter } from "next/router";
+import format from "date-fns/format";
 
-import { Flex, Text, Box, Tab, Tabs, TabList } from "@chakra-ui/react";
+import {
+  Flex,
+  Text,
+  Box,
+  Tab,
+  Tabs,
+  TabList,
+  Container,
+} from "@chakra-ui/react";
 
 function Scores() {
   const dates = scoreDates();
@@ -19,17 +30,17 @@ function Scores() {
   console.log(data);
 
   return (
-    <Box mt="70px">
+    <Container maxW={{ base: "100%", lg: "90%", xl: "75%" }} mt="70px">
       <Tabs variant="soft-rounded" colorScheme="green">
         <TabList>
           {dates.map((item) => (
             <Tab
               key={item}
               onClick={(e) => {
-                router.push(`/categories/scores/${e.target.innerHTML}`);
+                router.push(`/categories/scores/${item}`);
               }}
             >
-              {item}
+              {format(new Date(item), "dd-MM")}
             </Tab>
           ))}
         </TabList>
@@ -46,7 +57,7 @@ function Scores() {
             </Box>
           </Flex>
         ))}
-    </Box>
+    </Container>
   );
 }
 
