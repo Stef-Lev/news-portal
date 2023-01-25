@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import useSWR from "swr";
 import Head from "next/head";
 import Link from "next/link";
@@ -9,6 +10,8 @@ import {
   Flex,
   Text,
   Box,
+  Grid,
+  GridItem,
   Tab,
   Tabs,
   TabList,
@@ -24,19 +27,38 @@ function Scores() {
   const { data, error, isLoading } = useSWR(
     `/api/scores/?date=${router.query.scoreDate}`,
     fetcher,
-    { refreshInterval: 5000 }
+    {
+      revalidateOnFocus: false,
+      revalidateIfStale: false,
+      refreshInterval: 2000,
+    }
   );
 
+  const status = (item) => {
+    if (item.isHT) {
+      return "ΗΜ";
+    }
+    if (item.isFinished) {
+      return "ΤΕΛ";
+    }
+    if (item.isLive) {
+      return `${item.minute}'`;
+    }
+    return `${item.time}`;
+  };
+
   console.log(data);
+  console.log(router.query.scoreDate);
 
   return (
     <Container maxW={{ base: "100%", lg: "90%", xl: "75%" }} mt="70px">
-      <Tabs variant="soft-rounded" colorScheme="green">
+      <Tabs variant="soft-rounded">
         <TabList>
           {dates.map((item) => (
             <Tab
+              _selected={{ background: "teal", color: "white" }}
               key={item}
-              onClick={(e) => {
+              onClick={() => {
                 router.push(`/categories/scores/${item}`);
               }}
             >
@@ -45,18 +67,98 @@ function Scores() {
           ))}
         </TabList>
       </Tabs>
-      {!isLoading &&
-        !error &&
-        data.map((item) => (
-          <Flex flexDirection="column" key={item.id} border="1px solid white">
-            <Box>
-              {item.teams.hometeam.name} -{item.score.goal1}
-            </Box>{" "}
-            <Box>
-              {item.teams.awayteam.name} -{item.score.goal2}
-            </Box>
-          </Flex>
-        ))}
+      <Box my="20px">
+        {!isLoading &&
+          !error &&
+          data.map((item) => (
+            <Grid
+              templateColumns="1fr 1fr 6fr 2fr 6fr 1fr 1fr"
+              gap={2}
+              key={item.id}
+              backgroundColor="#0d181b"
+              _odd={{ backgroundColor: "#16262b" }}
+            >
+              <GridItem
+                display="flex"
+                alignItems="center"
+                w="100%"
+                p="10px"
+                textAlign="center"
+              >
+                <Text color={item.isLive ? "#73c3ce" : "#fff"}>
+                  {status(item)}
+                </Text>
+              </GridItem>
+              <GridItem
+                display="flex"
+                alignItems="center"
+                justifyContent="flex-end"
+                w="100%"
+                p="10px"
+                textAlign="center"
+              >
+                {item.rcards.length > 0 &&
+                  item.rcards.some((item) => item.team == 1) && (
+                    <Box h="14px" w="9px" background="#f33e3e" />
+                  )}
+              </GridItem>
+              <GridItem
+                display="flex"
+                alignItems="center"
+                justifyContent="flex-end"
+                w="100%"
+                p="10px"
+              >
+                {item.teams.hometeam.name}
+              </GridItem>
+              <GridItem
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                w="100%"
+                p="10px"
+                fontSize="24px"
+              >
+                <Box display="flex" gap="8px">
+                  <Text color="#FFFDD0">{item.score.goal1}</Text>
+                  <Text> - </Text>
+                  <Text color="#FFFDD0">{item.score.goal2}</Text>
+                </Box>
+              </GridItem>
+              <GridItem
+                display="flex"
+                alignItems="center"
+                justifyContent="flex-start"
+                w="100%"
+                p="10px"
+                textAlign="left"
+              >
+                {item.teams.awayteam.name}
+              </GridItem>
+              <GridItem
+                display="flex"
+                alignItems="center"
+                justifyContent="flex-end"
+                w="100%"
+                p="10px"
+                textAlign="center"
+              >
+                {item.rcards.length > 0 &&
+                  item.rcards.some((item) => item.team == 2) && (
+                    <Box h="14px" w="9px" background="#f33e3e" />
+                  )}
+              </GridItem>
+              <GridItem
+                display="flex"
+                alignItems="center"
+                justifyContent="flex-end"
+                w="100%"
+                p="10px"
+                textAlign="center"
+              />
+            </Grid>
+          ))}
+      </Box>
     </Container>
   );
 }

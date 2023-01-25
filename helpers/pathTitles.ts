@@ -1,3 +1,6 @@
+import scoreDates from "./scoreDates";
+const dates = scoreDates();
+
 export const titleToPath = {
   ΑΘΛΗΤΙΣΜΟΣ: "sports",
   ΚΟΣΜΟΣ: "world",
@@ -5,7 +8,7 @@ export const titleToPath = {
   ΟΙΚΟΝΟΜΙΑ: "economy",
   ΠΟΛΙΤΙΚΗ: "politics",
   ΠΟΛΙΤΙΣΜΟΣ: "culture",
-  "ΑΠΟΤΕΛΕΣΜΑΤΑ ΑΓΩΝΩΝ": "scores",
+  "ΑΠΟΤΕΛΕΣΜΑΤΑ ΑΓΩΝΩΝ": `scores/${dates[0]}`,
 };
 
 export const pathToTitle = {

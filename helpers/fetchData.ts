@@ -73,18 +73,5 @@ export async function getWeather() {
 export async function getScores(date) {
   let todayData = await fetch(`${SCORES_URL}${date}`);
   let todayScores = await todayData.json();
-  let formattedGames = todayScores.games.map((item) => ({
-    id: item.id,
-    isFinished: item.isFinished,
-    isLive: item.isLive,
-    league_id: item.league_id,
-    league_name: item.league_name,
-    minute: item.minute,
-    red_cards: item.rcards,
-    timestamp: item.timestamp,
-    time: item.time,
-    score: item.score,
-    teams: item.teams,
-  }));
-  return formattedGames;
+  return todayScores.games;
 }
