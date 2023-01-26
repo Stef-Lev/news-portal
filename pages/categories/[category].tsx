@@ -8,7 +8,7 @@ const Category = ({ news }) => {
   const router = useRouter();
   // console.log(news);
   return (
-    <Container maxW={{ base: "100%", lg: "90%", xl: "75%" }} mt="66px">
+    <Container maxW={{ base: "100%", lg: "90%", xl: "75%" }} mt="90px">
       <Box>
         <Heading marginBottom="16px">
           {pathToTitle[router.query.category]}

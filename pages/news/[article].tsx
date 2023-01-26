@@ -23,7 +23,7 @@ const Article = ({ data }) => {
   return (
     <>
       <Box
-        mt="66px"
+        mt="90px"
         mb="20px"
         borderBottom="1px solid #f3f3f3"
         pb="8px"
@@ -40,7 +40,7 @@ const Article = ({ data }) => {
         maxW={["95%", "90%", "80%", "70%", "60%"]}
         gap="120px"
         pb="30px"
-        mt={{ base: "0px", md: "66px" }}
+        mt={{ base: "0px", md: "90px" }}
       >
         <Heading fontSize={["24px", "24px", "26px", "28px"]} pb="16px">
           {data.title}
@@ -121,7 +121,7 @@ export async function getServerSideProps(ctx: NextPageContext) {
     content: {
       selector: ".entry-content p",
     },
-  }).then(({ data, response }) => {
+  }).then(({ data }) => {
     return (finalData = data);
   });
 

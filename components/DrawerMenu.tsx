@@ -44,7 +44,6 @@ function DrawerMenu() {
             src="/news.png"
             borderRadius="10px"
             w="120px"
-            css={{ filter: "hue-rotate(-60deg)" }}
             onClick={() => router.push("/")}
           />
         </Box>

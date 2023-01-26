@@ -40,7 +40,7 @@ function Scores() {
   // console.log(router.query.scoreDate);
 
   return (
-    <Container maxW={{ base: "100%", lg: "90%", xl: "75%" }} mt="70px">
+    <Container maxW={{ base: "100%", lg: "90%", xl: "75%" }} mt="90px">
       <Tabs variant="soft-rounded">
         <TabList>
           {dates.map((item) => (
