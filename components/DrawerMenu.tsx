@@ -10,6 +10,7 @@ import {
   List,
   ListItem,
   Box,
+  Image,
   useDisclosure,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
@@ -24,8 +25,36 @@ function DrawerMenu() {
 
   return (
     <Box>
-      <Box position="fixed" top={0} bg="blue.900" w="100%" zIndex={200}>
+      <Box
+        position="fixed"
+        top={0}
+        bg="blue.900"
+        w="100%"
+        zIndex={200}
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+      >
         <IconButton ref={btnRef} colorScheme="white" onClick={onOpen}>
+          <HamburgerIcon w={30} h={30} color="text.light" />
+        </IconButton>
+        <Box py="10px">
+          <Image
+            alt="news logo"
+            src="/news.png"
+            borderRadius="10px"
+            w="120px"
+            css={{ filter: "hue-rotate(-60deg)" }}
+            onClick={() => router.push("/")}
+          />
+        </Box>
+
+        <IconButton
+          aria-label="ghost"
+          colorScheme="white"
+          onClick={onOpen}
+          visibility="hidden"
+        >
           <HamburgerIcon w={30} h={30} color="text.light" />
         </IconButton>
       </Box>

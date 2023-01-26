@@ -19,11 +19,11 @@ import { el } from "date-fns/locale";
 
 const Article = ({ data }) => {
   const router = useRouter();
-  // console.log(data);
+
   return (
     <>
       <Box
-        mt="40px"
+        mt="66px"
         mb="20px"
         borderBottom="1px solid #f3f3f3"
         pb="8px"
@@ -40,7 +40,7 @@ const Article = ({ data }) => {
         maxW={["95%", "90%", "80%", "70%", "60%"]}
         gap="120px"
         pb="30px"
-        mt={{ base: "0px", md: "40px" }}
+        mt={{ base: "0px", md: "66px" }}
       >
         <Heading fontSize={["24px", "24px", "26px", "28px"]} pb="16px">
           {data.title}

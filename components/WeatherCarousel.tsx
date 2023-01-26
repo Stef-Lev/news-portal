@@ -10,7 +10,7 @@ function WeatherCarousel({ items }) {
           bg="blue.900"
           padding="0px"
           overflowX="auto"
-          mt="40px"
+          mt="66px"
           scrollSnapType="x"
         >
           {items.map((item) => (
