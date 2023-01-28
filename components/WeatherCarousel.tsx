@@ -36,6 +36,5 @@ function WeatherCarousel({ items }) {
     </Container>
   );
 }
-//https://openweathermap.org/img/wn/04n@2x.png
 
 export default WeatherCarousel;

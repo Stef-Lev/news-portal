@@ -20,7 +20,7 @@ import { useRouter } from "next/router";
 
 function DrawerMenu() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const btnRef = useRef();
+  const btnRef = useRef(null);
   const router = useRouter();
 
   return (
@@ -35,7 +35,12 @@ function DrawerMenu() {
         justifyContent="space-between"
         alignItems="center"
       >
-        <IconButton ref={btnRef} colorScheme="white" onClick={onOpen}>
+        <IconButton
+          ref={btnRef}
+          aria-label="hamburger"
+          colorScheme="white"
+          onClick={onOpen}
+        >
           <HamburgerIcon w={30} h={30} color="text.light" />
         </IconButton>
         <Box py="10px">
@@ -44,6 +49,7 @@ function DrawerMenu() {
             src="/news.png"
             borderRadius="10px"
             w="120px"
+            _hover={{ cursor: "pointer" }}
             onClick={() => router.push("/")}
           />
         </Box>
@@ -74,6 +80,7 @@ function DrawerMenu() {
               {Object.entries(titleToPath).map((item) => (
                 <ListItem
                   key={item[1]}
+                  _hover={{ cursor: "pointer" }}
                   onClick={() => {
                     router.push(`/categories/${item[1]}`);
                     onClose();

@@ -7,8 +7,9 @@ import {
   GridItem,
   useMediaQuery,
 } from "@chakra-ui/react";
+import { ScoreItem } from "../types/types";
 
-function ScoreItem({ item }) {
+function ScoreItem({ item, index }: ScoreItem) {
   const [isLargerThan880] = useMediaQuery("(min-width: 880px)");
 
   const status = (game) => {
@@ -30,8 +31,7 @@ function ScoreItem({ item }) {
         <Grid
           templateColumns="1fr 1fr 6fr 2fr 6fr 1fr 1fr"
           gap={2}
-          backgroundColor="#0d181b"
-          _odd={{ backgroundColor: "#16262b" }}
+          backgroundColor={index % 2 === 0 ? "#16262b" : "#0d181b"}
         >
           <GridItem
             display="flex"
@@ -115,8 +115,7 @@ function ScoreItem({ item }) {
           templateColumns="1fr 9fr"
           gap={2}
           fontSize="14px"
-          backgroundColor="#0d181b"
-          _odd={{ backgroundColor: "#16262b" }}
+          backgroundColor={index % 2 === 0 ? "#16262b" : "#0d181b"}
         >
           <GridItem
             display="flex"

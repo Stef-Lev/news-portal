@@ -41,6 +41,7 @@ const Panel: React.FC<PanelProps> = ({ data }) => {
         borderRadius="8px"
         background="blue.800"
         w="100%"
+        _hover={{ cursor: "pointer" }}
         onClick={() => goToPath(data.link)}
       >
         <Flex flexDirection="column">
@@ -86,6 +87,7 @@ const Panel: React.FC<PanelProps> = ({ data }) => {
         background="blue.800"
         h={{ base: "110px", md: "120px", lg: "130px", xl: "140px" }}
         w="100%"
+        _hover={{ cursor: "pointer" }}
         onClick={() => goToPath(data.link)}
       >
         <Flex>

@@ -10,3 +10,95 @@ export type NewsItem = {
   pubDate: string;
   title: string;
 };
+
+type teamType = {
+  id: string;
+  name: string;
+  nat: string;
+  formation: string;
+  $t: string;
+  winning: boolean;
+  scored: boolean;
+};
+
+export type ScoreItem = {
+  id: string;
+  date: string;
+  time: string;
+  spectators: string;
+  stadium: string;
+  week: string;
+  live: string;
+  league_id: string;
+  league_name: string;
+  minute: string;
+  gamestatus: string;
+  season: string;
+  couponGr: string;
+  upd: string;
+  del: string;
+  teams: {
+    hometeam: teamType;
+    awayteam: teamType;
+  };
+  score: {
+    goal1: string;
+    goal2: string;
+    ht_goal1: string;
+    ht_goal2: string;
+    et_goal1: string;
+    et_goal2: string;
+    pt_goal1: string;
+    pt_goal2: string;
+  };
+  odds: {
+    coupon: string;
+    code: string;
+    mins: string;
+    odd_1: string;
+    odd_X: string;
+    odd_2: string;
+    odd_1X: string;
+    odd_X2: string;
+    odd_12: string;
+    odd_o25: string;
+    odd_u25: string;
+    odd_HT1: string;
+    odd_HTX: string;
+    odd_HT2: string;
+    odd_G01: string;
+    odd_G23: string;
+    odd_G46: string;
+    odd_G7: string;
+    homeAdv: string;
+    awayAdv: string;
+  };
+  events: [];
+  timestamp: number;
+  image_name: string;
+  comp_name: string;
+  isLive: boolean;
+  isHT: boolean;
+  isFinished: boolean;
+  isPP: boolean;
+  result: boolean;
+  rcards: [];
+  otherOddsCount: number;
+  droppingOdds: {
+    odd_1: string;
+    odd_X: string;
+    odd_2: string;
+    odd_1X: string;
+    odd_X2: string;
+    odd_12: string;
+    odd_o25: string;
+    odd_u25: string;
+    odd_HT1: string;
+    odd_HTX: string;
+    odd_HT2: string;
+    odd_G01: string;
+    odd_G23: string;
+    odd_G46: string;
+    odd_G7: string;
+  };
+};

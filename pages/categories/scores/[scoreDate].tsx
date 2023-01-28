@@ -62,7 +62,9 @@ function Scores() {
       <Box my="20px">
         {!isLoading &&
           !error &&
-          data.map((item) => <ScoreItem key={item.id} item={item} />)}
+          data.map((item, index) => (
+            <ScoreItem key={item.id} item={item} index={index} />
+          ))}
       </Box>
     </Container>
   );

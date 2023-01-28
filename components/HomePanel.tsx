@@ -25,7 +25,7 @@ const HomePanel: React.FC<HomePanelProps> = ({ newsItem, index }) => {
     locale: el,
     addSuffix: true,
   });
-  // console.log(newsItem);
+
   return (
     <GridItem
       key={newsItem.title}
@@ -33,6 +33,7 @@ const HomePanel: React.FC<HomePanelProps> = ({ newsItem, index }) => {
       borderRadius="8px"
       background="blue.800"
       w="100%"
+      _hover={{ cursor: "pointer" }}
       onClick={() => goToPath(newsItem.link)}
     >
       <Flex flexDirection="column">
