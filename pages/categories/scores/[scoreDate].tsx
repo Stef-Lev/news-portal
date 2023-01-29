@@ -3,6 +3,7 @@ import scoreDates from "../../../helpers/scoreDates";
 import ScoreItem from "../../../components/ScoreItem";
 import { ScoreItem as ScoreItemType } from "../../../types/types";
 import { useRouter } from "next/router";
+import Loader from "../../../components/Loader";
 import format from "date-fns/format";
 
 import { Box, Tab, Tabs, TabList, Container } from "@chakra-ui/react";
@@ -32,7 +33,7 @@ function Scores() {
               padding={{ base: "5px 10px", md: "8px 16px" }}
               fontSize={{ base: "14px", md: "16px" }}
               marginRight="5px"
-              _selected={{ background: "teal", color: "white" }}
+              _selected={{ background: "blue.400", color: "white" }}
               key={item}
               onClick={() => {
                 router.push(`/categories/scores/${item}`);
@@ -44,6 +45,7 @@ function Scores() {
         </TabList>
       </Tabs>
       <Box my="20px">
+        {isLoading && <Loader />}
         {!isLoading &&
           !error &&
           data.map((item: ScoreItemType, index: number) => (

@@ -23,7 +23,6 @@ type ArticleProps = { data: ArticleType };
 
 const Article: NextPage<ArticleProps> = ({ data }) => {
   const router = useRouter();
-  console.log("data", data);
 
   return (
     <>
