@@ -8,17 +8,22 @@ import {
   Box,
   HStack,
 } from "@chakra-ui/react";
+import type { NextPage } from "next";
 import { ChevronLeftIcon, CalendarIcon } from "@chakra-ui/icons";
 import scrapeIt from "scrape-it";
 import { NextPageContext } from "next";
+import { ArticleType } from "../../types/types";
 import { useRouter } from "next/router";
 import { titleToPath } from "../../helpers/pathTitles";
 import { categories } from "../../helpers/pathTitles";
 import format from "date-fns/format";
 import { el } from "date-fns/locale";
 
-const Article = ({ data }) => {
+type ArticleProps = { data: ArticleType };
+
+const Article: NextPage<ArticleProps> = ({ data }) => {
   const router = useRouter();
+  console.log("data", data);
 
   return (
     <>
@@ -72,7 +77,13 @@ const Article = ({ data }) => {
           width="max-content"
           mb="16px"
           onClick={() =>
-            router.push(`/categories/${titleToPath[categories[data.category]]}`)
+            router.push(
+              `/categories/${
+                titleToPath[
+                  categories[data.category] as keyof typeof titleToPath
+                ]
+              }`
+            )
           }
         >
           {categories[data.category]}

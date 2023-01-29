@@ -1,17 +1,17 @@
-export type NewsItem = {
-  categories: string[];
+export interface NewsItem {
+  categories?: string[];
   content: string;
   contentSnippet: string;
-  "dc:creator": string;
+  "dc:creator"?: string;
   guid: string;
-  image: { $: { height: string; url: string; width: string } };
+  image?: { $: { height: string; url: string; width: string } };
   isoDate: string;
   link: string;
   pubDate: string;
   title: string;
-};
+}
 
-type teamType = {
+type TeamType = {
   id: string;
   name: string;
   nat: string;
@@ -19,6 +19,11 @@ type teamType = {
   $t: string;
   winning: boolean;
   scored: boolean;
+};
+
+export type Rcard = {
+  team: number;
+  type: string;
 };
 
 export type ScoreItem = {
@@ -38,8 +43,8 @@ export type ScoreItem = {
   upd: string;
   del: string;
   teams: {
-    hometeam: teamType;
-    awayteam: teamType;
+    hometeam: TeamType;
+    awayteam: TeamType;
   };
   score: {
     goal1: string;
@@ -82,7 +87,7 @@ export type ScoreItem = {
   isFinished: boolean;
   isPP: boolean;
   result: boolean;
-  rcards: [];
+  rcards: Rcard[];
   otherOddsCount: number;
   droppingOdds: {
     odd_1: string;
@@ -102,3 +107,120 @@ export type ScoreItem = {
     odd_G7: string;
   };
 };
+
+export interface Coord {
+  lon: number;
+  lat: number;
+}
+
+export interface Sys {
+  country: string;
+  timezone: number;
+  sunrise: number;
+  sunset: number;
+}
+
+export interface Weather {
+  id: number;
+  main: string;
+  description: string;
+  icon: string;
+}
+
+export interface Main {
+  temp: number;
+  feels_like: number;
+  temp_min: number;
+  temp_max: number;
+  pressure: number;
+  humidity: number;
+}
+
+export interface Wind {
+  speed: number;
+  deg: number;
+}
+
+export interface Clouds {
+  all: number;
+}
+
+export interface WeatherObject {
+  coord: Coord;
+  sys: Sys;
+  weather: Weather[];
+  main: Main;
+  visibility: number;
+  wind: Wind;
+  clouds: Clouds;
+  dt: number;
+  id: number;
+  name: string;
+}
+
+export interface Enclosure {
+  url: string;
+  length?: number;
+  type?: string;
+}
+
+export interface Item {
+  link?: string;
+  guid?: string;
+  title?: string;
+  pubDate?: string;
+  creator?: string;
+  summary?: string;
+  content?: string;
+  isoDate?: string;
+  categories?: string[];
+  contentSnippet?: string;
+  enclosure?: Enclosure;
+}
+
+export interface PaginationLinks {
+  self?: string;
+  first?: string;
+  next?: string;
+  last?: string;
+  prev?: string;
+}
+export interface RawFeed<U> {
+  image?: {
+    link?: string;
+    url: string;
+    title?: string;
+  };
+  paginationLinks?: PaginationLinks;
+  link?: string;
+  title?: string;
+  items: (U & Item)[];
+  feedUrl?: string;
+  description?: string;
+  itunes?: {
+    [key: string]: any;
+    image?: string;
+    owner?: {
+      name?: string;
+      email?: string;
+    };
+    author?: string;
+    summary?: string;
+    explicit?: string;
+    categories?: string[];
+    keywords?: string[];
+  };
+}
+
+export interface NewsFeed {
+  [category: string]: Array<NewsItem>;
+}
+
+export interface ArticleType {
+  title: string;
+  subtitle: string;
+  category: string;
+  date: Date;
+  imgUrl: string;
+  content: string;
+}

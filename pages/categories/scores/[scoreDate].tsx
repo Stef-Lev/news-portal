@@ -1,30 +1,17 @@
-import { useEffect, useState } from "react";
 import useSWR from "swr";
-import Head from "next/head";
-import Link from "next/link";
 import scoreDates from "../../../helpers/scoreDates";
 import ScoreItem from "../../../components/ScoreItem";
+import { ScoreItem as ScoreItemType } from "../../../types/types";
 import { useRouter } from "next/router";
 import format from "date-fns/format";
 
-import {
-  Flex,
-  Text,
-  Box,
-  Grid,
-  GridItem,
-  Tab,
-  Tabs,
-  TabList,
-  Container,
-  Show,
-} from "@chakra-ui/react";
+import { Box, Tab, Tabs, TabList, Container } from "@chakra-ui/react";
 
 function Scores() {
   const dates = scoreDates();
   const router = useRouter();
 
-  const fetcher = (url) => fetch(url).then((r) => r.json());
+  const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
   const { data, error, isLoading } = useSWR(
     `/api/scores/?date=${router.query.scoreDate}`,
@@ -35,9 +22,6 @@ function Scores() {
       refreshInterval: 2000,
     }
   );
-
-  console.log(data);
-  // console.log(router.query.scoreDate);
 
   return (
     <Container maxW={{ base: "100%", lg: "90%", xl: "75%" }} mt="90px">
@@ -62,7 +46,7 @@ function Scores() {
       <Box my="20px">
         {!isLoading &&
           !error &&
-          data.map((item, index) => (
+          data.map((item: ScoreItemType, index: number) => (
             <ScoreItem key={item.id} item={item} index={index} />
           ))}
       </Box>

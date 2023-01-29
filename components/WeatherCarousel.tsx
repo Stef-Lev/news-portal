@@ -1,7 +1,12 @@
 import { Box, Image, Text, Flex, Container, Center } from "@chakra-ui/react";
 import { weatherCities } from "../helpers/weatherCities";
+import { WeatherObject } from "../types/types";
 
-function WeatherCarousel({ items }) {
+type WeatherProps = {
+  items: WeatherObject[];
+};
+
+function WeatherCarousel({ items }: WeatherProps) {
   return (
     <Container maxW={{ base: "100%", lg: "90%", xl: "75%" }} mb="20px">
       <Center>
@@ -21,7 +26,9 @@ function WeatherCarousel({ items }) {
                 flexDirection="column"
                 alignItems="center"
               >
-                <Text fontSize="md">{weatherCities[item.name]}</Text>
+                <Text fontSize="md">
+                  {weatherCities[item.name as keyof typeof weatherCities]}
+                </Text>
                 <Image
                   alt="weather"
                   w="50px"

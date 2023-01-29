@@ -21,7 +21,7 @@ export const pathToTitle = {
   scores: "ΑΠΟΤΕΛΕΣΜΑΤΑ ΑΓΩΝΩΝ",
 };
 
-export const categories = {
+export const categories: { [key: string]: string } = {
   "ΔΙΕΘΝΗΣ ΟΙΚΟΝΟΜΙΑ": "ΟΙΚΟΝΟΜΙΑ",
   ΑΘΛΗΤΙΣΜΟΣ: "ΑΘΛΗΤΙΣΜΟΣ",
   ΠΟΛΙΤΙΣΜΟΣ: "ΠΟΛΙΤΙΣΜΟΣ",

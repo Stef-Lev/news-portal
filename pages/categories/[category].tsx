@@ -1,17 +1,21 @@
 import { Heading, Box, Grid, Container } from "@chakra-ui/react";
+import { GetServerSidePropsContext } from "next";
+import { NewsItem } from "../../types/types";
 import { getNews } from "../../helpers/fetchData";
 import { pathToTitle } from "../../helpers/pathTitles";
 import Panel from "../../components/Panel";
 import { useRouter } from "next/router";
 
-const Category = ({ news }) => {
+type NewsType = { news: NewsItem[] };
+
+const Category = ({ news }: NewsType) => {
+  console.log("category", news);
   const router = useRouter();
-  // console.log(news);
   return (
     <Container maxW={{ base: "100%", lg: "90%", xl: "75%" }} mt="90px">
       <Box>
         <Heading marginBottom="16px">
-          {pathToTitle[router.query.category]}
+          {pathToTitle[router.query.category as keyof typeof pathToTitle]}
         </Heading>
         <Grid
           gap={{ base: "3", md: "4", lg: "5" }}
@@ -29,12 +33,12 @@ const Category = ({ news }) => {
 
 export default Category;
 
-export async function getServerSideProps(ctx) {
+export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   const { category } = ctx.query;
   const allNews = await getNews();
 
   const news = Object.entries(allNews).find(
-    (item) => item[0] === pathToTitle[category]
+    (item) => item[0] === pathToTitle[category as keyof typeof pathToTitle]
   );
 
   if (!news) {

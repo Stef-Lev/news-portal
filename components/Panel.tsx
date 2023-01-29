@@ -47,7 +47,7 @@ const Panel: React.FC<PanelProps> = ({ data }) => {
         <Flex flexDirection="column">
           <Image
             alt={data.title}
-            src={data.image.$.url}
+            src={data.image?.$.url}
             w="100%"
             borderRadius="8px 8px 0px 0px"
             objectFit="cover"
@@ -93,7 +93,7 @@ const Panel: React.FC<PanelProps> = ({ data }) => {
         <Flex>
           <Image
             alt={data.title}
-            src={data.image.$.url}
+            src={data.image?.$.url}
             borderRadius="8px 0px 0px 8px"
             boxSize={{ base: "110px", md: "120px", lg: "130px", xl: "140px" }}
             objectFit="cover"

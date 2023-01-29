@@ -7,12 +7,17 @@ import {
   GridItem,
   useMediaQuery,
 } from "@chakra-ui/react";
-import { ScoreItem } from "../types/types";
+import { ScoreItem, Rcard } from "../types/types";
 
-function ScoreItem({ item, index }: ScoreItem) {
+type ScoreItemProps = {
+  item: ScoreItem;
+  index: number;
+};
+
+function ScoreItem({ item, index }: ScoreItemProps) {
   const [isLargerThan880] = useMediaQuery("(min-width: 880px)");
 
-  const status = (game) => {
+  const status = (game: ScoreItem) => {
     if (game.isHT) {
       return "ΗΜ";
     }
@@ -51,7 +56,7 @@ function ScoreItem({ item, index }: ScoreItem) {
             textAlign="center"
           >
             {item.rcards.length > 0 &&
-              item.rcards.some((item) => item.team == 1) && (
+              item.rcards.some((item: Rcard) => item.team == 1) && (
                 <Box h="14px" w="9px" background="#f33e3e" />
               )}
           </GridItem>

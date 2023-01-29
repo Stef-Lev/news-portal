@@ -1,4 +1,5 @@
 import { categories as tabs } from "./pathTitles";
+import { NewsFeed, NewsItem, RawFeed } from "../types/types";
 const NEWS_URL = process.env.NEWS_URL ?? "";
 const WEATHER_URL = process.env.WEATHER_URL;
 const WEATHER_KEY = process.env.WEATHER_KEY;
@@ -14,7 +15,7 @@ const parser = new Parser({
 });
 
 export async function getNews() {
-  let news = {};
+  let news: NewsFeed = {};
   const categories = [
     "ΔΙΕΘΝΗΣ ΟΙΚΟΝΟΜΙΑ",
     "ΑΘΛΗΤΙΣΜΟΣ",
@@ -35,9 +36,10 @@ export async function getNews() {
     "ΒΙΒΛΙΟ",
   ];
 
-  let feed = await parser.parseURL(NEWS_URL);
+  let feed = (await parser.parseURL(NEWS_URL)) as RawFeed<NewsItem>;
+
   feed.items.map((item) => {
-    if (categories.includes(item.categories[0])) {
+    if (item.categories && categories.includes(item.categories[0])) {
       if (news[tabs[item.categories[0]]]) {
         news[tabs[item.categories[0]]].push(item);
       } else {
@@ -46,6 +48,7 @@ export async function getNews() {
       }
     }
   });
+  console.log(news);
   return news;
 }
 export async function getWeather() {
@@ -70,7 +73,7 @@ export async function getWeather() {
   let weather = await data.json();
   return weather;
 }
-export async function getScores(date) {
+export async function getScores(date: string | string[] | undefined) {
   let todayData = await fetch(`${SCORES_URL}${date}`);
   let todayScores = await todayData.json();
   return todayScores.games;
