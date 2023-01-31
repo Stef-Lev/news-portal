@@ -1,45 +1,45 @@
 import scrapeIt from "scrape-it";
 import { useRouter } from "next/router";
-import { pathToTitle } from "../../../helpers/pathTitles";
 import type { NextPage } from "next";
 import { NextPageContext } from "next";
-import {
-  Heading,
-  Text,
-  Image,
-  Box,
-  Link,
-  Flex,
-  Center,
-} from "@chakra-ui/react";
+import { FrontPages } from "../../../types/types";
+import { Heading, Image, Box, Link, Flex, Container } from "@chakra-ui/react";
 
-const Newspapers: NextPage = ({ data }) => {
+type NewspapersProps = { frontpages: FrontPages };
+
+const Newspapers: NextPage<NewspapersProps> = ({ frontpages }) => {
   const router = useRouter();
   console.log(router);
-  console.log(data);
+  console.log(frontpages);
   return (
-    <Box mt="90px" mb="20px" borderBottom="1px solid #f3f3f3" pb="8px">
-      <Heading marginBottom="16px">ΕΦΗΜΕΡΙΔΕΣ</Heading>
-
-      <Flex flexWrap="wrap" gap={5} justifyContent="center">
-        {data.papers.map((item) => (
-          <Box key={item.url}>
-            <Flex
-              display="flex"
-              flexDirection="column"
-              alignItems="center"
-              w="300px"
-            >
-              <Heading as="h5" fontSize="20px">
-                {item.title}
-              </Heading>
-              <Link href={`/newspapers/${item.url}`}>
-                <Image src={item.img} alt={item.title} />
-              </Link>
-            </Flex>
-          </Box>
-        ))}
-      </Flex>
+    <Box mt="120px" mb="20px">
+      <Container
+        maxW={{ base: "100%", md: "720px", lg: "900px", xl: "1100px" }}
+        mb="20px"
+      >
+        <Heading marginBottom="30px" textAlign="center">
+          ΠΡΩΤΟΣΕΛΙΔΑ ΕΦΗΜΕΡΙΔΩΝ
+        </Heading>
+        <Flex flexWrap="wrap" gap={5} justifyContent="center">
+          {frontpages.papers.map((item) => (
+            <Box key={item.url}>
+              <Flex
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+                w="300px"
+              >
+                <Heading as="h5" fontSize="20px" mb="10px">
+                  {item.title}
+                </Heading>
+                <Link href={`/newspapers/${item.url}`}>
+                  <Image src={item.img} alt={item.title} />
+                </Link>
+              </Flex>
+            </Box>
+          ))}
+        </Flex>
+      </Container>
     </Box>
   );
 };
@@ -47,9 +47,9 @@ const Newspapers: NextPage = ({ data }) => {
 export default Newspapers;
 
 export async function getServerSideProps(ctx: NextPageContext) {
-  const url = process.env.PAPERS_URL;
+  const url = process.env.PAPERS_URL || "https://www.protothema.gr/frontpages/";
 
-  let finalData;
+  let frontpages;
   const ftc = await scrapeIt(url, {
     papers: {
       listItem: ".fpItem",
@@ -63,10 +63,10 @@ export async function getServerSideProps(ctx: NextPageContext) {
       },
     },
   }).then(({ data }) => {
-    return (finalData = data);
+    return (frontpages = data);
   });
 
   return {
-    props: { data: finalData },
+    props: { frontpages },
   };
 }

@@ -224,3 +224,12 @@ export interface ArticleType {
   imgUrl: string;
   content: string;
 }
+export interface Paper {
+  title: string;
+  img: string;
+  url: string;
+}
+
+export interface FrontPages {
+  papers: Paper[];
+}
