@@ -1,10 +1,18 @@
-const dateString = (date: Date) => {
+export const dateString = (date: Date, withDash: boolean = true) => {
   let year = date.getFullYear();
   let month = date.getMonth() + 1;
   let day = date.getDate();
-  let dateString = `${year}-${
-    String(month).length > 1 ? month : `0${month}`
-  }-${day}`;
+  let dateString = "";
+  if (withDash) {
+    dateString = `${year}-${String(month).length > 1 ? month : `0${month}`}-${
+      String(day).length > 1 ? day : `0${day}`
+    }`;
+  } else {
+    dateString = `${year}${String(month).length > 1 ? month : `0${month}`}${
+      String(day).length > 1 ? day : `0${day}`
+    }`;
+  }
+
   return dateString;
 };
 

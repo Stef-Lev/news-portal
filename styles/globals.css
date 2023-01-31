@@ -24,3 +24,25 @@ img,
 p {
   margin: 0px;
 }
+
+#newspaper-date .react-datepicker-wrapper {
+  width: 100px;
+  margin-bottom: 20px;
+}
+
+#newspaper-date .react-datepicker__input-container {
+  width: 100px;
+}
+
+#newspaper-date input {
+  background: transparent;
+  width: 100px;
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 3px 8px;
+  display: flex;
+  justify-content: center;
+}
+#newspaper-date input:hover {
+  cursor: pointer;
+}

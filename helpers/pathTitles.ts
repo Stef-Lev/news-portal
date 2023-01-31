@@ -1,5 +1,5 @@
-import scoreDates from "./scoreDates";
-const dates = scoreDates();
+import { dateString } from "./scoreDates";
+const fetchDate = dateString(new Date(), true);
 
 export const titleToPath = {
   ΑΘΛΗΤΙΣΜΟΣ: "sports",
@@ -8,8 +8,8 @@ export const titleToPath = {
   ΟΙΚΟΝΟΜΙΑ: "economy",
   ΠΟΛΙΤΙΚΗ: "politics",
   ΠΟΛΙΤΙΣΜΟΣ: "culture",
-  "ΑΠΟΤΕΛΕΣΜΑΤΑ ΑΓΩΝΩΝ": `scores/${dates[0]}`,
-  ΕΦΗΜΕΡΙΔΕΣ: "newspapers",
+  "ΑΠΟΤΕΛΕΣΜΑΤΑ ΑΓΩΝΩΝ": `scores/${fetchDate}`,
+  ΕΦΗΜΕΡΙΔΕΣ: `newspapers/?date=${fetchDate}`,
 };
 
 export const pathToTitle = {
