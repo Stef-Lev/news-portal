@@ -48,7 +48,6 @@ export async function getNews() {
       }
     }
   });
-  console.log(news);
   return news;
 }
 export async function getWeather() {

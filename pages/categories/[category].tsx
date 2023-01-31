@@ -9,7 +9,6 @@ import { useRouter } from "next/router";
 type NewsType = { news: NewsItem[] };
 
 const Category = ({ news }: NewsType) => {
-  console.log("category", news);
   const router = useRouter();
   return (
     <Container maxW={{ base: "100%", lg: "90%", xl: "75%" }} mt="90px">

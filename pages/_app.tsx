@@ -15,5 +15,8 @@ function MyApp({ Component, pageProps }: AppProps) {
     </ChakraProvider>
   );
 }
+// TODO: Add accordion with league name for scores
+// TODO: Add newspaper all page
+// TODO: Add newspaper single page
 
 export default MyApp;

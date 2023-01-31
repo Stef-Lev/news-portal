@@ -9,6 +9,7 @@ export const titleToPath = {
   ΠΟΛΙΤΙΚΗ: "politics",
   ΠΟΛΙΤΙΣΜΟΣ: "culture",
   "ΑΠΟΤΕΛΕΣΜΑΤΑ ΑΓΩΝΩΝ": `scores/${dates[0]}`,
+  ΕΦΗΜΕΡΙΔΕΣ: "newspapers",
 };
 
 export const pathToTitle = {
@@ -19,6 +20,7 @@ export const pathToTitle = {
   politics: "ΠΟΛΙΤΙΚΗ",
   culture: "ΠΟΛΙΤΙΣΜΟΣ",
   scores: "ΑΠΟΤΕΛΕΣΜΑΤΑ ΑΓΩΝΩΝ",
+  newspapers: "ΕΦΗΜΕΡΙΔΕΣ",
 };
 
 export const categories: { [key: string]: string } = {
