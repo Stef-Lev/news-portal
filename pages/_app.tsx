@@ -17,6 +17,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 }
 // TODO: Add accordion with league name for scores
 // TODO: Add datepicker for scores
-// TODO: Fix newspaper single page
+// TODO: Fix newspaper single page, use modal, not fetch
 
 export default MyApp;

@@ -73,7 +73,7 @@ export async function getWeather() {
   return weather;
 }
 export async function getScores(date: string | string[] | undefined) {
-  let todayData = await fetch(`${SCORES_URL}${date}`);
-  let todayScores = await todayData.json();
-  return todayScores.games;
+  let data = await fetch(`${SCORES_URL}${date}`);
+  let scores = await data.json();
+  return scores.games;
 }

@@ -1,18 +1,27 @@
 import useSWR from "swr";
+import { scoresAccordion } from "../../../helpers/scoresAccordion";
 import scoreDates from "../../../helpers/scoreDates";
 import ScoreItem from "../../../components/ScoreItem";
-import { ScoreItem as ScoreItemType } from "../../../types/types";
 import { useRouter } from "next/router";
 import Loader from "../../../components/Loader";
 import format from "date-fns/format";
-
-import { Box, Tab, Tabs, TabList, Container } from "@chakra-ui/react";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
+} from "@chakra-ui/react";
+import { Box, Tab, Tabs, TabList, Container, Center } from "@chakra-ui/react";
 
 function Scores() {
   const dates = scoreDates();
   const router = useRouter();
 
-  const fetcher = (url: string) => fetch(url).then((r) => r.json());
+  const fetcher = (url: string) =>
+    fetch(url)
+      .then((r) => r.json())
+      .then((data) => scoresAccordion(data));
 
   const { data, error, isLoading } = useSWR(
     `/api/scores/?date=${router.query.scoreDate}`,
@@ -26,7 +35,7 @@ function Scores() {
 
   return (
     <Container maxW={{ base: "100%", lg: "90%", xl: "75%" }} mt="90px">
-      <Tabs variant="soft-rounded">
+      <Tabs variant="soft-rounded" marginBottom="20px">
         <TabList>
           {dates.map((item) => (
             <Tab
@@ -44,14 +53,29 @@ function Scores() {
           ))}
         </TabList>
       </Tabs>
-      <Box my="20px">
-        {isLoading && <Loader />}
+      <Accordion allowMultiple defaultIndex={[0, 1, 2, 3]}>
         {!isLoading &&
-          !error &&
-          data.map((item: ScoreItemType, index: number) => (
-            <ScoreItem key={item.id} item={item} index={index} />
+          data &&
+          Object.entries(data).map((item) => (
+            <AccordionItem key={item[0]}>
+              <h2>
+                <AccordionButton>
+                  <Box as="span" flex="1" textAlign="left">
+                    {item[0]}
+                  </Box>
+                  <AccordionIcon />
+                </AccordionButton>
+              </h2>
+              <AccordionPanel pb={4}>
+                {item[1].map((el, idx) => (
+                  <ScoreItem key={el.id} item={el} index={idx} />
+                ))}
+              </AccordionPanel>
+            </AccordionItem>
           ))}
-      </Box>
+      </Accordion>
+
+      <Box my="20px">{isLoading && <Loader />}</Box>
     </Container>
   );
 }

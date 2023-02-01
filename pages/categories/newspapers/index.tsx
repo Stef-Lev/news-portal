@@ -36,9 +36,6 @@ const Newspapers: NextPage<NewspapersProps> = ({ frontpages }) => {
     }
   }, [router.query]);
 
-  console.log(dateString(new Date(), true));
-  // console.log(router);
-  console.log(frontpages);
   return (
     <Box mt="120px" mb="20px">
       <Container
