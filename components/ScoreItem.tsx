@@ -14,7 +14,7 @@ type ScoreItemProps = {
   index: number;
 };
 
-function ScoreItem({ item, index }: ScoreItemProps) {
+function ScoreItem({ item, index, oldData }: ScoreItemProps) {
   const [isLargerThan880] = useMediaQuery("(min-width: 880px)");
 
   const status = (game: ScoreItem) => {
@@ -28,6 +28,12 @@ function ScoreItem({ item, index }: ScoreItemProps) {
       return `${game.minute}'`;
     }
     return `${game.time}`;
+  };
+
+  const hasChanged = (item, goalAttr, oldData) => {
+    return (
+      item.isLive && oldData[item.id]?.score[goalAttr] !== item.score[goalAttr]
+    );
   };
 
   return (
@@ -78,9 +84,23 @@ function ScoreItem({ item, index }: ScoreItemProps) {
             fontSize="24px"
           >
             <Box display="flex" gap="8px">
-              <Text color="#FFFDD0">{item.score.goal1}</Text>
+              <Text
+                color="#FFFDD0"
+                background={
+                  hasChanged(item, "goal1", oldData) ? "red" : "transparent"
+                }
+              >
+                {item.score.goal1}
+              </Text>
               <Text> - </Text>
-              <Text color="#FFFDD0">{item.score.goal2}</Text>
+              <Text
+                color="#FFFDD0"
+                background={
+                  hasChanged(item, "goal2", oldData) ? "red" : "transparent"
+                }
+              >
+                {item.score.goal2}
+              </Text>
             </Box>
           </GridItem>
           <GridItem
@@ -150,6 +170,9 @@ function ScoreItem({ item, index }: ScoreItemProps) {
                 mx="20px"
                 fontSize="16px"
                 color="#FFFDD0"
+                background={
+                  hasChanged(item, "goal1", oldData) ? "red" : "transparent"
+                }
               >
                 {item.score.goal1}
               </Box>
@@ -171,6 +194,9 @@ function ScoreItem({ item, index }: ScoreItemProps) {
                 mx="20px"
                 fontSize="16px"
                 color="#FFFDD0"
+                background={
+                  hasChanged(item, "goal2", oldData) ? "red" : "transparent"
+                }
               >
                 {item.score.goal2}
               </Box>
