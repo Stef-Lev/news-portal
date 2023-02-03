@@ -8,6 +8,7 @@ import {
   Box,
   HStack,
 } from "@chakra-ui/react";
+import cleanArticle from "../../helpers/cleanArticle";
 import type { NextPage } from "next";
 import { ChevronLeftIcon, CalendarIcon } from "@chakra-ui/icons";
 import scrapeIt from "scrape-it";
@@ -23,6 +24,8 @@ type ArticleProps = { data: ArticleType };
 
 const Article: NextPage<ArticleProps> = ({ data }) => {
   const router = useRouter();
+
+  console.log(data);
 
   return (
     <>
@@ -118,7 +121,7 @@ export async function getServerSideProps(ctx: NextPageContext) {
     };
   }
 
-  let finalData;
+  let finalData = {};
   const ftc = await scrapeIt(url, {
     title: "h1",
     subtitle: "h2",
@@ -132,7 +135,7 @@ export async function getServerSideProps(ctx: NextPageContext) {
       selector: ".entry-content p",
     },
   }).then(({ data }) => {
-    return (finalData = data);
+    return (finalData = cleanArticle(data));
   });
 
   return {
