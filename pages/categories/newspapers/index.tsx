@@ -9,15 +9,24 @@ import { useRouter } from "next/router";
 import type { NextPage } from "next";
 import { NextPageContext } from "next";
 import { FrontPages } from "../../../types/types";
+import { FiCalendar } from "react-icons/fi";
 import {
   Heading,
   Image,
   Box,
-  Link,
   Flex,
   Container,
   Center,
   Text,
+} from "@chakra-ui/react";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
 } from "@chakra-ui/react";
 
 registerLocale("el", el);
@@ -27,6 +36,8 @@ type NewspapersProps = { frontpages: FrontPages };
 
 const Newspapers: NextPage<NewspapersProps> = ({ frontpages }) => {
   const [startDate, setStartDate] = useState(new Date());
+  const [frontpage, setFrontpage] = useState({ img: "", title: "" });
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const router = useRouter();
 
   useEffect(() => {
@@ -35,6 +46,11 @@ const Newspapers: NextPage<NewspapersProps> = ({ frontpages }) => {
       setStartDate(new Date(date as string));
     }
   }, [router.query]);
+
+  const showModal = (item) => {
+    setFrontpage({ img: item.img, title: item.title });
+    onOpen();
+  };
 
   return (
     <Box mt="120px" mb="20px">
@@ -46,16 +62,26 @@ const Newspapers: NextPage<NewspapersProps> = ({ frontpages }) => {
           ΠΡΩΤΟΣΕΛΙΔΑ ΕΦΗΜΕΡΙΔΩΝ
         </Heading>
         <Center id="newspaper-date">
-          <DatePicker
-            selected={startDate}
-            locale="el"
-            dateFormat="dd-MM-yyyy"
-            onChange={(date) =>
-              router.push(
-                `/categories/newspapers?date=${dateString(date as Date, true)}`
-              )
-            }
-          />
+          <Flex alignItems="center" justifyContent="center" gap={2}>
+            <Box mb="20px">
+              <FiCalendar size="32px" />
+            </Box>
+            <Box>
+              <DatePicker
+                selected={startDate}
+                locale="el"
+                dateFormat="dd-MM-yyyy"
+                onChange={(date) =>
+                  router.push(
+                    `/categories/newspapers?date=${dateString(
+                      date as Date,
+                      true
+                    )}`
+                  )
+                }
+              />
+            </Box>
+          </Flex>
         </Center>
 
         <Flex flexWrap="wrap" gap={5} justifyContent="center">
@@ -71,13 +97,13 @@ const Newspapers: NextPage<NewspapersProps> = ({ frontpages }) => {
                   <Heading as="h5" fontSize="20px" mb="10px">
                     {item.title}
                   </Heading>
-                  <Link
-                    href={`/categories/newspapers/${
-                      item.img.split("/")[7].split(".")[0]
-                    }/?img=${item.img}&title=${item.title}`}
-                  >
-                    <Image src={item.img} alt={item.title} />
-                  </Link>
+                  <Image
+                    src={item.img}
+                    alt={item.title}
+                    onClick={() => showModal(item)}
+                    borderRadius="8px"
+                    _hover={{ cursor: "pointer" }}
+                  />
                 </Flex>
               </Box>
             ))}
@@ -87,6 +113,29 @@ const Newspapers: NextPage<NewspapersProps> = ({ frontpages }) => {
             </Flex>
           )}
         </Flex>
+        <Box>
+          <Modal isOpen={isOpen} onClose={onClose} size="2xl">
+            <ModalOverlay />
+            <ModalContent color="black">
+              <ModalHeader fontWeight="bold">
+                <Center>{frontpage.title}</Center>
+              </ModalHeader>
+              <ModalCloseButton />
+              <ModalBody padding="0">
+                <Center>
+                  <Image
+                    width="620px"
+                    src={frontpage.img}
+                    alt={frontpage.title}
+                    onClick={onOpen}
+                    margin="0"
+                    _hover={{ cursor: "pointer" }}
+                  />
+                </Center>
+              </ModalBody>
+            </ModalContent>
+          </Modal>
+        </Box>
       </Container>
     </Box>
   );
