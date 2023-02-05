@@ -7,6 +7,7 @@ import {
   GridItem,
   useMediaQuery,
 } from "@chakra-ui/react";
+import GoalFlashText from "./GoalFlashText";
 import { ScoreItem, Rcard } from "../types/types";
 
 type ScoreItemProps = {
@@ -69,11 +70,16 @@ function ScoreItem({ item, index, oldData }: ScoreItemProps) {
           <GridItem
             display="flex"
             alignItems="center"
-            justifyContent="flex-end"
+            justifyContent="space-between"
             w="100%"
             p="10px"
           >
-            {item.teams.hometeam.name}
+            <GoalFlashText
+              hasChanged={hasChanged(item, "goal1", oldData)}
+              type="goalTxt"
+              text="GOAL"
+            />
+            <Text>{item.teams.hometeam.name}</Text>
           </GridItem>
           <GridItem
             display="flex"
@@ -84,34 +90,34 @@ function ScoreItem({ item, index, oldData }: ScoreItemProps) {
             fontSize="24px"
           >
             <Box display="flex" gap="8px">
-              <Text
-                color="#FFFDD0"
-                background={
-                  hasChanged(item, "goal1", oldData) ? "red" : "transparent"
-                }
-              >
-                {item.score.goal1}
-              </Text>
+              <GoalFlashText
+                hasChanged={hasChanged(item, "goal1", oldData)}
+                text={item.score.goal1}
+                type="goalNum"
+              />
               <Text> - </Text>
-              <Text
-                color="#FFFDD0"
-                background={
-                  hasChanged(item, "goal2", oldData) ? "red" : "transparent"
-                }
-              >
-                {item.score.goal2}
-              </Text>
+
+              <GoalFlashText
+                hasChanged={hasChanged(item, "goal2", oldData)}
+                text={item.score.goal2}
+                type="goalNum"
+              />
             </Box>
           </GridItem>
           <GridItem
             display="flex"
             alignItems="center"
-            justifyContent="flex-start"
+            justifyContent="space-between"
             w="100%"
             p="10px"
             textAlign="left"
           >
-            {item.teams.awayteam.name}
+            <Text>{item.teams.awayteam.name}</Text>
+            <GoalFlashText
+              hasChanged={hasChanged(item, "goal2", oldData)}
+              text="GOAL"
+              type="goalTxt"
+            />
           </GridItem>
           <GridItem
             display="flex"
@@ -170,11 +176,12 @@ function ScoreItem({ item, index, oldData }: ScoreItemProps) {
                 mx="20px"
                 fontSize="16px"
                 color="#FFFDD0"
-                background={
-                  hasChanged(item, "goal1", oldData) ? "red" : "transparent"
-                }
               >
-                {item.score.goal1}
+                <GoalFlashText
+                  hasChanged={hasChanged(item, "goal1", oldData)}
+                  text={item.score.goal1}
+                  type="goalNum"
+                />
               </Box>
             </Flex>
             <Flex justify="space-between">
@@ -194,11 +201,12 @@ function ScoreItem({ item, index, oldData }: ScoreItemProps) {
                 mx="20px"
                 fontSize="16px"
                 color="#FFFDD0"
-                background={
-                  hasChanged(item, "goal2", oldData) ? "red" : "transparent"
-                }
               >
-                {item.score.goal2}
+                <GoalFlashText
+                  hasChanged={hasChanged(item, "goal2", oldData)}
+                  text={item.score.goal2}
+                  type="goalNum"
+                />
               </Box>
             </Flex>
           </GridItem>

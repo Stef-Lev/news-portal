@@ -1,5 +1,6 @@
 import { useState } from "react";
 import useSWR from "swr";
+import { dateString } from "../../../helpers/scoreDates";
 import filterLiveGames from "../../../helpers/filterLiveGames";
 import { scoresAccordion } from "../../../helpers/scoresAccordion";
 import scoreDates from "../../../helpers/scoreDates";
@@ -18,7 +19,6 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import { Box, Tab, Tabs, TabList, Container } from "@chakra-ui/react";
-import { motion } from "framer-motion";
 
 function Scores() {
   const [oldData, setOldData] = useState({});
@@ -39,8 +39,10 @@ function Scores() {
         return scoresAccordion(data);
       });
 
+  const scoreDate = router.query.scoreDate || dateString(new Date(), true);
+
   const { data, error, isLoading } = useSWR(
-    `/api/scores/?date=${router.query.scoreDate}`,
+    `/api/scores/?date=${scoreDate}`,
     fetcher,
     {
       revalidateOnFocus: false,
@@ -49,7 +51,8 @@ function Scores() {
     }
   );
 
-  data && console.log(data);
+  console.log(oldData);
+  // data && console.log(data);
   return (
     <Container maxW={{ base: "100%", lg: "90%", xl: "75%" }} mt="90px">
       <Tabs variant="soft-rounded" marginBottom="20px">
@@ -147,30 +150,3 @@ function Scores() {
 }
 
 export default Scores;
-//   "ΑΥΣΤΡΑΛΙΑ : Α ΚΑΤΗΓΟΡΙΑ": [
-//     { id: 123, name: "au1", isLive: false },
-//     { id: 123, name: "au2", isLive: false },
-//   ],
-//   "ΤΟΥΡΚΙΑ : ΣΟΥΠΕΡ ΛΙΓΚ": [
-//     { id: 123, name: "tur1", isLive: true },
-//     { id: 123, name: "tur2", isLive: false },
-//     { id: 123, name: "tur3", isLive: true },
-//     { id: 123, name: "tur4", isLive: true },
-//   ],
-//   "ΤΟΥΡΚΙΑ : 2η ΚΑΤΗΓΟΡΙΑ": [
-//     { id: 123, name: "tyr1", isLive: false },
-//     { id: 123, name: "tyr1", isLive: false },
-//   ],
-//   "ΠΟΡΤΟΓΑΛΙΑ - 2η ΚΑΤΗΓΟΡΙΑ": [
-//     { id: 123, name: "por1", isLive: true },
-//     { id: 123, name: "por2", isLive: false },
-//     { id: 123, name: "por3", isLive: true },
-//     { id: 123, name: "por4", isLive: true },
-//     { id: 123, name: "por5", isLive: true },
-//     { id: 123, name: "por6", isLive: false },
-//   ],
-//   "ΓΕΡΜΑΝΙΑ : ΜΠΟΥΝΤΕΣΛΙΓΚΑ II": [
-//     { id: 123, name: "ger1", isLive: true },
-//     { id: 123, name: "ger2", isLive: false },
-//   ],
-// };

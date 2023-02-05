@@ -46,3 +46,23 @@ p {
 #newspaper-date input:hover {
   cursor: pointer;
 }
+
+.isFlashing {
+  animation: flashing 5s infinite;
+}
+
+@keyframes flashing {
+  0% {
+    color: #fffdd0;
+    text-shadow: none;
+  }
+  50% {
+    color: rgb(255, 179, 86);
+    text-shadow: 0 0 0.2em rgb(243, 149, 33), 0 0 0.2em rgb(243, 149, 33),
+      0 0 0.2em rgb(243, 149, 33);
+  }
+  100% {
+    color: #fffdd0;
+    text-shadow: none;
+  }
+}

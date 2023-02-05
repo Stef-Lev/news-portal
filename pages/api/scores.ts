@@ -6,6 +6,9 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const { date } = req.query;
-  const scores = await getScores(date);
-  res.status(200).json(scores);
+  let scores;
+  if (date) {
+    scores = await getScores(date);
+    res.status(200).json(scores);
+  }
 }
