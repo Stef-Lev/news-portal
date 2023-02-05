@@ -33,7 +33,9 @@ function ScoreItem({ item, index, oldData }: ScoreItemProps) {
 
   const hasChanged = (item, goalAttr, oldData) => {
     return (
-      item.isLive && oldData[item.id]?.score[goalAttr] !== item.score[goalAttr]
+      item.isLive &&
+      oldData[item.id] &&
+      oldData[item.id].score[goalAttr] !== item.score[goalAttr]
     );
   };
 

@@ -51,8 +51,6 @@ function Scores() {
     }
   );
 
-  console.log(oldData);
-  // data && console.log(data);
   return (
     <Container maxW={{ base: "100%", lg: "90%", xl: "75%" }} mt="90px">
       <Tabs variant="soft-rounded" marginBottom="20px">
