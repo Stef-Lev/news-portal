@@ -22,7 +22,7 @@ import { Box, Tab, Tabs, TabList, Container } from "@chakra-ui/react";
 
 function Scores() {
   const [oldData, setOldData] = useState({});
-  const [liveOnly, setLiveOnly] = useState(true);
+  const [liveOnly, setLiveOnly] = useState(false);
   const dates = scoreDates();
   const router = useRouter();
 

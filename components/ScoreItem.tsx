@@ -98,7 +98,6 @@ function ScoreItem({ item, index, oldData }: ScoreItemProps) {
                 type="goalNum"
               />
               <Text> - </Text>
-
               <GoalFlashText
                 hasChanged={hasChanged(item, "goal2", oldData)}
                 text={item.score.goal2}
@@ -169,22 +168,31 @@ function ScoreItem({ item, index, oldData }: ScoreItemProps) {
                       <Box h="7px" w="5px" background="#f33e3e" />
                     )}
                 </Flex>
-                <Box>{item.teams.hometeam.name}</Box>
+                <Text>{item.teams.hometeam.name}</Text>
               </Flex>
-              <Box
-                display="flex"
-                justifyContent="center"
-                w="20px"
-                mx="20px"
-                fontSize="16px"
-                color="#FFFDD0"
-              >
-                <GoalFlashText
-                  hasChanged={hasChanged(item, "goal1", oldData)}
-                  text={item.score.goal1}
-                  type="goalNum"
-                />
-              </Box>
+              <Flex justify="space-between" alignItems="center">
+                <Box>
+                  <GoalFlashText
+                    hasChanged={hasChanged(item, "goal1", oldData)}
+                    text="GOAL"
+                    type="goalTxt"
+                  />
+                </Box>
+                <Box
+                  display="flex"
+                  justifyContent="center"
+                  w="20px"
+                  mx="10px"
+                  fontSize="16px"
+                  color="#FFFDD0"
+                >
+                  <GoalFlashText
+                    hasChanged={hasChanged(item, "goal1", oldData)}
+                    text={item.score.goal1}
+                    type="goalNum"
+                  />
+                </Box>
+              </Flex>
             </Flex>
             <Flex justify="space-between">
               <Flex alignItems="center">
@@ -194,22 +202,31 @@ function ScoreItem({ item, index, oldData }: ScoreItemProps) {
                       <Box h="7px" w="5px" background="#f33e3e" />
                     )}
                 </Flex>
-                <Box>{item.teams.awayteam.name}</Box>
+                <Text>{item.teams.awayteam.name}</Text>
               </Flex>
-              <Box
-                display="flex"
-                justifyContent="center"
-                w="20px"
-                mx="20px"
-                fontSize="16px"
-                color="#FFFDD0"
-              >
-                <GoalFlashText
-                  hasChanged={hasChanged(item, "goal2", oldData)}
-                  text={item.score.goal2}
-                  type="goalNum"
-                />
-              </Box>
+              <Flex justify="space-between" alignItems="center">
+                <Box>
+                  <GoalFlashText
+                    hasChanged={hasChanged(item, "goal2", oldData)}
+                    text="GOAL"
+                    type="goalTxt"
+                  />
+                </Box>
+                <Box
+                  display="flex"
+                  justifyContent="center"
+                  w="20px"
+                  mx="10px"
+                  fontSize="16px"
+                  color="#FFFDD0"
+                >
+                  <GoalFlashText
+                    hasChanged={hasChanged(item, "goal2", oldData)}
+                    text={item.score.goal2}
+                    type="goalNum"
+                  />
+                </Box>
+              </Flex>
             </Flex>
           </GridItem>
         </Grid>
