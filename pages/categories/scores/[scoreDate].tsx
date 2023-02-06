@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useSWR from "swr";
+import { el } from "date-fns/locale";
 import { dateString } from "../../../helpers/scoreDates";
 import filterLiveGames from "../../../helpers/filterLiveGames";
 import { scoresAccordion } from "../../../helpers/scoresAccordion";
@@ -25,6 +26,10 @@ function Scores() {
   const [liveOnly, setLiveOnly] = useState(false);
   const dates = scoreDates();
   const router = useRouter();
+
+  useEffect(() => {
+    console.log(router.query.scoreDate, dates);
+  }, []);
 
   const fetcher = (url: string) =>
     fetch(url)
@@ -53,33 +58,41 @@ function Scores() {
 
   return (
     <Container maxW={{ base: "100%", lg: "90%", xl: "75%" }} mt="90px">
-      <Tabs variant="soft-rounded" marginBottom="20px">
-        <TabList>
-          {dates.map((item) => (
-            <Tab
-              padding={{ base: "5px 10px", md: "8px 16px" }}
-              fontSize={{ base: "14px", md: "16px" }}
-              marginRight="5px"
-              _selected={{ background: "blue.400", color: "white" }}
-              key={item}
-              onClick={() => {
-                router.push(`/categories/scores/${item}`);
-              }}
-            >
-              {format(new Date(item), "dd-MM")}
-            </Tab>
-          ))}
-        </TabList>
-      </Tabs>
-      <HStack marginBottom="20px" ml="16px">
-        <Text>Μόνο LIVE</Text>
-        <Switch
-          size="lg"
-          colorScheme="orange"
-          isChecked={liveOnly}
-          onChange={() => setLiveOnly((prev) => !prev)}
-        />
-      </HStack>
+      {router.query.scoreDate && (
+        <>
+          <Tabs
+            variant="soft-rounded"
+            marginBottom="20px"
+            index={dates.indexOf(router.query.scoreDate) || -1}
+          >
+            <TabList>
+              {dates.map((item) => (
+                <Tab
+                  padding={{ base: "5px 10px", md: "8px 16px" }}
+                  fontSize={{ base: "14px", md: "16px" }}
+                  marginRight="5px"
+                  _selected={{ background: "blue.400", color: "white" }}
+                  key={item}
+                  onClick={() => {
+                    router.push(`/categories/scores/${item}`);
+                  }}
+                >
+                  {format(new Date(item), "d MMM", { locale: el })}
+                </Tab>
+              ))}
+            </TabList>
+          </Tabs>
+          <HStack marginBottom="20px" ml="16px">
+            <Text>Μόνο LIVE</Text>
+            <Switch
+              size="lg"
+              colorScheme="orange"
+              isChecked={liveOnly}
+              onChange={() => setLiveOnly((prev) => !prev)}
+            />
+          </HStack>
+        </>
+      )}
 
       {!isLoading && data && !liveOnly && (
         <Accordion
