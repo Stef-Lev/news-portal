@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import showNotification from "../../../helpers/showNotification";
 import useSWR from "swr";
 import { el } from "date-fns/locale";
 import { dateString } from "../../../helpers/scoreDates";
@@ -23,13 +24,8 @@ import { Box, Tab, Tabs, TabList, Container } from "@chakra-ui/react";
 
 function Scores() {
   const [oldData, setOldData] = useState({});
-  const [liveOnly, setLiveOnly] = useState(false);
   const dates = scoreDates();
   const router = useRouter();
-
-  useEffect(() => {
-    console.log(router.query.scoreDate, dates);
-  }, []);
 
   const fetcher = (url: string) =>
     fetch(url)
@@ -44,6 +40,7 @@ function Scores() {
         return scoresAccordion(data);
       });
 
+  const isLive = router.query.live === "true" ? true : false;
   const scoreDate = router.query.scoreDate || dateString(new Date(), true);
 
   const { data, error, isLoading } = useSWR(
@@ -63,7 +60,7 @@ function Scores() {
           <Tabs
             variant="soft-rounded"
             marginBottom="20px"
-            index={dates.indexOf(router.query.scoreDate) || -1}
+            index={dates.indexOf(router.query.scoreDate as string)}
           >
             <TabList>
               {dates.map((item) => (
@@ -74,7 +71,7 @@ function Scores() {
                   _selected={{ background: "blue.400", color: "white" }}
                   key={item}
                   onClick={() => {
-                    router.push(`/categories/scores/${item}`);
+                    router.push(`/categories/scores/${item}?live=${isLive}`);
                   }}
                 >
                   {format(new Date(item), "d MMM", { locale: el })}
@@ -87,14 +84,18 @@ function Scores() {
             <Switch
               size="lg"
               colorScheme="orange"
-              isChecked={liveOnly}
-              onChange={() => setLiveOnly((prev) => !prev)}
+              isChecked={isLive}
+              onChange={() =>
+                router.push(
+                  `/categories/scores/${router.query.scoreDate}?live=${!isLive}`
+                )
+              }
             />
           </HStack>
         </>
       )}
 
-      {!isLoading && data && !liveOnly && (
+      {!isLoading && data && !isLive && (
         <Accordion
           allowMultiple
           defaultIndex={Object.keys(data).map((item, idx) => idx)}
@@ -123,7 +124,7 @@ function Scores() {
           ))}
         </Accordion>
       )}
-      {!isLoading && data && liveOnly && (
+      {!isLoading && data && isLive && (
         <Accordion
           allowMultiple
           defaultIndex={Object.keys(filterLiveGames(data)).map(
@@ -155,6 +156,9 @@ function Scores() {
         </Accordion>
       )}
 
+      <button onClick={() => showNotification("TEST notification", "info")}>
+        CLICK
+      </button>
       <Box my="20px">{isLoading && <Loader />}</Box>
     </Container>
   );
