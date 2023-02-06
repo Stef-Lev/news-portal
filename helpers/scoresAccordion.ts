@@ -1,5 +1,8 @@
-export const scoresAccordion = (data) => {
-  const dictionary = {};
+import { ScoreItem } from "../types/types";
+import { League } from "../types/types";
+
+export const scoresAccordion = (data: ScoreItem[]) => {
+  const dictionary: League = {};
   data.map((item) => {
     if (!item.league_name) {
       return;

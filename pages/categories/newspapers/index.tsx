@@ -6,6 +6,7 @@ import { dateString } from "../../../helpers/scoreDates";
 import { el } from "date-fns/locale";
 import scrapeIt from "scrape-it";
 import { useRouter } from "next/router";
+import { Paper } from "../../../types/types";
 import type { NextPage } from "next";
 import { NextPageContext } from "next";
 import { FrontPages } from "../../../types/types";
@@ -47,7 +48,7 @@ const Newspapers: NextPage<NewspapersProps> = ({ frontpages }) => {
     }
   }, [router.query]);
 
-  const showModal = (item) => {
+  const showModal = (item: Paper) => {
     setFrontpage({ img: item.img, title: item.title });
     onOpen();
   };

@@ -2,6 +2,7 @@ import { useState } from "react";
 import showNotification from "../../../helpers/showNotification";
 import useSWR from "swr";
 import { el } from "date-fns/locale";
+import { League } from "../../../types/types";
 import { dateString } from "../../../helpers/scoreDates";
 import filterLiveGames from "../../../helpers/filterLiveGames";
 import { scoresAccordion } from "../../../helpers/scoresAccordion";
@@ -30,12 +31,14 @@ function Scores() {
   const fetcher = (url: string) =>
     fetch(url)
       .then((r) => r.json())
-      .then((data) => {
+      .then((data: ScoreItemType[]) => {
         const filteredGames = data.filter((item: ScoreItemType) => item.isLive);
-        let liveObj: ScoreItem = {};
-        filteredGames.forEach((item: ScoreItemType) => {
-          liveObj[item.id] = item;
-        });
+        let liveObj: { [key: string]: ScoreItemType } = {};
+        if (filteredGames.length > 0) {
+          filteredGames.forEach((item: ScoreItemType) => {
+            liveObj[item.id] = item;
+          });
+        }
         setOldData(liveObj);
         return scoresAccordion(data);
       });
@@ -43,13 +46,15 @@ function Scores() {
   const isLive = router.query.live === "true" ? true : false;
   const scoreDate = router.query.scoreDate || dateString(new Date(), true);
 
-  const { data, error, isLoading } = useSWR<{
-    [key: string]: Array<ScoreItemType>;
-  }>(`/api/scores/?date=${scoreDate}`, fetcher, {
-    revalidateOnFocus: false,
-    revalidateIfStale: false,
-    refreshInterval: 2000,
-  });
+  const { data, error, isLoading } = useSWR<League>(
+    `/api/scores/?date=${scoreDate}`,
+    fetcher,
+    {
+      revalidateOnFocus: false,
+      revalidateIfStale: false,
+      refreshInterval: 2000,
+    }
+  );
 
   if (error) {
     showNotification("Κάτι πήγε στραβά, δοκιμάστε αργότερα", "error", {
@@ -142,10 +147,6 @@ function Scores() {
           ))}
         </Box>
       )}
-
-      <button onClick={() => showNotification("TEST notification", "info")}>
-        CLICK
-      </button>
       <Box my="20px">{isLoading && <Loader />}</Box>
     </Container>
   );

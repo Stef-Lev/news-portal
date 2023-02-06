@@ -140,8 +140,13 @@ export async function getServerSideProps(ctx: NextPageContext) {
     content: {
       selector: ".entry-content p",
     },
-  }).then(({ data }) => {
-    return (finalData = cleanArticle(data));
+  }).then((res) => {
+    if (res.data) {
+      const data: ArticleType = res.data;
+      return (finalData = cleanArticle(data));
+    } else {
+      return null;
+    }
   });
 
   return {

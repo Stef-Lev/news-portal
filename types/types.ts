@@ -27,7 +27,7 @@ export type Rcard = {
 };
 
 export type ScoreItem = {
-  id?: string;
+  id: string;
   date?: string;
   time?: string;
   spectators?: string;
@@ -227,9 +227,13 @@ export interface ArticleType {
 export interface Paper {
   title: string;
   img: string;
-  url: string;
+  url?: string;
 }
 
 export interface FrontPages {
   papers: Paper[];
+}
+
+export interface League {
+  [key: string]: ScoreItem[];
 }
