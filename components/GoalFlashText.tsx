@@ -3,7 +3,7 @@ import { Text } from "@chakra-ui/react";
 
 interface GoalFlashTextProps {
   text: string;
-  hasChanged: boolean;
+  hasChanged?: boolean;
   type: "goalTxt" | "goalNum";
 }
 

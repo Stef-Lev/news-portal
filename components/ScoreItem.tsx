@@ -13,6 +13,9 @@ import { ScoreItem, Rcard } from "../types/types";
 type ScoreItemProps = {
   item: ScoreItem;
   index: number;
+  oldData: {
+    [key: string]: ScoreItem;
+  };
 };
 
 function ScoreItem({ item, index, oldData }: ScoreItemProps) {
@@ -31,12 +34,18 @@ function ScoreItem({ item, index, oldData }: ScoreItemProps) {
     return `${game.time}`;
   };
 
-  const hasChanged = (item, goalAttr, oldData) => {
-    return (
-      item.isLive &&
-      oldData[item.id] &&
-      oldData[item.id].score[goalAttr] !== item.score[goalAttr]
-    );
+  const hasChanged = (
+    item: ScoreItem,
+    goalAttr: keyof ScoreItem["score"],
+    oldData: ScoreItemProps["oldData"]
+  ) => {
+    if (item && item.id !== undefined) {
+      return (
+        item.isLive &&
+        oldData[item.id] &&
+        oldData[item.id].score[goalAttr] !== item.score[goalAttr]
+      );
+    }
   };
 
   return (
@@ -64,7 +73,8 @@ function ScoreItem({ item, index, oldData }: ScoreItemProps) {
             p="10px"
             textAlign="center"
           >
-            {item.rcards.length > 0 &&
+            {item.rcards &&
+              item.rcards.length > 0 &&
               item.rcards.some((item: Rcard) => item.team == 1) && (
                 <Box h="14px" w="9px" background="#f33e3e" />
               )}
@@ -81,7 +91,7 @@ function ScoreItem({ item, index, oldData }: ScoreItemProps) {
               type="goalTxt"
               text="GOAL"
             />
-            <Text>{item.teams.hometeam.name}</Text>
+            <Text>{item?.teams?.hometeam.name}</Text>
           </GridItem>
           <GridItem
             display="flex"
@@ -113,7 +123,7 @@ function ScoreItem({ item, index, oldData }: ScoreItemProps) {
             p="10px"
             textAlign="left"
           >
-            <Text>{item.teams.awayteam.name}</Text>
+            <Text>{item?.teams?.awayteam.name}</Text>
             <GoalFlashText
               hasChanged={hasChanged(item, "goal2", oldData)}
               text="GOAL"
@@ -128,7 +138,8 @@ function ScoreItem({ item, index, oldData }: ScoreItemProps) {
             p="10px"
             textAlign="center"
           >
-            {item.rcards.length > 0 &&
+            {item.rcards &&
+              item.rcards.length > 0 &&
               item.rcards.some((item) => item.team == 2) && (
                 <Box h="14px" w="9px" background="#f33e3e" />
               )}
@@ -163,12 +174,13 @@ function ScoreItem({ item, index, oldData }: ScoreItemProps) {
             <Flex justify="space-between">
               <Flex alignItems="center">
                 <Flex w="20px">
-                  {item.rcards.length > 0 &&
+                  {item.rcards &&
+                    item.rcards.length > 0 &&
                     item.rcards.some((item) => item.team == 1) && (
                       <Box h="7px" w="5px" background="#f33e3e" />
                     )}
                 </Flex>
-                <Text>{item.teams.hometeam.name}</Text>
+                <Text>{item?.teams?.hometeam.name}</Text>
               </Flex>
               <Flex justify="space-between" alignItems="center">
                 <Box>
@@ -197,12 +209,13 @@ function ScoreItem({ item, index, oldData }: ScoreItemProps) {
             <Flex justify="space-between">
               <Flex alignItems="center">
                 <Flex w="20px">
-                  {item.rcards.length > 0 &&
+                  {item.rcards &&
+                    item.rcards.length > 0 &&
                     item.rcards.some((item) => item.team == 2) && (
                       <Box h="7px" w="5px" background="#f33e3e" />
                     )}
                 </Flex>
-                <Text>{item.teams.awayteam.name}</Text>
+                <Text>{item?.teams?.awayteam.name}</Text>
               </Flex>
               <Flex justify="space-between" alignItems="center">
                 <Box>

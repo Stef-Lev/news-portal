@@ -7,20 +7,20 @@ import filterLiveGames from "../../../helpers/filterLiveGames";
 import { scoresAccordion } from "../../../helpers/scoresAccordion";
 import scoreDates from "../../../helpers/scoreDates";
 import ScoreItem from "../../../components/ScoreItem";
+import { ScoreItem as ScoreItemType } from "../../../types/types";
 import { useRouter } from "next/router";
 import Loader from "../../../components/Loader";
 import format from "date-fns/format";
 import {
-  Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionPanel,
-  AccordionIcon,
+  Box,
+  Tab,
+  Tabs,
+  TabList,
   Switch,
   Text,
   HStack,
+  Container,
 } from "@chakra-ui/react";
-import { Box, Tab, Tabs, TabList, Container } from "@chakra-ui/react";
 
 function Scores() {
   const [oldData, setOldData] = useState({});
@@ -31,9 +31,9 @@ function Scores() {
     fetch(url)
       .then((r) => r.json())
       .then((data) => {
-        const filteredGames = data.filter((item) => item.isLive);
-        let liveObj = {};
-        filteredGames.forEach((item) => {
+        const filteredGames = data.filter((item: ScoreItemType) => item.isLive);
+        let liveObj: ScoreItem = {};
+        filteredGames.forEach((item: ScoreItemType) => {
           liveObj[item.id] = item;
         });
         setOldData(liveObj);
@@ -43,15 +43,19 @@ function Scores() {
   const isLive = router.query.live === "true" ? true : false;
   const scoreDate = router.query.scoreDate || dateString(new Date(), true);
 
-  const { data, error, isLoading } = useSWR(
-    `/api/scores/?date=${scoreDate}`,
-    fetcher,
-    {
-      revalidateOnFocus: false,
-      revalidateIfStale: false,
-      refreshInterval: 2000,
-    }
-  );
+  const { data, error, isLoading } = useSWR<{
+    [key: string]: Array<ScoreItemType>;
+  }>(`/api/scores/?date=${scoreDate}`, fetcher, {
+    revalidateOnFocus: false,
+    revalidateIfStale: false,
+    refreshInterval: 2000,
+  });
+
+  if (error) {
+    showNotification("Κάτι πήγε στραβά, δοκιμάστε αργότερα", "error", {
+      theme: "colored",
+    });
+  }
 
   return (
     <Container maxW={{ base: "100%", lg: "90%", xl: "75%" }} mt="90px">
@@ -96,22 +100,15 @@ function Scores() {
       )}
 
       {!isLoading && data && !isLive && (
-        <Accordion
-          allowMultiple
-          defaultIndex={Object.keys(data).map((item, idx) => idx)}
-        >
+        <Box>
           {Object.entries(data).map((item) => (
-            <AccordionItem key={item[0]}>
-              <h2>
-                <AccordionButton>
-                  <Box as="span" flex="1" textAlign="left">
-                    {item[0]}
-                  </Box>
-                  <AccordionIcon />
-                </AccordionButton>
-              </h2>
-              <AccordionPanel pb={4}>
-                {item[1].map((el, idx) => (
+            <Box key={item[0]}>
+              <Box textAlign="left" p="10px">
+                {item[0]}
+              </Box>
+
+              <Box pb={4}>
+                {item[1].map((el: ScoreItemType, idx: number) => (
                   <ScoreItem
                     key={el.id}
                     item={el}
@@ -119,29 +116,19 @@ function Scores() {
                     oldData={oldData}
                   />
                 ))}
-              </AccordionPanel>
-            </AccordionItem>
+              </Box>
+            </Box>
           ))}
-        </Accordion>
+        </Box>
       )}
       {!isLoading && data && isLive && (
-        <Accordion
-          allowMultiple
-          defaultIndex={Object.keys(filterLiveGames(data)).map(
-            (item, idx) => idx
-          )}
-        >
+        <Box>
           {Object.entries(filterLiveGames(data)).map((item) => (
-            <AccordionItem key={item[0]}>
-              <h2>
-                <AccordionButton>
-                  <Box as="span" flex="1" textAlign="left">
-                    {item[0]}
-                  </Box>
-                  <AccordionIcon />
-                </AccordionButton>
-              </h2>
-              <AccordionPanel pb={4}>
+            <Box key={item[0]}>
+              <Box textAlign="left" p="10px">
+                {item[0]}
+              </Box>
+              <Box pb={4}>
                 {item[1].map((el, idx) => (
                   <ScoreItem
                     key={el.id}
@@ -150,10 +137,10 @@ function Scores() {
                     oldData={oldData}
                   />
                 ))}
-              </AccordionPanel>
-            </AccordionItem>
+              </Box>
+            </Box>
           ))}
-        </Accordion>
+        </Box>
       )}
 
       <button onClick={() => showNotification("TEST notification", "info")}>

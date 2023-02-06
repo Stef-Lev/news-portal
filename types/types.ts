@@ -27,22 +27,22 @@ export type Rcard = {
 };
 
 export type ScoreItem = {
-  id: string;
-  date: string;
-  time: string;
-  spectators: string;
-  stadium: string;
-  week: string;
-  live: string;
-  league_id: string;
-  league_name: string;
-  minute: string;
-  gamestatus: string;
-  season: string;
-  couponGr: string;
-  upd: string;
-  del: string;
-  teams: {
+  id?: string;
+  date?: string;
+  time?: string;
+  spectators?: string;
+  stadium?: string;
+  week?: string;
+  live?: string;
+  league_id?: string;
+  league_name?: string;
+  minute?: string;
+  gamestatus?: string;
+  season?: string;
+  couponGr?: string;
+  upd?: string;
+  del?: string;
+  teams?: {
     hometeam: TeamType;
     awayteam: TeamType;
   };
@@ -56,7 +56,7 @@ export type ScoreItem = {
     pt_goal1: string;
     pt_goal2: string;
   };
-  odds: {
+  odds?: {
     coupon: string;
     code: string;
     mins: string;
@@ -78,18 +78,18 @@ export type ScoreItem = {
     homeAdv: string;
     awayAdv: string;
   };
-  events: [];
-  timestamp: number;
-  image_name: string;
-  comp_name: string;
-  isLive: boolean;
-  isHT: boolean;
-  isFinished: boolean;
-  isPP: boolean;
-  result: boolean;
-  rcards: Rcard[];
-  otherOddsCount: number;
-  droppingOdds: {
+  events?: [];
+  timestamp?: number;
+  image_name?: string;
+  comp_name?: string;
+  isLive?: boolean;
+  isHT?: boolean;
+  isFinished?: boolean;
+  isPP?: boolean;
+  result?: boolean;
+  rcards?: Rcard[];
+  otherOddsCount?: number;
+  droppingOdds?: {
     odd_1: string;
     odd_X: string;
     odd_2: string;
@@ -217,12 +217,12 @@ export interface NewsFeed {
 }
 
 export interface ArticleType {
-  title: string;
-  subtitle: string;
-  category: string;
-  date: Date;
-  imgUrl: string;
-  content: string;
+  title?: string;
+  subtitle?: string;
+  category?: string;
+  date?: Date;
+  imgUrl?: string;
+  content?: string;
 }
 export interface Paper {
   title: string;
