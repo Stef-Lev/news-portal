@@ -25,6 +25,14 @@ p {
   margin: 0px;
 }
 
+select:hover {
+  cursor: pointer;
+}
+
+option {
+  background: #16262b !important;
+}
+
 #newspaper-date .react-datepicker-wrapper {
   width: 100px;
   margin-bottom: 20px;

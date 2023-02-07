@@ -19,12 +19,14 @@ import {
   TabList,
   Switch,
   Text,
-  HStack,
+  Flex,
   Container,
+  Select,
 } from "@chakra-ui/react";
 
 function Scores() {
   const [oldData, setOldData] = useState({});
+  const [selectedLeague, setSelectedLeague] = useState("ΟΛΑ");
   const dates = scoreDates();
   const router = useRouter();
 
@@ -64,7 +66,7 @@ function Scores() {
 
   return (
     <Container maxW={{ base: "100%", lg: "90%", xl: "75%" }} mt="90px">
-      {router.query.scoreDate && (
+      {router.query.scoreDate && data && (
         <>
           <Tabs
             variant="soft-rounded"
@@ -80,6 +82,7 @@ function Scores() {
                   _selected={{ background: "blue.400", color: "white" }}
                   key={item}
                   onClick={() => {
+                    setSelectedLeague("ΟΛΑ");
                     router.push(`/categories/scores/${item}?live=${isLive}`);
                   }}
                 >
@@ -88,65 +91,157 @@ function Scores() {
               ))}
             </TabList>
           </Tabs>
-          <HStack marginBottom="20px" ml="16px">
-            <Text>Μόνο LIVE</Text>
-            <Switch
-              size="lg"
-              colorScheme="orange"
-              isChecked={isLive}
-              onChange={() =>
-                router.push(
-                  `/categories/scores/${router.query.scoreDate}?live=${!isLive}`
-                )
-              }
-            />
-          </HStack>
+          <Flex
+            marginBottom="20px"
+            alignItems={{ base: "flex-start", md: "center" }}
+            gap={2}
+            flexDirection={{ base: "column", md: "row" }}
+          >
+            <Flex alignItems="center" gap={2}>
+              <Text width={{ base: "110px", md: "max-content" }}>
+                ΠΡΩΤΑΘΛΗΜΑ
+              </Text>
+              <Box w="200px" mr="10px" bg="#0d181b">
+                <Select
+                  size="md"
+                  value={selectedLeague}
+                  onChange={(e) => setSelectedLeague(e.target.value)}
+                >
+                  <option value="ΟΛΑ">ΟΛΑ</option>
+                  {Object.keys(data).map((item, index) => (
+                    <option key={index + 1} value={item}>
+                      {item}
+                    </option>
+                  ))}
+                </Select>
+              </Box>
+            </Flex>
+            <Flex alignItems="center" gap={2} h="40px">
+              <Text width={{ base: "110px", md: "max-content" }}>
+                Μόνο LIVE
+              </Text>
+              <Switch
+                size="lg"
+                colorScheme="orange"
+                isChecked={isLive}
+                onChange={() =>
+                  router.push(
+                    `/categories/scores/${
+                      router.query.scoreDate
+                    }?live=${!isLive}`
+                  )
+                }
+              />
+            </Flex>
+          </Flex>
         </>
       )}
 
-      {!isLoading && data && !isLive && (
-        <Box>
-          {Object.entries(data).map((item) => (
-            <Box key={item[0]}>
-              <Box textAlign="left" p="10px">
-                {item[0]}
-              </Box>
+      {!isLoading &&
+        data &&
+        !isLive &&
+        (!selectedLeague || selectedLeague === "ΟΛΑ") && (
+          <Box>
+            {Object.entries(data).map((item) => (
+              <Box key={item[0]}>
+                <Box textAlign="left" p="10px">
+                  {item[0]}
+                </Box>
 
-              <Box pb={4}>
-                {item[1].map((el: ScoreItemType, idx: number) => (
-                  <ScoreItem
-                    key={el.id}
-                    item={el}
-                    index={idx}
-                    oldData={oldData}
-                  />
-                ))}
+                <Box pb={4}>
+                  {item[1].map((el: ScoreItemType, idx: number) => (
+                    <ScoreItem
+                      key={el.id}
+                      item={el}
+                      index={idx}
+                      oldData={oldData}
+                    />
+                  ))}
+                </Box>
               </Box>
-            </Box>
-          ))}
-        </Box>
-      )}
-      {!isLoading && data && isLive && (
-        <Box>
-          {Object.entries(filterLiveGames(data)).map((item) => (
-            <Box key={item[0]}>
-              <Box textAlign="left" p="10px">
-                {item[0]}
+            ))}
+          </Box>
+        )}
+      {!isLoading &&
+        data &&
+        !isLive &&
+        selectedLeague &&
+        selectedLeague !== "ΟΛΑ" && (
+          <Box>
+            {Object.entries(data)
+              .filter((item) => item[0] === selectedLeague)
+              .map((item) => (
+                <Box key={item[0]}>
+                  <Box textAlign="left" p="10px">
+                    {item[0]}
+                  </Box>
+
+                  <Box pb={4}>
+                    {item[1].map((el: ScoreItemType, idx: number) => (
+                      <ScoreItem
+                        key={el.id}
+                        item={el}
+                        index={idx}
+                        oldData={oldData}
+                      />
+                    ))}
+                  </Box>
+                </Box>
+              ))}
+          </Box>
+        )}
+      {!isLoading &&
+        data &&
+        isLive &&
+        (!selectedLeague || selectedLeague === "ΟΛΑ") && (
+          <Box>
+            {Object.entries(filterLiveGames(data)).map((item) => (
+              <Box key={item[0]}>
+                <Box textAlign="left" p="10px">
+                  {item[0]}
+                </Box>
+                <Box pb={4}>
+                  {item[1].map((el, idx) => (
+                    <ScoreItem
+                      key={el.id}
+                      item={el}
+                      index={idx}
+                      oldData={oldData}
+                    />
+                  ))}
+                </Box>
               </Box>
-              <Box pb={4}>
-                {item[1].map((el, idx) => (
-                  <ScoreItem
-                    key={el.id}
-                    item={el}
-                    index={idx}
-                    oldData={oldData}
-                  />
-                ))}
-              </Box>
-            </Box>
-          ))}
-        </Box>
-      )}
+            ))}
+          </Box>
+        )}
+
+      {!isLoading &&
+        data &&
+        isLive &&
+        selectedLeague &&
+        selectedLeague !== "ΟΛΑ" && (
+          <Box>
+            {Object.entries(filterLiveGames(data))
+              .filter((item) => item[0] === selectedLeague)
+              .map((item) => (
+                <Box key={item[0]}>
+                  <Box textAlign="left" p="10px">
+                    {item[0]}
+                  </Box>
+                  <Box pb={4}>
+                    {item[1].map((el, idx) => (
+                      <ScoreItem
+                        key={el.id}
+                        item={el}
+                        index={idx}
+                        oldData={oldData}
+                      />
+                    ))}
+                  </Box>
+                </Box>
+              ))}
+          </Box>
+        )}
       <Box my="20px">{isLoading && <Loader />}</Box>
     </Container>
   );
