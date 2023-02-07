@@ -29,13 +29,7 @@ const Article: NextPage<ArticleProps> = ({ data }) => {
     <>
       {data && (
         <>
-          <Box
-            mt="90px"
-            mb="20px"
-            borderBottom="1px solid #f3f3f3"
-            pb="8px"
-            display={{ base: "block", md: "none" }}
-          >
+          <Box mt="90px" mb="20px" pb="8px">
             <IconButton
               aria-label="Go back"
               variant="unstyled"
@@ -47,7 +41,6 @@ const Article: NextPage<ArticleProps> = ({ data }) => {
             maxW={["95%", "90%", "80%", "70%", "60%"]}
             gap="120px"
             pb="30px"
-            mt={{ base: "0px", md: "90px" }}
           >
             <Heading fontSize={["24px", "24px", "26px", "28px"]} pb="16px">
               {data.title}
