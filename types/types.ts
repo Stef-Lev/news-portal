@@ -1,5 +1,5 @@
 export interface NewsItem {
-  categories?: string[];
+  categories: string[];
   content: string;
   contentSnippet: string;
   "dc:creator"?: string;
@@ -227,7 +227,7 @@ export interface ArticleType {
 export interface Paper {
   title: string;
   img: string;
-  url?: string;
+  url: string;
 }
 
 export interface FrontPages {

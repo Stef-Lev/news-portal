@@ -43,5 +43,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 
 // TODO: Add error handling to the whole app
 // TODO: Small refactoring when needed
+// TODO: Adjust the style
 
 export default MyApp;

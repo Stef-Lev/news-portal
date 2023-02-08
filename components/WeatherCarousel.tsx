@@ -12,7 +12,7 @@ function WeatherCarousel({ items }: WeatherProps) {
       <Center>
         <Flex
           h="120px"
-          bg="blue.900"
+          bg="white"
           padding="0px"
           overflowX="auto"
           mt="90px"

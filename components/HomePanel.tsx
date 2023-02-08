@@ -31,7 +31,7 @@ const HomePanel: React.FC<HomePanelProps> = ({ newsItem, index }) => {
       key={newsItem.title}
       colSpan={{ base: 2, md: index === 0 ? 2 : 1 }}
       borderRadius="8px"
-      background="blue.800"
+      background="light.300"
       w="100%"
       _hover={{ cursor: "pointer" }}
       onClick={() => goToPath(newsItem.link)}

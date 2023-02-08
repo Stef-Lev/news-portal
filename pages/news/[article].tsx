@@ -66,6 +66,7 @@ const Article: NextPage<ArticleProps> = ({ data }) => {
             </Center>
             <Box
               bg="blue.400"
+              color="white"
               borderRadius="5px"
               p="2px 6px"
               fontWeight={700}

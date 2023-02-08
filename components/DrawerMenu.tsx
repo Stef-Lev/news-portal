@@ -28,7 +28,7 @@ function DrawerMenu() {
       <Box
         position="fixed"
         top={0}
-        bg="blue.900"
+        bg="white"
         w="100%"
         zIndex={200}
         display="flex"
@@ -41,7 +41,7 @@ function DrawerMenu() {
           colorScheme="white"
           onClick={onOpen}
         >
-          <HamburgerIcon w={30} h={30} color="text.light" />
+          <HamburgerIcon w={30} h={30} color="text.dark" />
         </IconButton>
         <Box py="10px">
           <Image
@@ -73,9 +73,9 @@ function DrawerMenu() {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader background="blue.800"></DrawerHeader>
+          <DrawerHeader background="white"></DrawerHeader>
 
-          <DrawerBody background="blue.800" fontWeight={500}>
+          <DrawerBody background="white" fontWeight={500}>
             <List spacing={3}>
               {Object.entries(titleToPath).map((item) => (
                 <ListItem
@@ -92,7 +92,7 @@ function DrawerMenu() {
             </List>
           </DrawerBody>
 
-          <DrawerFooter background="blue.800"></DrawerFooter>
+          <DrawerFooter background="white"></DrawerFooter>
         </DrawerContent>
       </Drawer>
     </Box>
