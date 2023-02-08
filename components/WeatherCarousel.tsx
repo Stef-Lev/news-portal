@@ -1,6 +1,6 @@
-import { Box, Image, Text, Flex, Container, Center } from "@chakra-ui/react";
-import { weatherCities } from "../helpers/weatherCities";
 import { WeatherObject } from "../types/types";
+import { weatherCities } from "../helpers/weatherCities";
+import { Box, Image, Text, Flex, Container, Center } from "@chakra-ui/react";
 
 type WeatherProps = {
   items: WeatherObject[];

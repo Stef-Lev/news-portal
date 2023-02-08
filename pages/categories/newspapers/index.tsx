@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import type { NextPage } from "next";
+import { NextPageContext } from "next";
+import { Paper } from "../../../types/types";
+import { FrontPages } from "../../../types/types";
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale, setDefaultLocale } from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { dateString } from "../../../helpers/scoreDates";
 import { el } from "date-fns/locale";
 import scrapeIt from "scrape-it";
-import { useRouter } from "next/router";
-import { Paper } from "../../../types/types";
-import type { NextPage } from "next";
-import { NextPageContext } from "next";
-import { FrontPages } from "../../../types/types";
-import { FiCalendar } from "react-icons/fi";
 import {
   Heading,
   Image,
@@ -19,8 +18,6 @@ import {
   Container,
   Center,
   Text,
-} from "@chakra-ui/react";
-import {
   Modal,
   ModalOverlay,
   ModalContent,
@@ -29,6 +26,7 @@ import {
   ModalCloseButton,
   useDisclosure,
 } from "@chakra-ui/react";
+import { FiCalendar } from "react-icons/fi";
 
 registerLocale("el", el);
 setDefaultLocale("el");
@@ -72,6 +70,7 @@ const Newspapers: NextPage<NewspapersProps> = ({ frontpages }) => {
                 selected={startDate}
                 locale="el"
                 dateFormat="dd-MM-yyyy"
+                disabledKeyboardNavigation
                 onChange={(date) =>
                   router.push(
                     `/categories/newspapers?date=${dateString(

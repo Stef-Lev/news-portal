@@ -1,3 +1,7 @@
+import { useRouter } from "next/router";
+import { NewsItem } from "../types/types";
+import { formatDistanceToNowStrict } from "date-fns";
+import { el } from "date-fns/locale";
 import {
   Image,
   Flex,
@@ -6,10 +10,6 @@ import {
   Box,
   useBreakpointValue,
 } from "@chakra-ui/react";
-import { NewsItem } from "../types/types";
-import { useRouter } from "next/router";
-import { el } from "date-fns/locale";
-import { formatDistanceToNowStrict } from "date-fns";
 
 type PanelProps = {
   data: NewsItem;

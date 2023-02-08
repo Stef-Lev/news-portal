@@ -1,8 +1,8 @@
-import { Image, Flex, Text, GridItem, Box, Heading } from "@chakra-ui/react";
-import { NewsItem } from "../types/types";
 import { useRouter } from "next/router";
-import { el } from "date-fns/locale";
+import { NewsItem } from "../types/types";
 import { formatDistanceToNowStrict } from "date-fns";
+import { el } from "date-fns/locale";
+import { Image, Flex, Text, GridItem, Box, Heading } from "@chakra-ui/react";
 
 type HomePanelProps = {
   newsItem: NewsItem;

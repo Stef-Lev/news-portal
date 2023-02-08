@@ -1,16 +1,16 @@
 import { useState } from "react";
-import showNotification from "../../../helpers/showNotification";
-import useSWR from "swr";
-import { el } from "date-fns/locale";
+import { useRouter } from "next/router";
+import ScoreItem from "../../../components/ScoreItem";
+import Loader from "../../../components/Loader";
 import { League } from "../../../types/types";
+import { ScoreItem as ScoreItemType } from "../../../types/types";
 import { dateString } from "../../../helpers/scoreDates";
 import filterLiveGames from "../../../helpers/filterLiveGames";
 import { scoresAccordion } from "../../../helpers/scoresAccordion";
 import scoreDates from "../../../helpers/scoreDates";
-import ScoreItem from "../../../components/ScoreItem";
-import { ScoreItem as ScoreItemType } from "../../../types/types";
-import { useRouter } from "next/router";
-import Loader from "../../../components/Loader";
+import showNotification from "../../../helpers/showNotification";
+import useSWR from "swr";
+import { el } from "date-fns/locale";
 import format from "date-fns/format";
 import {
   Box,

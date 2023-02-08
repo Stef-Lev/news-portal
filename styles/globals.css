@@ -20,6 +20,11 @@ a {
   background: transparent; /* make scrollbar transparent */
 }
 
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
 img,
 p {
   margin: 0px;

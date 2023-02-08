@@ -1,10 +1,10 @@
-import { Heading, Box, Grid, Container } from "@chakra-ui/react";
 import { GetServerSidePropsContext } from "next";
+import { useRouter } from "next/router";
+import Panel from "../../components/Panel";
 import { NewsItem } from "../../types/types";
 import { getNews } from "../../helpers/fetchData";
 import { pathToTitle } from "../../helpers/pathTitles";
-import Panel from "../../components/Panel";
-import { useRouter } from "next/router";
+import { Heading, Box, Grid, Container } from "@chakra-ui/react";
 
 type NewsType = { news: NewsItem[] };
 

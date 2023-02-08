@@ -1,3 +1,13 @@
+import { useRouter } from "next/router";
+import type { NextPage } from "next";
+import { NextPageContext } from "next";
+import { titleToPath } from "../../helpers/pathTitles";
+import { categories } from "../../helpers/pathTitles";
+import cleanArticle from "../../helpers/cleanArticle";
+import { ArticleType } from "../../types/types";
+import scrapeIt from "scrape-it";
+import format from "date-fns/format";
+import { el } from "date-fns/locale";
 import {
   Container,
   Heading,
@@ -8,17 +18,7 @@ import {
   Box,
   HStack,
 } from "@chakra-ui/react";
-import cleanArticle from "../../helpers/cleanArticle";
-import type { NextPage } from "next";
 import { ChevronLeftIcon, CalendarIcon } from "@chakra-ui/icons";
-import scrapeIt from "scrape-it";
-import { NextPageContext } from "next";
-import { ArticleType } from "../../types/types";
-import { useRouter } from "next/router";
-import { titleToPath } from "../../helpers/pathTitles";
-import { categories } from "../../helpers/pathTitles";
-import format from "date-fns/format";
-import { el } from "date-fns/locale";
 
 type ArticleProps = { data: ArticleType };
 

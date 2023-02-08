@@ -1,4 +1,5 @@
-import React from "react";
+import GoalFlashText from "./GoalFlashText";
+import { ScoreItem, Rcard } from "../types/types";
 import {
   Flex,
   Text,
@@ -7,8 +8,6 @@ import {
   GridItem,
   useMediaQuery,
 } from "@chakra-ui/react";
-import GoalFlashText from "./GoalFlashText";
-import { ScoreItem, Rcard } from "../types/types";
 
 type ScoreItemProps = {
   item: ScoreItem;

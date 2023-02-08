@@ -1,14 +1,14 @@
-import "../styles/globals.css";
-import { ToastContainer } from "react-toastify";
 import { useState, useEffect } from "react";
-import "react-toastify/dist/ReactToastify.css";
+import Router from "next/router";
 import type { AppProps } from "next/app";
-import { ChakraProvider } from "@chakra-ui/react";
 import Layout from "../components/Layout";
 import Loader from "../components/Loader";
-import { theme } from "../theme";
 import ScrollTopButton from "../components/ScrollTopBtn";
-import Router from "next/router";
+import { ToastContainer } from "react-toastify";
+import { ChakraProvider, Center } from "@chakra-ui/react";
+import { theme } from "../theme";
+import "react-toastify/dist/ReactToastify.css";
+import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [loading, setLoading] = useState(false);
@@ -26,7 +26,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ChakraProvider theme={theme}>
       <Layout>
         {loading ? (
-          <Loader />
+          <Center mt="90px">
+            <Loader />
+          </Center>
         ) : (
           <>
             <Component {...pageProps} />
@@ -39,8 +41,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 
-// TODO: Add filter for leagues
 // TODO: Add error handling to the whole app
-// TODO: Fix all types for final build
+// TODO: Small refactoring when needed
 
 export default MyApp;

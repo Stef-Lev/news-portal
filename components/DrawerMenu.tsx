@@ -1,3 +1,6 @@
+import { useRef } from "react";
+import { useRouter } from "next/router";
+import { titleToPath } from "../helpers/pathTitles";
 import {
   Drawer,
   DrawerBody,
@@ -14,9 +17,6 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
-import { useRef } from "react";
-import { titleToPath } from "../helpers/pathTitles";
-import { useRouter } from "next/router";
 
 function DrawerMenu() {
   const { isOpen, onOpen, onClose } = useDisclosure();
