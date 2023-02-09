@@ -11,12 +11,14 @@ function WeatherCarousel({ items }: WeatherProps) {
     <Container maxW={{ base: "100%", lg: "90%", xl: "75%" }} mb="20px">
       <Center>
         <Flex
+          id="sky"
           h="120px"
           bg="white"
           padding="0px"
           overflowX="auto"
           mt="90px"
           scrollSnapType="x"
+          borderRadius="10px"
         >
           {items.map((item) => (
             <Box key={item.name} w="120px">

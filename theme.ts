@@ -7,7 +7,7 @@ export const theme = extendTheme({
   colors: {
     text: {
       light: "#f3f3f3",
-      medium: "#adadad",
+      medium: "#777777",
       dark: "#141414",
     },
     blue: {
@@ -20,7 +20,14 @@ export const theme = extendTheme({
     light: {
       100: "#f3f3f3",
       200: "#E5E5E5",
-      300: "#cccccc",
+      300: "#dcdcdc",
+    },
+    score: {
+      bgOdd: "#95b5c4",
+      bgEven: "#80a8ba",
+      liveText: "",
+      completeText: "",
+      goalText: "#edb780",
     },
   },
 });

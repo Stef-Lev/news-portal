@@ -60,6 +60,16 @@ option {
   cursor: pointer;
 }
 
+#sky {
+  background: rgb(105, 159, 210);
+  background: linear-gradient(
+    90deg,
+    rgba(105, 159, 210, 1) 0%,
+    rgba(152, 192, 233, 1) 50%,
+    rgba(197, 216, 235, 1) 100%
+  );
+}
+
 .isFlashing {
   animation: flashing 5s infinite;
 }
