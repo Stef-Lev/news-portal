@@ -1,3 +1,4 @@
+import type { NextPage } from "next";
 import { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
 import Panel from "../../components/Panel";
@@ -8,7 +9,7 @@ import { Heading, Box, Grid, Container } from "@chakra-ui/react";
 
 type NewsType = { news: NewsItem[] };
 
-const Category = ({ news }: NewsType) => {
+const Category: NextPage<NewsType> = ({ news }) => {
   const router = useRouter();
   return (
     <Container maxW={{ base: "100%", lg: "90%", xl: "75%" }} mt="90px">

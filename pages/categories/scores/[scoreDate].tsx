@@ -1,3 +1,4 @@
+import type { NextPage } from "next";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import ScoreItem from "../../../components/ScoreItem";
@@ -25,7 +26,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-function Scores() {
+const Scores: NextPage = () => {
   const [oldData, setOldData] = useState({});
   const [selectedLeague, setSelectedLeague] = useState("ΟΛΑ");
   const dates = scoreDates();
@@ -255,6 +256,6 @@ function Scores() {
       <Box my="20px">{isLoading && <Loader />}</Box>
     </Container>
   );
-}
+};
 
 export default Scores;

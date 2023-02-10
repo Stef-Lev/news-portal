@@ -23,7 +23,7 @@ const colors = {
       bgEven: "#b1b1b1",
       liveText: "#45857f",
       completeText: "#1c2021",
-      goalText: "#886e03",
+      goalText: "#68674e",
     },
   },
   dark: {

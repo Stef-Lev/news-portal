@@ -1,18 +1,39 @@
+import type { NextPage } from "next";
 import { useRouter } from "next/router";
-import { Button, Center, Heading, Image, VStack } from "@chakra-ui/react";
+import {
+  Button,
+  Center,
+  Heading,
+  Image,
+  VStack,
+  useColorModeValue,
+} from "@chakra-ui/react";
 
-export default function FourOhFour() {
+const FourOhFour: NextPage = () => {
   const router = useRouter();
+  const background = useColorModeValue(
+    "light.theme.primary",
+    "dark.theme.primary"
+  );
+
   return (
     <Center mt="90px" mb="20px" pb="8px">
       <VStack>
         <Heading mt="20px">Η σελίδα δεν βρέθηκε</Heading>
-        <Image alt="error page" p="20px" src="404_image.jpg" />
+        <Image maxW="600px" alt="error page" p="20px" src="404_image.jpg" />
 
-        <Button bg="light.theme.primary" onClick={() => router.push("/")}>
+        <Button
+          bg={background}
+          color="dark.global.color"
+          _hover={{ bg: background, color: "dark.global.color" }}
+          _active={{ bg: background, color: "dark.global.color" }}
+          onClick={() => router.push("/")}
+        >
           Αρχική σελίδα
         </Button>
       </VStack>
     </Center>
   );
-}
+};
+
+export default FourOhFour;
