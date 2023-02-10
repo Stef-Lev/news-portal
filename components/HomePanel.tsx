@@ -2,7 +2,15 @@ import { useRouter } from "next/router";
 import { NewsItem } from "../types/types";
 import { formatDistanceToNowStrict } from "date-fns";
 import { el } from "date-fns/locale";
-import { Image, Flex, Text, GridItem, Box, Heading } from "@chakra-ui/react";
+import {
+  Image,
+  Flex,
+  Text,
+  GridItem,
+  Box,
+  Heading,
+  useColorModeValue,
+} from "@chakra-ui/react";
 
 type HomePanelProps = {
   newsItem: NewsItem;
@@ -11,16 +19,22 @@ type HomePanelProps = {
 
 const HomePanel: React.FC<HomePanelProps> = ({ newsItem, index }) => {
   const router = useRouter();
+
+  const color = useColorModeValue("light.global.color", "dark.global.color");
+  const background = useColorModeValue("light.panel.bg", "dark.panel.bg");
+
   const preparePath = (link: string) => {
     let path = link.split("/");
     return path[path.length - 3];
   };
+
   const goToPath = (url: string) => {
     router.push({
       pathname: `/news/${preparePath(url)}`,
       query: { url: url },
     });
   };
+
   const publishedDate = formatDistanceToNowStrict(new Date(newsItem.isoDate), {
     locale: el,
     addSuffix: true,
@@ -31,7 +45,8 @@ const HomePanel: React.FC<HomePanelProps> = ({ newsItem, index }) => {
       key={newsItem.title}
       colSpan={{ base: 2, md: index === 0 ? 2 : 1 }}
       borderRadius="8px"
-      background="light.300"
+      color={color}
+      background={background}
       w="100%"
       _hover={{ cursor: "pointer" }}
       onClick={() => goToPath(newsItem.link)}
@@ -77,7 +92,7 @@ const HomePanel: React.FC<HomePanelProps> = ({ newsItem, index }) => {
             <Text
               fontSize="14px"
               fontStyle="italic"
-              color="text.medium"
+              color="light.text.medium"
               pt="4px"
             >
               {publishedDate}

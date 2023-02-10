@@ -9,6 +9,7 @@ import {
   GridItem,
   Box,
   useBreakpointValue,
+  useColorModeValue,
 } from "@chakra-ui/react";
 
 type PanelProps = {
@@ -17,10 +18,15 @@ type PanelProps = {
 
 const Panel: React.FC<PanelProps> = ({ data }) => {
   const router = useRouter();
+
+  const color = useColorModeValue("light.global.color", "dark.global.color");
+  const background = useColorModeValue("light.panel.bg", "dark.panel.bg");
+
   const preparePath = (link: string) => {
     let path = link.split("/");
     return path[path.length - 3];
   };
+
   const goToPath = (url: string) => {
     router.push({
       pathname: `/news/${preparePath(url)}`,
@@ -39,7 +45,8 @@ const Panel: React.FC<PanelProps> = ({ data }) => {
     return (
       <GridItem
         borderRadius="8px"
-        background="light.300"
+        color={color}
+        background={background}
         w="100%"
         _hover={{ cursor: "pointer" }}
         onClick={() => goToPath(data.link)}
@@ -66,7 +73,7 @@ const Panel: React.FC<PanelProps> = ({ data }) => {
               <Text
                 fontSize="14px"
                 fontStyle="italic"
-                color="text.medium"
+                color="light.text.medium"
                 pt="4px"
                 css={{
                   "&::-webkit-line-clamp": 3,
@@ -84,7 +91,8 @@ const Panel: React.FC<PanelProps> = ({ data }) => {
     return (
       <GridItem
         borderRadius="8px"
-        background="light.300"
+        color={color}
+        background={background}
         h={{ base: "110px", md: "120px", lg: "130px", xl: "140px" }}
         w="100%"
         _hover={{ cursor: "pointer" }}
@@ -113,7 +121,7 @@ const Panel: React.FC<PanelProps> = ({ data }) => {
               <Text
                 fontSize="13px"
                 fontStyle="italic"
-                color="text.medium"
+                color="light.text.medium"
                 pt="4px"
               >
                 {publishedDate}

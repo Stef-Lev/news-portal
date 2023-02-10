@@ -16,6 +16,7 @@ import {
   Box,
   Image,
   useDisclosure,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 
@@ -23,6 +24,8 @@ function DrawerMenu() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef(null);
   const router = useRouter();
+  const color = useColorModeValue("light.global.color", "dark.global.color");
+  const background = useColorModeValue("light.global.bg", "dark.global.bg");
 
   return (
     <Box>
@@ -35,6 +38,8 @@ function DrawerMenu() {
         display="flex"
         justifyContent="space-between"
         alignItems="center"
+        color={color}
+        background={background}
       >
         <IconButton
           ref={btnRef}
@@ -46,7 +51,7 @@ function DrawerMenu() {
           colorScheme="white"
           onClick={onOpen}
         >
-          <HamburgerIcon w={30} h={30} color="text.dark" />
+          <HamburgerIcon w={30} h={30} color={color} />
         </IconButton>
 
         <Box py="10px">

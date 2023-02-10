@@ -79,7 +79,10 @@ function Scores() {
                   padding={{ base: "5px 10px", md: "8px 16px" }}
                   fontSize={{ base: "14px", md: "16px" }}
                   marginRight="5px"
-                  _selected={{ background: "blue.400", color: "white" }}
+                  _selected={{
+                    background: "light.theme.primary",
+                    color: "white",
+                  }}
                   key={item}
                   onClick={() => {
                     setSelectedLeague("ΟΛΑ");

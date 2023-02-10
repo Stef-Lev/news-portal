@@ -46,10 +46,10 @@ function ScrollTopButton() {
               h="60px"
               mr="20px"
               borderRadius="50px"
-              background="blue.400"
+              background="light.theme.primary"
               color="white"
-              _active={{ background: "blue.400" }}
-              _hover={{ background: "blue.400" }}
+              _active={{ background: "light.theme.primary" }}
+              _hover={{ background: "light.theme.primary" }}
               opacity={opacity}
               onClick={handleScrollTop}
             >

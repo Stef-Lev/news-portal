@@ -65,7 +65,7 @@ const Article: NextPage<ArticleProps> = ({ data }) => {
               />
             </Center>
             <Box
-              bg="blue.400"
+              bg="light.theme.primary"
               color="white"
               borderRadius="5px"
               p="2px 6px"
@@ -88,12 +88,12 @@ const Article: NextPage<ArticleProps> = ({ data }) => {
             </Box>
 
             <HStack mb={3}>
-              <CalendarIcon color="text.medium" />
+              <CalendarIcon color="light.text.medium" />
               {data.date && (
                 <Text
                   fontSize={{ base: "12px", md: "16px" }}
                   fontStyle="italic"
-                  color="text.medium"
+                  color="light.text.medium"
                 >
                   {format(new Date(data.date), "PPPp", { locale: el })}
                 </Text>

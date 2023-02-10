@@ -53,7 +53,9 @@ function ScoreItem({ item, index, oldData }: ScoreItemProps) {
         <Grid
           templateColumns="1fr 1fr 6fr 2fr 6fr 1fr 1fr"
           gap={2}
-          backgroundColor={index % 2 === 0 ? "score.bgEven" : "score.bgOdd"}
+          backgroundColor={
+            index % 2 === 0 ? "light.score.bgEven" : "light.score.bgOdd"
+          }
         >
           <GridItem
             display="flex"
@@ -63,7 +65,7 @@ function ScoreItem({ item, index, oldData }: ScoreItemProps) {
             textAlign="center"
           >
             <Text
-              color={item.isLive ? "#f5a451" : "text.dark"}
+              color={item.isLive ? "#f5a451" : "light.text.strong"}
               fontWeight={item.isLive ? "bold" : "normal"}
             >
               {status(item)}

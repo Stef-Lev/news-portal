@@ -9,7 +9,7 @@ export default function FourOhFour() {
         <Heading mt="20px">Η σελίδα δεν βρέθηκε</Heading>
         <Image alt="error page" p="20px" src="404_image.jpg" />
 
-        <Button bg="blue.400" onClick={() => router.push("/")}>
+        <Button bg="light.theme.primary" onClick={() => router.push("/")}>
           Αρχική σελίδα
         </Button>
       </VStack>

@@ -27,7 +27,7 @@ const GoalFlashText: React.FC<GoalFlashTextProps> = ({
     <>
       {type === "goalTxt" && (
         <Text
-          color="score.goalText"
+          color="light.score.goalText"
           position="relative"
           visibility={isFlashing ? "visible" : "hidden"}
           className={isFlashing ? "isFlashing" : ""}
@@ -37,7 +37,7 @@ const GoalFlashText: React.FC<GoalFlashTextProps> = ({
       )}
       {type === "goalNum" && (
         <Text
-          color="score.goalText"
+          color="light.score.goalText"
           position="relative"
           className={isFlashing ? "isFlashing" : ""}
         >
