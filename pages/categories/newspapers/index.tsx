@@ -116,7 +116,7 @@ const Newspapers: NextPage<NewspapersProps> = ({ frontpages }) => {
         <Box>
           <Modal isOpen={isOpen} onClose={onClose} size="2xl">
             <ModalOverlay />
-            <ModalContent color="black">
+            <ModalContent color="light.global.color" background="white">
               <ModalHeader fontWeight="bold">
                 <Center>{frontpage.title}</Center>
               </ModalHeader>
