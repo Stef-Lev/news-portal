@@ -22,6 +22,7 @@ const HomePanel: React.FC<HomePanelProps> = ({ newsItem, index }) => {
 
   const color = useColorModeValue("light.global.color", "dark.global.color");
   const background = useColorModeValue("light.panel.bg", "dark.panel.bg");
+  const dateColor = useColorModeValue("light.text.medium", "dark.text.medium");
 
   const preparePath = (link: string) => {
     let path = link.split("/");
@@ -69,7 +70,7 @@ const HomePanel: React.FC<HomePanelProps> = ({ newsItem, index }) => {
           flexDirection="column"
           justifyContent="space-between"
           w="100%"
-          minH="120px"
+          minH="150px"
           padding={{ base: "12px", sm: "14px", md: "20px" }}
         >
           <Heading
@@ -88,13 +89,9 @@ const HomePanel: React.FC<HomePanelProps> = ({ newsItem, index }) => {
           {index === 0 && (
             <Text fontWeight={400}>{newsItem.contentSnippet}</Text>
           )}
+
           <Box>
-            <Text
-              fontSize="14px"
-              fontStyle="italic"
-              color="light.text.medium"
-              pt="4px"
-            >
+            <Text fontSize="14px" fontStyle="italic" color={dateColor} pt="4px">
               {publishedDate}
             </Text>
           </Box>

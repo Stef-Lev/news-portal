@@ -21,6 +21,7 @@ const Panel: React.FC<PanelProps> = ({ data }) => {
 
   const color = useColorModeValue("light.global.color", "dark.global.color");
   const background = useColorModeValue("light.panel.bg", "dark.panel.bg");
+  const dateColor = useColorModeValue("light.text.medium", "dark.text.medium");
 
   const preparePath = (link: string) => {
     let path = link.split("/");
@@ -63,9 +64,10 @@ const Panel: React.FC<PanelProps> = ({ data }) => {
             flexDirection="column"
             padding="10px"
             justifyContent="space-between"
+            minH="120px"
           >
             <Box w="100%">
-              <Text fontSize="16px" fontWeight={500}>
+              <Text fontSize="20px" fontWeight={500}>
                 {data.title}
               </Text>
             </Box>
@@ -73,7 +75,7 @@ const Panel: React.FC<PanelProps> = ({ data }) => {
               <Text
                 fontSize="14px"
                 fontStyle="italic"
-                color="light.text.medium"
+                color={dateColor}
                 pt="4px"
                 css={{
                   "&::-webkit-line-clamp": 3,
@@ -113,7 +115,10 @@ const Panel: React.FC<PanelProps> = ({ data }) => {
             w="100%"
           >
             <Box>
-              <Text fontSize={{ base: "14px", lg: "18px" }} fontWeight={500}>
+              <Text
+                fontSize={{ base: "16px", md: "14px", lg: "18px" }}
+                fontWeight={500}
+              >
                 {data.title}
               </Text>
             </Box>
@@ -121,7 +126,7 @@ const Panel: React.FC<PanelProps> = ({ data }) => {
               <Text
                 fontSize="13px"
                 fontStyle="italic"
-                color="light.text.medium"
+                color={dateColor}
                 pt="4px"
               >
                 {publishedDate}

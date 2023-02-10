@@ -190,7 +190,12 @@ function ScoreItem({ item, index, oldData }: ScoreItemProps) {
             p="10px"
             textAlign="center"
           >
-            <Text color={item.isLive ? "#73c3ce" : "#fff"}>{status(item)}</Text>
+            <Text
+              color={item.isLive ? liveColor : completeColor}
+              fontWeight={item.isLive ? "bold" : "normal"}
+            >
+              {status(item)}
+            </Text>
           </GridItem>
           <GridItem w="100%" p="10px">
             <Flex justify="space-between">

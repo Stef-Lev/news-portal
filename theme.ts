@@ -23,13 +23,13 @@ const colors = {
       bgEven: "#b1b1b1",
       liveText: "#45857f",
       completeText: "#1c2021",
-      goalText: "#948b71",
+      goalText: "#886e03",
     },
   },
   dark: {
     global: { color: "#f5f5f5", bg: "#191c1c" },
     font: { base: "", sm: "", md: "", lg: "" },
-    text: { weak: "#f3f3f3", medium: "#a2a2a2", strong: "green" },
+    text: { weak: "#f3f3f3", medium: "#b2b2b2", strong: "green" },
     panel: { bg: "#404040" },
     theme: { primary: "#5497b8" },
     score: {
