@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { useRouter } from "next/router";
+import DarkModeSwitch from "./DarkModeSwitch";
 import { titleToPath } from "../helpers/pathTitles";
 import {
   Drawer,
@@ -37,12 +38,17 @@ function DrawerMenu() {
       >
         <IconButton
           ref={btnRef}
+          w="100px"
+          display="flex"
+          justifyContent="flex-start"
+          pl="20px"
           aria-label="hamburger"
           colorScheme="white"
           onClick={onOpen}
         >
           <HamburgerIcon w={30} h={30} color="text.dark" />
         </IconButton>
+
         <Box py="10px">
           <Image
             alt="news logo"
@@ -53,15 +59,7 @@ function DrawerMenu() {
             onClick={() => router.push("/")}
           />
         </Box>
-
-        <IconButton
-          aria-label="ghost"
-          colorScheme="white"
-          onClick={onOpen}
-          visibility="hidden"
-        >
-          <HamburgerIcon w={30} h={30} color="text.light" />
-        </IconButton>
+        <DarkModeSwitch />
       </Box>
 
       <Drawer

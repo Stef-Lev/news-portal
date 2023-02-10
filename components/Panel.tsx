@@ -40,7 +40,6 @@ const Panel: React.FC<PanelProps> = ({ data }) => {
       <GridItem
         borderRadius="8px"
         background="light.300"
-        boxShadow="1px 1px 3px 1px rgba(0,0,0,0.40)"
         w="100%"
         _hover={{ cursor: "pointer" }}
         onClick={() => goToPath(data.link)}
@@ -86,7 +85,6 @@ const Panel: React.FC<PanelProps> = ({ data }) => {
       <GridItem
         borderRadius="8px"
         background="light.300"
-        boxShadow="1px 1px 3px 1px rgba(0,0,0,0.40)"
         h={{ base: "110px", md: "120px", lg: "130px", xl: "140px" }}
         w="100%"
         _hover={{ cursor: "pointer" }}

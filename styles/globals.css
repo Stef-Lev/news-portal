@@ -21,8 +21,14 @@ a {
 }
 
 button,
-a {
+a,
+input {
   -webkit-tap-highlight-color: transparent;
+}
+
+:focus {
+  outline: 0 !important;
+  background: transparent !important;
 }
 
 img,
