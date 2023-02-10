@@ -5,7 +5,6 @@ import { titleToPath } from "../helpers/pathTitles";
 import {
   Drawer,
   DrawerBody,
-  DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
   DrawerContent,
@@ -76,9 +75,9 @@ function DrawerMenu() {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader background="white"></DrawerHeader>
+          <DrawerHeader background={background}></DrawerHeader>
 
-          <DrawerBody background="white" fontWeight={500}>
+          <DrawerBody background={background} fontWeight={500}>
             <List spacing={3}>
               {Object.entries(titleToPath).map((item) => (
                 <ListItem
@@ -94,8 +93,6 @@ function DrawerMenu() {
               ))}
             </List>
           </DrawerBody>
-
-          <DrawerFooter background="white"></DrawerFooter>
         </DrawerContent>
       </Drawer>
     </Box>

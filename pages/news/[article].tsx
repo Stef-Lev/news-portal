@@ -17,6 +17,7 @@ import {
   IconButton,
   Box,
   HStack,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { ChevronLeftIcon, CalendarIcon } from "@chakra-ui/icons";
 
@@ -24,6 +25,16 @@ type ArticleProps = { data: ArticleType };
 
 const Article: NextPage<ArticleProps> = ({ data }) => {
   const router = useRouter();
+
+  const background = useColorModeValue(
+    "light.theme.primary",
+    "dark.theme.primary"
+  );
+
+  const secondaryText = useColorModeValue(
+    "light.text.medium",
+    "dark.text.medium"
+  );
 
   return (
     <>
@@ -65,7 +76,7 @@ const Article: NextPage<ArticleProps> = ({ data }) => {
               />
             </Center>
             <Box
-              bg="light.theme.primary"
+              bg={background}
               color="white"
               borderRadius="5px"
               p="2px 6px"
@@ -88,12 +99,12 @@ const Article: NextPage<ArticleProps> = ({ data }) => {
             </Box>
 
             <HStack mb={3}>
-              <CalendarIcon color="light.text.medium" />
+              <CalendarIcon color={secondaryText} />
               {data.date && (
                 <Text
                   fontSize={{ base: "12px", md: "16px" }}
                   fontStyle="italic"
-                  color="light.text.medium"
+                  color={secondaryText}
                 >
                   {format(new Date(data.date), "PPPp", { locale: el })}
                 </Text>

@@ -22,6 +22,7 @@ import {
   Flex,
   Container,
   Select,
+  useColorModeValue,
 } from "@chakra-ui/react";
 
 function Scores() {
@@ -29,6 +30,12 @@ function Scores() {
   const [selectedLeague, setSelectedLeague] = useState("ΟΛΑ");
   const dates = scoreDates();
   const router = useRouter();
+
+  const tabBackground = useColorModeValue(
+    "light.theme.primary",
+    "dark.theme.primary"
+  );
+  const selectBg = useColorModeValue("light.global.bg", "dark.global.bg");
 
   const fetcher = (url: string) =>
     fetch(url)
@@ -80,7 +87,7 @@ function Scores() {
                   fontSize={{ base: "14px", md: "16px" }}
                   marginRight="5px"
                   _selected={{
-                    background: "light.theme.primary",
+                    background: tabBackground,
                     color: "white",
                   }}
                   key={item}
@@ -104,7 +111,7 @@ function Scores() {
               <Text width={{ base: "110px", md: "max-content" }}>
                 ΠΡΩΤΑΘΛΗΜΑ
               </Text>
-              <Box w="200px" mr="10px" bg="#0d181b">
+              <Box w="200px" mr="10px" bg={selectBg}>
                 <Select
                   size="md"
                   value={selectedLeague}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text } from "@chakra-ui/react";
+import { Text, useColorModeValue } from "@chakra-ui/react";
 
 interface GoalFlashTextProps {
   text: string;
@@ -14,6 +14,11 @@ const GoalFlashText: React.FC<GoalFlashTextProps> = ({
 }) => {
   const [isFlashing, setIsFlashing] = useState(false);
 
+  const color = useColorModeValue(
+    "light.score.goalText",
+    "dark.score.goalText"
+  );
+
   useEffect(() => {
     if (hasChanged) {
       setIsFlashing(true);
@@ -27,7 +32,7 @@ const GoalFlashText: React.FC<GoalFlashTextProps> = ({
     <>
       {type === "goalTxt" && (
         <Text
-          color="light.score.goalText"
+          color={color}
           position="relative"
           visibility={isFlashing ? "visible" : "hidden"}
           className={isFlashing ? "isFlashing" : ""}
@@ -37,7 +42,7 @@ const GoalFlashText: React.FC<GoalFlashTextProps> = ({
       )}
       {type === "goalNum" && (
         <Text
-          color="light.score.goalText"
+          color={color}
           position="relative"
           className={isFlashing ? "isFlashing" : ""}
         >

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Flex, Box, Button } from "@chakra-ui/react";
+import { Flex, Box, Button, useColorModeValue } from "@chakra-ui/react";
 import { FiArrowUp } from "react-icons/fi";
 
 function ScrollTopButton() {
@@ -7,6 +7,11 @@ function ScrollTopButton() {
   const [opacity, setOpacity] = useState(0);
   const ScrollStart = 300;
   const ScrollEnd = 400;
+
+  const background = useColorModeValue(
+    "light.theme.primary",
+    "dark.theme.primary"
+  );
 
   const handleScrollTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -46,10 +51,10 @@ function ScrollTopButton() {
               h="60px"
               mr="20px"
               borderRadius="50px"
-              background="light.theme.primary"
+              background={background}
               color="white"
-              _active={{ background: "light.theme.primary" }}
-              _hover={{ background: "light.theme.primary" }}
+              _active={{ background: background }}
+              _hover={{ background: background }}
               opacity={opacity}
               onClick={handleScrollTop}
             >

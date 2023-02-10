@@ -7,6 +7,7 @@ import {
   Grid,
   GridItem,
   useMediaQuery,
+  useColorModeValue,
 } from "@chakra-ui/react";
 
 type ScoreItemProps = {
@@ -19,6 +20,23 @@ type ScoreItemProps = {
 
 function ScoreItem({ item, index, oldData }: ScoreItemProps) {
   const [isLargerThan880] = useMediaQuery("(min-width: 880px)");
+
+  const oddBackground = useColorModeValue(
+    "light.score.bgOdd",
+    "dark.score.bgOdd"
+  );
+  const evenBackground = useColorModeValue(
+    "light.score.bgEven",
+    "dark.score.bgEven"
+  );
+  const liveColor = useColorModeValue(
+    "light.score.liveText",
+    "dark.score.liveText"
+  );
+  const completeColor = useColorModeValue(
+    "light.score.completeText",
+    "dark.score.completeText"
+  );
 
   const status = (game: ScoreItem) => {
     if (game.isHT) {
@@ -53,9 +71,7 @@ function ScoreItem({ item, index, oldData }: ScoreItemProps) {
         <Grid
           templateColumns="1fr 1fr 6fr 2fr 6fr 1fr 1fr"
           gap={2}
-          backgroundColor={
-            index % 2 === 0 ? "light.score.bgEven" : "light.score.bgOdd"
-          }
+          backgroundColor={index % 2 === 0 ? evenBackground : oddBackground}
         >
           <GridItem
             display="flex"
@@ -65,7 +81,7 @@ function ScoreItem({ item, index, oldData }: ScoreItemProps) {
             textAlign="center"
           >
             <Text
-              color={item.isLive ? "#f5a451" : "light.text.strong"}
+              color={item.isLive ? liveColor : completeColor}
               fontWeight={item.isLive ? "bold" : "normal"}
             >
               {status(item)}
@@ -164,7 +180,7 @@ function ScoreItem({ item, index, oldData }: ScoreItemProps) {
           templateColumns="1fr 9fr"
           gap={2}
           fontSize="14px"
-          backgroundColor={index % 2 === 0 ? "#16262b" : "#0d181b"}
+          backgroundColor={index % 2 === 0 ? evenBackground : oddBackground}
         >
           <GridItem
             display="flex"
