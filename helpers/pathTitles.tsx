@@ -1,5 +1,15 @@
 import { dateString } from "./scoreDates";
 const fetchDate = dateString(new Date(), true);
+import {
+  FaGlobeEurope,
+  FaNewspaper,
+  FaCoins,
+  FaFutbol,
+  FaLandmark,
+  FaUserFriends,
+  FaBiking,
+  FaTheaterMasks,
+} from "react-icons/fa";
 
 export const titleToPath = {
   ΑΘΛΗΤΙΣΜΟΣ: "sports",
@@ -41,4 +51,15 @@ export const categories: { [key: string]: string } = {
   "ΕΛΛΗΝΙΚΗ ΟΙΚΟΝΟΜΙΑ": "ΟΙΚΟΝΟΜΙΑ",
   ΤΑΞΙΔΙΑ: "ΚΟΣΜΟΣ",
   ΒΙΒΛΙΟ: "ΠΟΛΙΤΙΣΜΟΣ",
+};
+
+export const titleToIcon = {
+  ΑΘΛΗΤΙΣΜΟΣ: <FaBiking />,
+  ΚΟΣΜΟΣ: <FaGlobeEurope />,
+  ΚΟΙΝΩΝΙΑ: <FaUserFriends />,
+  ΟΙΚΟΝΟΜΙΑ: <FaCoins />,
+  ΠΟΛΙΤΙΚΗ: <FaLandmark />,
+  ΠΟΛΙΤΙΣΜΟΣ: <FaTheaterMasks />,
+  "ΑΠΟΤΕΛΕΣΜΑΤΑ ΑΓΩΝΩΝ": <FaFutbol />,
+  ΕΦΗΜΕΡΙΔΕΣ: <FaNewspaper />,
 };
