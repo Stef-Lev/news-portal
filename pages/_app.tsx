@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Head from "next/head";
 import Router from "next/router";
 import type { AppProps } from "next/app";
 import Layout from "../components/Layout";
@@ -24,6 +25,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, []);
   return (
     <ChakraProvider theme={theme}>
+      <Head>
+        <meta property="og:image" content="/preview.png" />
+      </Head>
       <Layout>
         {loading ? (
           <Center mt="90px">
@@ -40,10 +44,5 @@ function MyApp({ Component, pageProps }: AppProps) {
     </ChakraProvider>
   );
 }
-
-// TODO: Add error handling to the whole app
-// TODO: Small refactoring when needed
-// TODO: Adjust the style
-// https://www.frontpages.gr
 
 export default MyApp;
