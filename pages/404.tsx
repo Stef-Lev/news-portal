@@ -20,7 +20,12 @@ const FourOhFour: NextPage = () => {
     <Center mt="90px" mb="20px" pb="8px">
       <VStack>
         <Heading mt="20px">Η σελίδα δεν βρέθηκε</Heading>
-        <Image maxW="600px" alt="error page" p="20px" src="404_image.jpg" />
+        <Image
+          width={{ base: "100%", md: "500px", lg: "700px" }}
+          alt="error page"
+          p="20px"
+          src="404_image.jpg"
+        />
 
         <Button
           bg={background}
