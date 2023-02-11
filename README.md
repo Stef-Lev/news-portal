@@ -1,6 +1,6 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-%233178C6.svg?style=flat&logo=typescript&logoColor=white) ![React](https://img.shields.io/badge/React-%2361DAFB.svg?style=flat&logo=react&logoColor=white) ![Next.js](https://img.shields.io/badge/Next.js-%230070f3.svg?style=flat&logo=next.js&logoColor=white) ![Chakra UI](https://img.shields.io/badge/Chakra%20UI-%237900FF.svg?style=flat&logo=chakra-ui&logoColor=white)
 
-# NextJS Greek News Portal
+# NextJS Greek News Portal.
 
 This is a greek news portal where you can find the latest news, read the newspapers frontpages and see football results in real time.
 
