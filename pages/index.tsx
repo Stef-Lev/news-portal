@@ -4,6 +4,7 @@ import { Container, Grid, Box, Heading } from "@chakra-ui/react";
 import { getNews } from "../helpers/fetchData";
 import { getWeather } from "../helpers/fetchData";
 import WeatherCarousel from "../components/WeatherCarousel";
+import DateToday from "../components/DateToday";
 import { WeatherObject, NewsItem } from "../types/types";
 
 type HomePageProps = {
@@ -15,6 +16,7 @@ const Home: NextPage<HomePageProps> = ({ news, weather }) => {
   return (
     <>
       <WeatherCarousel items={weather.list} />
+      <DateToday />
       <Box>
         {news.map((item: any, index: number) => (
           <Container
