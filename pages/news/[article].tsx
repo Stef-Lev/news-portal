@@ -17,6 +17,8 @@ import {
   IconButton,
   Box,
   HStack,
+  Divider,
+  Link,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { ChevronLeftIcon, CalendarIcon } from "@chakra-ui/icons";
@@ -36,9 +38,11 @@ const Article: NextPage<ArticleProps> = ({ data }) => {
     "dark.text.medium"
   );
 
+  const border = useColorModeValue("light.global.color", "dark.global.color");
+
   return (
     <>
-      {data && (
+      {data && router.query.url && (
         <>
           <Box mt="90px" mb="20px" pb="8px">
             <IconButton
@@ -111,6 +115,26 @@ const Article: NextPage<ArticleProps> = ({ data }) => {
               )}
             </HStack>
             <Text fontSize={{ base: "16px", md: "18px" }}>{data.content}</Text>
+            <Box
+              border="1px solid"
+              borderColor={border}
+              borderRadius="10px"
+              mt="20px"
+              p="10px"
+            >
+              <Text>
+                Πηγή:{" "}
+                <Link color={background} href="https://www.kathimerini.gr/">
+                  Καθημερινή
+                </Link>
+              </Text>
+              <Text>
+                Σύνδεσμος άρθρου:{" "}
+                <Link color={background} href={`${router.query.url}`}>
+                  {router.query.url}
+                </Link>
+              </Text>
+            </Box>
           </Container>
         </>
       )}

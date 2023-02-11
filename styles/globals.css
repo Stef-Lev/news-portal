@@ -51,17 +51,17 @@ html[data-theme="dark"] option {
 }
 
 #newspaper-date .react-datepicker-wrapper {
-  width: 100px;
+  width: 140px;
   margin-bottom: 20px;
 }
 
 #newspaper-date .react-datepicker__input-container {
-  width: 100px;
+  width: 140px;
 }
 
 #newspaper-date input {
   background: transparent;
-  width: 100px;
+  width: 140px;
   border: 1px solid white;
   border-radius: 5px;
   padding: 3px 8px;

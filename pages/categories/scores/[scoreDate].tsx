@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import ScoreItem from "../../../components/ScoreItem";
 import Loader from "../../../components/Loader";
@@ -23,9 +23,9 @@ import {
   Flex,
   Container,
   Select,
+  Link,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { clearTimeout } from "timers";
 
 const Scores: NextPage = () => {
   const [oldData, setOldData] = useState({});
@@ -38,6 +38,12 @@ const Scores: NextPage = () => {
     "dark.theme.primary"
   );
   const selectBg = useColorModeValue("light.global.bg", "dark.global.bg");
+
+  const linkColor = useColorModeValue(
+    "light.theme.primary",
+    "dark.theme.primary"
+  );
+  const border = useColorModeValue("light.global.color", "dark.global.color");
 
   const fetcher = (url: string) =>
     fetch(url)
@@ -63,7 +69,7 @@ const Scores: NextPage = () => {
     {
       revalidateOnFocus: false,
       revalidateIfStale: false,
-      refreshInterval: 2000,
+      refreshInterval: 20000,
     }
   );
 
@@ -256,6 +262,20 @@ const Scores: NextPage = () => {
           </Box>
         )}
       <Box my="20px">{isLoading && <Loader />}</Box>
+      <Box
+        border="1px solid"
+        borderColor={border}
+        borderRadius="10px"
+        mt="20px"
+        p="10px"
+      >
+        <Text>
+          Πηγή δεδομένων:{" "}
+          <Link color={linkColor} href="https://www.betarades.gr/">
+            betarades.gr
+          </Link>
+        </Text>
+      </Box>
     </Container>
   );
 };

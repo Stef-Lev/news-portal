@@ -1,6 +1,14 @@
 import type { NextPage } from "next";
 import HomePanel from "../components/HomePanel";
-import { Container, Grid, Box, Heading } from "@chakra-ui/react";
+import {
+  Container,
+  Grid,
+  Box,
+  Heading,
+  Text,
+  Link,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { getNews } from "../helpers/fetchData";
 import { getWeather } from "../helpers/fetchData";
 import WeatherCarousel from "../components/WeatherCarousel";
@@ -13,6 +21,12 @@ type HomePageProps = {
 };
 
 const Home: NextPage<HomePageProps> = ({ news, weather }) => {
+  const linkColor = useColorModeValue(
+    "light.theme.primary",
+    "dark.theme.primary"
+  );
+  const border = useColorModeValue("light.global.color", "dark.global.color");
+
   return (
     <>
       <WeatherCarousel items={weather.list} />
@@ -43,6 +57,24 @@ const Home: NextPage<HomePageProps> = ({ news, weather }) => {
           </Container>
         ))}
       </Box>
+      <Container
+        maxW={{ base: "100%", md: "720px", lg: "900px", xl: "1100px" }}
+      >
+        <Box
+          border="1px solid"
+          borderColor={border}
+          borderRadius="10px"
+          mt="20px"
+          p="10px"
+        >
+          <Text>
+            Πηγή RSS Feed:{" "}
+            <Link color={linkColor} href="https://www.kathimerini.gr/">
+              Καθημερινή
+            </Link>
+          </Text>
+        </Box>
+      </Container>
     </>
   );
 };

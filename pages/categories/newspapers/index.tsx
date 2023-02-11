@@ -25,6 +25,8 @@ import {
   ModalBody,
   ModalCloseButton,
   useDisclosure,
+  useColorModeValue,
+  Link,
 } from "@chakra-ui/react";
 import { FiCalendar } from "react-icons/fi";
 
@@ -38,6 +40,13 @@ const Newspapers: NextPage<NewspapersProps> = ({ frontpages }) => {
   const [frontpage, setFrontpage] = useState({ img: "", title: "" });
   const { isOpen, onOpen, onClose } = useDisclosure();
   const router = useRouter();
+
+  const background = useColorModeValue(
+    "light.theme.primary",
+    "dark.theme.primary"
+  );
+
+  const border = useColorModeValue("light.global.color", "dark.global.color");
 
   useEffect(() => {
     const { date } = router.query;
@@ -113,6 +122,24 @@ const Newspapers: NextPage<NewspapersProps> = ({ frontpages }) => {
             </Flex>
           )}
         </Flex>
+        <Box
+          border="1px solid"
+          borderColor={border}
+          borderRadius="10px"
+          mt="20px"
+          mb="40px"
+          p="10px"
+        >
+          <Text>
+            Πηγή:{" "}
+            <Link
+              color={background}
+              href="https://www.protothema.gr/frontpages/"
+            >
+              Πρώτο Θέμα
+            </Link>
+          </Text>
+        </Box>
         <Box>
           <Modal isOpen={isOpen} onClose={onClose} size="2xl">
             <ModalOverlay />
