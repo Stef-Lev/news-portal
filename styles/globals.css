@@ -40,8 +40,14 @@ select:hover {
   cursor: pointer;
 }
 
-option {
-  background: #16262b !important;
+html[data-theme="light"] option {
+  color: #1c2021 !important;
+  background: #f5f5f5 !important;
+}
+
+html[data-theme="dark"] option {
+  color: #f5f5f5 !important;
+  background: #191c1c !important;
 }
 
 #newspaper-date .react-datepicker-wrapper {
