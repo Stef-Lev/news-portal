@@ -7,8 +7,12 @@ export default async function handler(
 ) {
   const { date } = req.query;
   let scores;
-  if (date) {
-    scores = await getScores(date);
-    res.status(200).json(scores);
+  try {
+    if (date) {
+      scores = await getScores(date);
+      res.status(200).json(scores);
+    }
+  } catch (err) {
+    res.status(404).json({ error: err });
   }
 }

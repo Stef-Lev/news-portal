@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import ScoreItem from "../../../components/ScoreItem";
 import Loader from "../../../components/Loader";
@@ -25,6 +25,7 @@ import {
   Select,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { clearTimeout } from "timers";
 
 const Scores: NextPage = () => {
   const [oldData, setOldData] = useState({});
@@ -67,6 +68,7 @@ const Scores: NextPage = () => {
   );
 
   if (error) {
+    console.log(error);
     showNotification("Κάτι πήγε στραβά, δοκιμάστε αργότερα", "error", {
       theme: "colored",
     });

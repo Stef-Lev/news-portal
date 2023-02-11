@@ -144,28 +144,35 @@ const Newspapers: NextPage<NewspapersProps> = ({ frontpages }) => {
 export default Newspapers;
 
 export async function getServerSideProps(ctx: NextPageContext) {
-  const url = process.env.PAPERS_URL || "https://www.protothema.gr/frontpages/";
+  const url = process.env.PAPERS_URL;
   const { date } = ctx.query;
   const fetchDate = `?dt=${date}&publication=-1`;
 
   let frontpages;
-  const ftc = await scrapeIt(url + fetchDate, {
-    papers: {
-      listItem: ".fpItem",
-      data: {
-        title: { selector: "h3" },
-        url: { selector: "a", attr: "href" },
-        img: {
-          selector: "picture source[type='image/jpeg']",
-          attr: "data-srcset",
+  try {
+    const ftc = await scrapeIt(url + fetchDate, {
+      papers: {
+        listItem: ".fpItem",
+        data: {
+          title: { selector: "h3" },
+          url: { selector: "a", attr: "href" },
+          img: {
+            selector: "picture source[type='image/jpeg']",
+            attr: "data-srcset",
+          },
         },
       },
-    },
-  }).then(({ data }) => {
-    return (frontpages = data);
-  });
+    }).then(({ data }) => {
+      return (frontpages = data);
+    });
 
-  return {
-    props: { frontpages },
-  };
+    return {
+      props: { frontpages },
+    };
+  } catch (err) {
+    return {
+      redirect: { permanent: false, destination: "/404" },
+      props: { error: err },
+    };
+  }
 }

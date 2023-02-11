@@ -48,11 +48,17 @@ const Home: NextPage<HomePageProps> = ({ news, weather }) => {
 export default Home;
 
 export async function getServerSideProps() {
-  const news = await getNews();
-  const weather = await getWeather();
+  try {
+    const news = await getNews();
+    const weather = await getWeather();
 
-  return {
-    props: { news: Object.entries(news), weather },
-    // props: { news, weather },
-  };
+    return {
+      props: { news: Object.entries(news), weather },
+    };
+  } catch (err) {
+    return {
+      redirect: { permanent: false, destination: "/404" },
+      props: { error: err },
+    };
+  }
 }
