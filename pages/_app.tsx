@@ -27,6 +27,10 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ChakraProvider theme={theme}>
       <Head>
         <meta property="og:image" content="/preview.png" />
+        <meta
+          property="og:description"
+          content="Check the news from around the world in this greek news portal made with NextJS."
+        />
       </Head>
       <Layout>
         {loading ? (
