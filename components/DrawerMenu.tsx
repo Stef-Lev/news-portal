@@ -6,6 +6,7 @@ import {
   Drawer,
   DrawerBody,
   DrawerHeader,
+  DrawerFooter,
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
@@ -18,6 +19,8 @@ import {
   Text,
   useDisclosure,
   useColorModeValue,
+  VStack,
+  Link,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { FaHome } from "react-icons/fa";
@@ -28,6 +31,10 @@ function DrawerMenu() {
   const router = useRouter();
   const color = useColorModeValue("light.global.color", "dark.global.color");
   const background = useColorModeValue("light.global.bg", "dark.global.bg");
+  const linkColor = useColorModeValue(
+    "light.theme.primary",
+    "dark.theme.primary"
+  );
 
   return (
     <Box>
@@ -111,6 +118,16 @@ function DrawerMenu() {
               ))}
             </List>
           </DrawerBody>
+          <DrawerFooter background={background} justifyContent="flex-start">
+            <VStack alignItems="flex-start">
+              <Text>Developed by Stefanos Leventis</Text>
+              <Text textDecor="underline" color={linkColor}>
+                <Link href="mailto:s.leventis77@gmail.com">
+                  s.leventis77@gmail.com
+                </Link>
+              </Text>
+            </VStack>
+          </DrawerFooter>
         </DrawerContent>
       </Drawer>
     </Box>
