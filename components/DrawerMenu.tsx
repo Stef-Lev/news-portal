@@ -126,6 +126,9 @@ function DrawerMenu() {
                   s.leventis77@gmail.com
                 </Link>
               </Text>
+              <Text fontStyle="italic" fontSize="14px">
+                For educational purposes only
+              </Text>
             </VStack>
           </DrawerFooter>
         </DrawerContent>
