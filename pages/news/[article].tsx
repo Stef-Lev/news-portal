@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+const greekUtils = require("greek-utils");
 import type { NextPage } from "next";
 import { NextPageContext } from "next";
 import { titleToPath } from "../../helpers/pathTitles";
@@ -17,7 +18,6 @@ import {
   IconButton,
   Box,
   HStack,
-  Divider,
   Link,
   useColorModeValue,
 } from "@chakra-ui/react";
@@ -87,19 +87,28 @@ const Article: NextPage<ArticleProps> = ({ data }) => {
               fontWeight={700}
               width="max-content"
               mb="16px"
+              _hover={{ cursor: "pointer" }}
               onClick={() =>
                 router.push(
                   `/categories/${
                     titleToPath[
                       categories[
-                        data.category as keyof typeof categories
+                        greekUtils
+                          .sanitizeDiacritics(data.category)
+                          .toUpperCase() as keyof typeof categories
                       ] as keyof typeof titleToPath
                     ]
                   }`
                 )
               }
             >
-              {categories[data.category as keyof typeof categories]}
+              {
+                categories[
+                  greekUtils
+                    .sanitizeDiacritics(data.category)
+                    .toUpperCase() as keyof typeof categories
+                ]
+              }
             </Box>
 
             <HStack mb={3}>
@@ -158,13 +167,13 @@ export async function getServerSideProps(ctx: NextPageContext) {
 
   let finalData: ArticleType = {};
   const ftc = await scrapeIt(url, {
-    title: "h1",
-    subtitle: "h2",
-    category: { selector: ".entry-header a" },
-    date: { selector: ".meta-date-published", attr: "datetime" },
+    title: { selector: ".entry-header .entry-title" },
+    subtitle: { selector: ".entry-header div p" },
+    category: { selector: ".nx-single-category-title" },
+    date: { selector: ".entry-date.published", attr: "datetime" },
     imgUrl: {
-      selector: '.first-img source[media="(min-width: 1024px)"]',
-      attr: "srcset",
+      selector: ".post-thumbnail a",
+      attr: "href",
     },
     content: {
       selector: ".entry-content p",

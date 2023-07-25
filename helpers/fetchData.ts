@@ -39,12 +39,13 @@ export async function getNews() {
   let feed = (await parser.parseURL(NEWS_URL)) as RawFeed<NewsItem>;
 
   feed.items.map((item) => {
-    if (item.categories && categories.includes(item.categories[0])) {
-      if (news[tabs[item.categories[0]]]) {
-        news[tabs[item.categories[0]]].push(item);
+    const articleCategory = item.categories[0].toUpperCase();
+    if (item.categories && categories.includes(articleCategory)) {
+      if (news[tabs[articleCategory]]) {
+        news[tabs[articleCategory]].push(item);
       } else {
-        news[tabs[item.categories[0]]] = [];
-        news[tabs[item.categories[0]]].push(item);
+        news[tabs[articleCategory]] = [];
+        news[tabs[articleCategory]].push(item);
       }
     }
   });

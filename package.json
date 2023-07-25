@@ -17,6 +17,7 @@
     "cors": "^2.8.5",
     "date-fns": "^2.29.3",
     "framer-motion": "^6.5.1",
+    "greek-utils": "^1.3.0",
     "next": "12.3.1",
     "react": "18.2.0",
     "react-datepicker": "^4.10.0",
