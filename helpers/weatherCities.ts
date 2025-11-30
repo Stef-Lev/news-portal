@@ -1,11 +1,11 @@
 export const weatherCities = {
   Athens: "Αθήνα",
-  Thessaloniki: "Θεσσαλονίκη",
+  Thessaloníki: "Θεσσαλονίκη",
   Volos: "Βόλος",
   Zakynthos: "Ζάκυνθος",
   Ioannina: "Ιωάννινα",
   Trikala: "Τρίκαλα",
-  Patras: "Πάτρα",
+  Patra: "Πάτρα",
   Xanthi: "Ξάνθη",
   Mykonos: "Μύκονος",
   Chania: "Χανιά",

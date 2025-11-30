@@ -173,18 +173,19 @@ export default Newspapers;
 export async function getServerSideProps(ctx: NextPageContext) {
   const url = process.env.PAPERS_URL;
   const { date } = ctx.query;
-  const fetchDate = `?dt=${date}&publication=-1`;
+  const fetchDate = `?dt=${date}&ncid=-1`;
+  const scrapeURL = url + fetchDate;
 
   let frontpages;
   try {
-    const ftc = await scrapeIt(url + fetchDate, {
+    const ftc = await scrapeIt(scrapeURL, {
       papers: {
         listItem: ".fpItem",
         data: {
           title: { selector: "h3" },
-          url: { selector: "a", attr: "href" },
+          url: { selector: "a.mainLink", attr: "href" },
           img: {
-            selector: "picture source[type='image/jpeg']",
+            selector: "article figure picture source ",
             attr: "data-srcset",
           },
         },

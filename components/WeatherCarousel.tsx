@@ -21,7 +21,7 @@ function WeatherCarousel({ items }: WeatherProps) {
           borderRadius="10px"
         >
           {items.map((item) => (
-            <Box key={item.name} w="120px">
+            <Box key={item.city.id} w="120px">
               <Flex
                 w="120px"
                 padding="5px 8px"
@@ -29,14 +29,14 @@ function WeatherCarousel({ items }: WeatherProps) {
                 alignItems="center"
               >
                 <Text fontSize="md">
-                  {weatherCities[item.name as keyof typeof weatherCities]}
+                  {weatherCities[item.city.name as keyof typeof weatherCities]}
                 </Text>
                 <Image
                   alt="weather"
                   w="50px"
-                  src={`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`}
+                  src={`https://openweathermap.org/img/wn/${item.data.weather[0].icon}@2x.png`}
                 />
-                <Text fontSize="sm">{Math.round(item.main.temp)}°C</Text>
+                <Text fontSize="sm">{Math.round(item.data.main.temp)}°C</Text>
               </Flex>
             </Box>
           ))}

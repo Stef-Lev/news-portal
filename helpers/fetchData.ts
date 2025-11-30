@@ -52,26 +52,24 @@ export async function getNews() {
   return news;
 }
 export async function getWeather() {
-  let cityIds = [
-    { id: 264371, name: "Athens" },
-    { id: 734077, name: "Thessaloníki" },
-    { id: 251833, name: "Volos" },
-    { id: 251280, name: "Zakynthos" },
-    { id: 261779, name: "Ioánnina" },
-    { id: 252661, name: "Trikala" },
-    { id: 8133690, name: "Patra" },
-    { id: 257056, name: "Mykonos" },
-    { id: 8133837, name: "Xanthi" },
-    { id: 8133762, name: "Chania" },
-    { id: 8133920, name: "Heraklion" },
+  let cities = [
+    { id: 264371, name: "Athens", lat: 37.9838, lon: 23.7275 },
+    { id: 734077, name: "Thessaloníki", lat: 40.6401, lon: 22.9444 },
+    { id: 251833, name: "Volos", lat: 39.361, lon: 22.9425 },
+    { id: 8133762, name: "Chania", lat: 35.5138, lon: 24.018 },
+    { id: 8133690, name: "Patra", lat: 38.2466, lon: 21.7346 },
+    { id: 252661, name: "Trikala", lat: 39.555, lon: 21.767 },
   ];
 
-  let ids = cityIds.map((item) => item.id).join(",");
-
-  let finalURL = `${WEATHER_URL}group?id=${ids}&units=metric&appid=${WEATHER_KEY}`;
-  let data = await fetch(finalURL);
-  let weather = await data.json();
-  return weather;
+  const sep = WEATHER_URL && WEATHER_URL.includes("?") ? "&" : "?";
+  const requests = cities.map((city) =>
+    fetch(
+      `${WEATHER_URL}${sep}lat=${city.lat}&lon=${city.lon}&appid=${WEATHER_KEY}`
+    ).then((res) => res.json().then((data) => ({ city, data })))
+  );
+  const weatherResults = await Promise.all(requests);
+  console.log({ weatherResults });
+  return weatherResults;
 }
 export async function getScores(date: string | string[] | undefined) {
   let data = await fetch(`${SCORES_URL}${date}`);

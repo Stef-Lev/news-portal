@@ -17,7 +17,7 @@ import { WeatherObject, NewsItem } from "../types/types";
 
 type HomePageProps = {
   news: Array<[string, Array<NewsItem>]>;
-  weather: { cnt: number; list: WeatherObject[] };
+  weather: WeatherObject[];
 };
 
 const Home: NextPage<HomePageProps> = ({ news, weather }) => {
@@ -26,10 +26,11 @@ const Home: NextPage<HomePageProps> = ({ news, weather }) => {
     "dark.theme.primary"
   );
   const border = useColorModeValue("light.global.color", "dark.global.color");
+  console.log({ weather });
 
   return (
     <>
-      <WeatherCarousel items={weather.list} />
+      <WeatherCarousel items={weather} />
       <DateToday />
       <Box>
         {news.map((item: any, index: number) => (

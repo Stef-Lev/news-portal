@@ -114,10 +114,12 @@ export interface Coord {
 }
 
 export interface Sys {
+  type?: number;
+  id?: number;
   country: string;
-  timezone: number;
   sunrise: number;
   sunset: number;
+  timezone?: number;
 }
 
 export interface Weather {
@@ -134,6 +136,8 @@ export interface Main {
   temp_max: number;
   pressure: number;
   humidity: number;
+  sea_level?: number;
+  grnd_level?: number;
 }
 
 export interface Wind {
@@ -146,16 +150,19 @@ export interface Clouds {
 }
 
 export interface WeatherObject {
-  coord: Coord;
-  sys: Sys;
-  weather: Weather[];
-  main: Main;
-  visibility: number;
-  wind: Wind;
-  clouds: Clouds;
-  dt: number;
-  id: number;
-  name: string;
+  city: { id: number; name: string; lat: number; lon: number };
+  data: {
+    coord: Coord;
+    sys: Sys;
+    weather: Weather[];
+    main: Main;
+    visibility: number;
+    wind: Wind;
+    clouds: Clouds;
+    dt: number;
+    id: number;
+    name: string;
+  };
 }
 
 export interface Enclosure {
