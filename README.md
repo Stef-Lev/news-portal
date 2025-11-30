@@ -9,15 +9,3 @@ This is a greek news portal where you can find the latest news, read the newspap
 ## Deployed Project
 
 Check the deployed project [here](https://gr-news-portal.vercel.app/).
-
-## Run locally
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
