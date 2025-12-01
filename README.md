@@ -8,4 +8,4 @@ This is a greek news portal where you can find the latest news, read the newspap
 
 ## Deployed Project
 
-Check the deployed project [here](https://gr-news-portal.vercel.app/).
+Check the deployed project [here](https://gr-news-portal.vercel.app/)
