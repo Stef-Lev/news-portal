@@ -26,7 +26,6 @@ const Home: NextPage<HomePageProps> = ({ news, weather }) => {
     "dark.theme.primary"
   );
   const border = useColorModeValue("light.global.color", "dark.global.color");
-  console.log({ weather });
 
   return (
     <>

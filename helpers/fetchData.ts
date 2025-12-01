@@ -68,7 +68,6 @@ export async function getWeather() {
     ).then((res) => res.json().then((data) => ({ city, data })))
   );
   const weatherResults = await Promise.all(requests);
-  console.log({ weatherResults });
   return weatherResults;
 }
 export async function getScores(date: string | string[] | undefined) {
