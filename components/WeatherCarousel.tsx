@@ -6,7 +6,12 @@ type WeatherProps = {
   items: WeatherObject[];
 };
 
+function convertKelvinToCelsius(kelvin: number): string {
+  return Math.round(kelvin - 273.15) + "°C";
+}
+
 function WeatherCarousel({ items }: WeatherProps) {
+  console.log({ items });
   return (
     <Container maxW={{ base: "100%", lg: "90%", xl: "75%" }} mb="20px">
       <Center>
@@ -36,7 +41,9 @@ function WeatherCarousel({ items }: WeatherProps) {
                   w="50px"
                   src={`https://openweathermap.org/img/wn/${item.data.weather[0].icon}@2x.png`}
                 />
-                <Text fontSize="sm">{Math.round(item.data.main.temp)}°C</Text>
+                <Text fontSize="sm">
+                  {convertKelvinToCelsius(item.data.main.temp)}
+                </Text>
               </Flex>
             </Box>
           ))}
